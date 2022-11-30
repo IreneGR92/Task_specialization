@@ -24,6 +24,7 @@ class Individual {
 
     FishType fishType;                                                // possible classes: breeder, helper, floater
     int age{};
+    double rank;
     bool inherit{};                                                    //did the new breeder inherit the territory or did it disperse?
 
     void mutate(int generation);
@@ -72,8 +73,12 @@ public:
 
     int getAge() const;
 
+    double getRank() const;
+
     void increaseAge(bool alive); //for the breeder
     void increaseAge(); // For helpers and floaters
+
+    void calculateRank();
 
     bool isInherit() const;
 

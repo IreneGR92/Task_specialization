@@ -45,6 +45,7 @@ void Individual::initializeIndividual(FishType type) {
     this->fishType = type;
     this->inherit = true;
     this->age = 1;
+    this->rank = age; //TODO: change?
 }
 
 /* BECOME FLOATER (STAY VS DISPERSE) */
@@ -122,7 +123,7 @@ void Individual::mutate(int generation) // mutate genome of offspring
     if (parameters->isEvolutionHelpAfterDispersal() && generation < 25000) {
         mutationAlpha = 0;
         mutationAlphaAge = 0;
-    } else if (parameters->isNoRelatedness() && parameters->isNoRelatednessRandomGroup()){
+    } else if (parameters->isNoRelatedness() && parameters->isNoRelatednessRandomGroup()) {
         mutationAlpha = 0;
         mutationAlphaAge = 0;
     } else {
@@ -231,6 +232,10 @@ int Individual::getAge() const {
     return age;
 }
 
+double Individual::getRank() const {
+    return rank;
+}
+
 bool Individual::isInherit() const {
     return inherit;
 }
@@ -259,6 +264,8 @@ double Individual::get(Attribute type) const {
             return this->drift;
         case AGE:
             return this->age;
+        case RANK:
+            return this->rank;
     }
 
     assert(false);
@@ -269,14 +276,25 @@ int Individual::getGroupIndex() const {
 }
 
 bool Individual::isViableBreeder() {
-    if (age > parameters->getMinAgeBecomeBreeder()-1) {
+    if (age > parameters->getMinAgeBecomeBreeder() - 1) {
         return true;
     } else {
         return false;
     }
 }
 
+void Individual::calculateRank() {
+    if (parameters->isHelpReducesRank()) {
+        rank = age - parameters->getYh() * help;
+        if (rank < 0.001) {
+            rank = 0.001;
+        }
+    } else {
+        rank = age;
+    }
 
+
+}
 
 
 

@@ -148,7 +148,7 @@ void Group::mortalityGroup(int &deaths) {
 void Group::newBreeder(vector<Individual> &floaters, int &newBreederFloater, int &newBreederHelper, int &inheritance) {
     //    Select a random sample from the floaters
     int i = 0;
-    int sumAge = 0;
+    double sumRank = 0;
     double currentPosition = 0; //age of the previous ind taken from Candidates
     int floaterSampledID;
     double RandP = parameters->uniform(*parameters->getGenerator());
@@ -206,11 +206,12 @@ void Group::newBreeder(vector<Individual> &floaters, int &newBreederFloater, int
     if (!parameters->isAgeNoInfluenceInheritance()) {
         //    Choose breeder with higher likelihood for the highest age
         for (candidateIt = candidates.begin(); candidateIt < candidates.end(); ++candidateIt) {
-            sumAge += (*candidateIt)->getAge(); //add all the age from the vector candidates
+            (*candidateIt)->calculateRank();
+            sumRank += (*candidateIt)->getRank(); //add all the age from the vector candidates
         }
 
         for (candidateIt = candidates.begin(); candidateIt < candidates.end(); ++candidateIt) {
-            position.push_back(static_cast<double>((*candidateIt)->getAge()) / static_cast<double>(sumAge) +
+            position.push_back(static_cast<double>((*candidateIt)->getRank()) / static_cast<double>(sumRank) +
                                currentPosition); //creates a vector with proportional segments to the age of each individual
             currentPosition = position[position.size() - 1];
         }

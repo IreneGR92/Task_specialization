@@ -40,6 +40,7 @@ Parameters::Parameters(const string &url) {
     this->X0 = config["X0"].as<double>();
     this->Xsh = config["Xsh"].as<double>();
     this->Xsn = config["Xsn"].as<double>();
+    this->Yh = config["Yh"].as<double>();
     this->K0 = config["K0"].as<double>();
     this->K1 = config["K1"].as<double>();
     this->INIT_ALPHA = config["INIT_ALPHA"].as<double>();
@@ -102,6 +103,7 @@ void Parameters::print(std::ofstream &outputStream) {
                  << "X0(intercept):" << "\t" << this->getX0() << endl
                  << "Xh(Cost_help_survival):" << "\t" << this->getXsh() << endl
                  << "Xn(Benefit_group_size_survival):" << "\t" << this->getXsn() << endl
+                 << "Yh(Cost_help_rank):" << "\t" << this->getYh() << endl
                  << "K0(Base_fecundity):" << "\t" << this->getK0() << endl
                  << "K1(Benefit_help_fecundity):" << "\t" << this->getK1() << endl
                  << "initAlpha:" << "\t" << this->getInitAlpha() << endl
@@ -213,6 +215,10 @@ double Parameters::getXsh() const {
 
 double Parameters::getXsn() const {
     return Xsn;
+}
+
+double Parameters::getYh() const {
+    return Yh;
 }
 
 double Parameters::getK0() const {
