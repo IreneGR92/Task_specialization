@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="group_augmentation"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="gcc"/>
+		<Option virtualFolders="CMake Files\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="/home/whitewolf/git/Group-augmentation-Cpp/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j12 -f &quot;/home/whitewolf/git/Group-augmentation-Cpp/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/make -j12 -f &quot;/home/whitewolf/git/Group-augmentation-Cpp/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j12 -f &quot;/home/whitewolf/git/Group-augmentation-Cpp/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j12 -f &quot;/home/whitewolf/git/Group-augmentation-Cpp/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="App">
+				<Option output="/home/whitewolf/git/Group-augmentation-Cpp/cmake-build-debug/App" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/whitewolf/git/Group-augmentation-Cpp/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/whitewolf/git/Group-augmentation-Cpp/include"/>
+					<Add directory="/usr/include/c++/9"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/9"/>
+					<Add directory="/usr/include/c++/9/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/9/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j12 -f &quot;/home/whitewolf/git/Group-augmentation-Cpp/cmake-build-debug/Makefile&quot;  VERBOSE=1 App"/>
+					<CompileFile command="/usr/bin/make -j12 -f &quot;/home/whitewolf/git/Group-augmentation-Cpp/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j12 -f &quot;/home/whitewolf/git/Group-augmentation-Cpp/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j12 -f &quot;/home/whitewolf/git/Group-augmentation-Cpp/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="App/fast">
+				<Option output="/home/whitewolf/git/Group-augmentation-Cpp/cmake-build-debug/App" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/whitewolf/git/Group-augmentation-Cpp/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/whitewolf/git/Group-augmentation-Cpp/include"/>
+					<Add directory="/usr/include/c++/9"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/9"/>
+					<Add directory="/usr/include/c++/9/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/9/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j12 -f &quot;/home/whitewolf/git/Group-augmentation-Cpp/cmake-build-debug/Makefile&quot;  VERBOSE=1 App/fast"/>
+					<CompileFile command="/usr/bin/make -j12 -f &quot;/home/whitewolf/git/Group-augmentation-Cpp/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j12 -f &quot;/home/whitewolf/git/Group-augmentation-Cpp/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j12 -f &quot;/home/whitewolf/git/Group-augmentation-Cpp/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="Test">
+				<Option output="/home/whitewolf/git/Group-augmentation-Cpp/cmake-build-debug/Test" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/whitewolf/git/Group-augmentation-Cpp/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/whitewolf/git/Group-augmentation-Cpp/include"/>
+					<Add directory="/usr/include/c++/9"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/9"/>
+					<Add directory="/usr/include/c++/9/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/9/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j12 -f &quot;/home/whitewolf/git/Group-augmentation-Cpp/cmake-build-debug/Makefile&quot;  VERBOSE=1 Test"/>
+					<CompileFile command="/usr/bin/make -j12 -f &quot;/home/whitewolf/git/Group-augmentation-Cpp/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j12 -f &quot;/home/whitewolf/git/Group-augmentation-Cpp/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j12 -f &quot;/home/whitewolf/git/Group-augmentation-Cpp/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="Test/fast">
+				<Option output="/home/whitewolf/git/Group-augmentation-Cpp/cmake-build-debug/Test" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/whitewolf/git/Group-augmentation-Cpp/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/whitewolf/git/Group-augmentation-Cpp/include"/>
+					<Add directory="/usr/include/c++/9"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/9"/>
+					<Add directory="/usr/include/c++/9/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/9/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j12 -f &quot;/home/whitewolf/git/Group-augmentation-Cpp/cmake-build-debug/Makefile&quot;  VERBOSE=1 Test/fast"/>
+					<CompileFile command="/usr/bin/make -j12 -f &quot;/home/whitewolf/git/Group-augmentation-Cpp/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j12 -f &quot;/home/whitewolf/git/Group-augmentation-Cpp/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j12 -f &quot;/home/whitewolf/git/Group-augmentation-Cpp/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="/home/whitewolf/git/Group-augmentation-Cpp/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j12 -f &quot;/home/whitewolf/git/Group-augmentation-Cpp/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/make -j12 -f &quot;/home/whitewolf/git/Group-augmentation-Cpp/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j12 -f &quot;/home/whitewolf/git/Group-augmentation-Cpp/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j12 -f &quot;/home/whitewolf/git/Group-augmentation-Cpp/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rebuild_cache">
+				<Option working_dir="/home/whitewolf/git/Group-augmentation-Cpp/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j12 -f &quot;/home/whitewolf/git/Group-augmentation-Cpp/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/make -j12 -f &quot;/home/whitewolf/git/Group-augmentation-Cpp/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j12 -f &quot;/home/whitewolf/git/Group-augmentation-Cpp/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j12 -f &quot;/home/whitewolf/git/Group-augmentation-Cpp/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="/home/whitewolf/git/Group-augmentation-Cpp/src/Parameters.cpp">
+			<Option target="App"/>
+			<Option target="Test"/>
+		</Unit>
+		<Unit filename="/home/whitewolf/git/Group-augmentation-Cpp/src/Parameters.h">
+			<Option target="App"/>
+			<Option target="Test"/>
+		</Unit>
+		<Unit filename="/home/whitewolf/git/Group-augmentation-Cpp/src/Simulation.cpp">
+			<Option target="App"/>
+			<Option target="Test"/>
+		</Unit>
+		<Unit filename="/home/whitewolf/git/Group-augmentation-Cpp/src/Simulation.h">
+			<Option target="App"/>
+			<Option target="Test"/>
+		</Unit>
+		<Unit filename="/home/whitewolf/git/Group-augmentation-Cpp/src/main.cpp">
+			<Option target="App"/>
+		</Unit>
+		<Unit filename="/home/whitewolf/git/Group-augmentation-Cpp/src/model/Attribute.h">
+			<Option target="App"/>
+			<Option target="Test"/>
+		</Unit>
+		<Unit filename="/home/whitewolf/git/Group-augmentation-Cpp/src/model/Group.cpp">
+			<Option target="App"/>
+			<Option target="Test"/>
+		</Unit>
+		<Unit filename="/home/whitewolf/git/Group-augmentation-Cpp/src/model/Group.h">
+			<Option target="App"/>
+			<Option target="Test"/>
+		</Unit>
+		<Unit filename="/home/whitewolf/git/Group-augmentation-Cpp/src/model/Individual.cpp">
+			<Option target="App"/>
+			<Option target="Test"/>
+		</Unit>
+		<Unit filename="/home/whitewolf/git/Group-augmentation-Cpp/src/model/Individual.h">
+			<Option target="App"/>
+			<Option target="Test"/>
+		</Unit>
+		<Unit filename="/home/whitewolf/git/Group-augmentation-Cpp/src/model/Population.cpp">
+			<Option target="App"/>
+			<Option target="Test"/>
+		</Unit>
+		<Unit filename="/home/whitewolf/git/Group-augmentation-Cpp/src/model/Population.h">
+			<Option target="App"/>
+			<Option target="Test"/>
+		</Unit>
+		<Unit filename="/home/whitewolf/git/Group-augmentation-Cpp/src/model/container/Container.h">
+			<Option target="Test"/>
+		</Unit>
+		<Unit filename="/home/whitewolf/git/Group-augmentation-Cpp/src/model/container/IndividualVector.cpp">
+			<Option target="App"/>
+			<Option target="Test"/>
+		</Unit>
+		<Unit filename="/home/whitewolf/git/Group-augmentation-Cpp/src/model/container/IndividualVector.h">
+			<Option target="App"/>
+			<Option target="Test"/>
+		</Unit>
+		<Unit filename="/home/whitewolf/git/Group-augmentation-Cpp/src/stats/StatisticalFormulas.cpp">
+			<Option target="App"/>
+			<Option target="Test"/>
+		</Unit>
+		<Unit filename="/home/whitewolf/git/Group-augmentation-Cpp/src/stats/StatisticalFormulas.h">
+			<Option target="App"/>
+			<Option target="Test"/>
+		</Unit>
+		<Unit filename="/home/whitewolf/git/Group-augmentation-Cpp/src/stats/Statistics.cpp">
+			<Option target="App"/>
+			<Option target="Test"/>
+		</Unit>
+		<Unit filename="/home/whitewolf/git/Group-augmentation-Cpp/src/stats/Statistics.h">
+			<Option target="App"/>
+			<Option target="Test"/>
+		</Unit>
+		<Unit filename="/home/whitewolf/git/Group-augmentation-Cpp/src/test.cpp">
+			<Option target="Test"/>
+		</Unit>
+		<Unit filename="/home/whitewolf/git/Group-augmentation-Cpp/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>
