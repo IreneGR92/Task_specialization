@@ -26,6 +26,7 @@ Parameters::Parameters(const string &url) {
     this->NO_RELATEDNESS = config["NO_RELATEDNESS"].as<bool>();
     this->NO_RELATEDNESS_RANDOM_GROUP = config["NO_RELATEDNESS_RANDOM_GROUP"].as<bool>();
     this->AGE_NO_INFLUENCE_RELATEDNESS = config["AGE_NO_INFLUENCE_RELATEDNESS"].as<bool>();
+    this->HELP_REDUCES_RANK = config["HELP_REDUCES_RANK"].as<bool>();
     this->MAX_COLONIES = config["MAX_COLONIES"].as<int>();
     this->NUM_GENERATIONS = config["NUM_GENERATIONS"].as<int>();
     this->MAX_NUM_REPLICATES = config["MAX_NUM_REPLICATES"].as<int>();
@@ -88,6 +89,7 @@ void Parameters::print(std::ofstream &outputStream) {
                  << "No_effect_relatedness?:" << "\t" << this->isNoRelatedness() << endl
                  << "Non-related_helpers_random_group?:" << "\t" << this->isNoRelatednessRandomGroup() << endl
                  << "No_effect_age_inheritance?:" << "\t" << this->isAgeNoInfluenceInheritance() << endl
+                 << "Help_reduces_rank?:" << "\t" << this->isHelpReducesRank() << endl
                  << "Initial_population:" << "\t" << this->getMaxColonies() * (this->getInitNumHelpers() + 1) << endl
                  << "Number_of_colonies:" << "\t" << this->getMaxColonies() << endl
                  << "Number_generations:" << "\t" << this->getNumGenerations() << endl
@@ -155,6 +157,10 @@ bool Parameters::isNoRelatednessRandomGroup() const {
 
 bool Parameters::isAgeNoInfluenceInheritance() const {
     return AGE_NO_INFLUENCE_RELATEDNESS;
+}
+
+bool Parameters::isHelpReducesRank() const {
+    return HELP_REDUCES_RANK;
 }
 
 int Parameters::getMaxColonies() const {

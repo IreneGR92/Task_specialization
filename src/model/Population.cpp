@@ -60,7 +60,7 @@ void Population::disperse(int generation) {
         // In the non relatedness implementation, helpers just born are reassigned to random groups. Groups receive as many helpers as helpers left the group for reassignment.
         if (parameters->isNoRelatedness() && generation > 0) {
             noRelatedHelpers = group.reassignNoRelatedness(i);
-            for (int i = 0; i < noRelatedHelpers.size(); i++) {
+            for (int j = 0; j < noRelatedHelpers.size(); j++) {
                 noRelatednessGroupsID.push_back(groupID);
             }
             allNoRelatedHelpers.merge(noRelatedHelpers);
@@ -91,10 +91,10 @@ void Population::disperse(int generation) {
                 allNoRelatedHelpers.pop_back(); //remove the no related helper from its vector
 
             } else {
-                timeout++; //if not other group to put the helper than the original one, do it anyways
+                timeout++; //if not other group to put the helper than the original one, do it anyway
             }
         }
-        // Assign helpers to completelly random groups, group size not maintained
+        // Assign helpers to completely random groups, group size not maintained
     } else if (parameters->isNoRelatedness() && !allNoRelatedHelpers.empty() && parameters->isNoRelatednessRandomGroup()) {
         int timeout = 0;
         while (!allNoRelatedHelpers.empty()) {
@@ -108,7 +108,7 @@ void Population::disperse(int generation) {
                 allNoRelatedHelpers.pop_back(); //remove the no related helper from its vector
 
             } else {
-                timeout++; //if not other group to put the helper than the original one, do it anyways
+                timeout++; //if not other group to put the helper than the original one, do it anyway
             }
         }
     }
