@@ -1,4 +1,0 @@
-/home/whitewolf/git/Group-augmentation-Cpp/cmake-build-debug/CMakeFiles/App.dir
-/home/whitewolf/git/Group-augmentation-Cpp/cmake-build-debug/CMakeFiles/Test.dir
-/home/whitewolf/git/Group-augmentation-Cpp/cmake-build-debug/CMakeFiles/edit_cache.dir
-/home/whitewolf/git/Group-augmentation-Cpp/cmake-build-debug/CMakeFiles/rebuild_cache.dir
