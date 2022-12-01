@@ -20,6 +20,7 @@ Individual::Individual(Individual &individual, FishType fishType, int &generatio
 
     this->dispersal = Parameters::NO_VALUE;
     this->help = Parameters::NO_VALUE;
+    this->task = Parameters::NO_VALUE;
 
     this->initializeIndividual(fishType);
 
@@ -45,6 +46,7 @@ void Individual::initializeIndividual(FishType type) {
     this->parameters = Parameters::instance();
     this->dispersal = Parameters::NO_VALUE;
     this->help = 0;
+    this->task = Parameters::NO_VALUE;
     this->survival = Parameters::NO_VALUE;
     this->fishType = type;
     this->inherit = true;
@@ -84,6 +86,24 @@ void Individual::calcHelp() {
         std::cout << "Error: floaters get a help value" << std::endl;
     }
 }
+
+/*CALCULATE TASK SPECIALIZATION*/
+
+void Individual::calcTaskSpecialization() {
+    if (fishType == HELPER) {
+        if (!parameters->isHelpReducesRank()) {
+            task = gamma;
+            if (task < 0) { task = 0;
+            } else if (task > 1) {task = 1;}
+        } else {
+            task = 1 / (1 + exp(gammaAge * age - gamma));
+        }
+    } else {
+        task = Parameters::NO_VALUE;
+        std::cout << "Error: floaters get a task value" << std::endl;
+    }
+}
+
 
 /*SURVIVAL*/
 
@@ -247,6 +267,10 @@ double Individual::getHelp() const {
     return help;
 }
 
+double Individual::getTask() const {
+    return task;
+}
+
 void Individual::setHelp(double help_) {
     Individual::help = help_;
 }
@@ -264,9 +288,11 @@ void Individual::setFishType(FishType type) {
     if (type == BREEDER) {
         this->dispersal = Parameters::NO_VALUE;
         this->help = 0;
+        this->task = Parameters::NO_VALUE;
     }
     if (type == FLOATER) {
         this->help = 0;
+        this->task = Parameters::NO_VALUE;
     }
 }
 
@@ -304,6 +330,8 @@ double Individual::get(Attribute type) const {
             return this->help;
         case DISPERSAL:
             return this->dispersal;
+        case TASK:
+            return this->task;
         case SURVIVAL:
             return this->survival;
         case DRIFT:

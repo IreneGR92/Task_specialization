@@ -29,9 +29,13 @@ class Statistics {
 
     StatisticalFormulas beta, betaAge;
 
+    StatisticalFormulas gamma, gammaAge;
+
     StatisticalFormulas help, cumulativeHelp;
 
     StatisticalFormulas dispersal, dispersalHelpers;
+
+    StatisticalFormulas task;
 
     StatisticalFormulas survival, survivalBreeders, survivalFloaters, survivalHelpers;
 

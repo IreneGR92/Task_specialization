@@ -22,6 +22,7 @@ class Individual {
 
     double dispersal{};
     double help{};
+    double task{};
     double survival{};
 
     FishType fishType;                                                // possible classes: breeder, helper, floater
@@ -48,6 +49,8 @@ public:
 
     void calcHelp();
 
+    void calcTaskSpecialization();
+
     void calculateSurvival(const int &groupSize);
 
     //Getters and setters
@@ -68,6 +71,8 @@ public:
     double getDispersal() const;
 
     double getHelp() const;
+
+    double getTask() const;
 
     void setHelp(double help_);
 

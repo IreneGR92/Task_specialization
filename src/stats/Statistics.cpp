@@ -82,6 +82,8 @@ void Statistics::calculateStatistics(const Population &populationObj) {
 
     help.addValues(helpers.get(HELP));
 
+    task.addValues(helpers.get(TASK));
+
     dispersal.addValues(helpers.get(DISPERSAL));
     dispersal.addValues(populationObj.getFloaters().get(DISPERSAL));
     dispersalHelpers.addValues(helpers.get(DISPERSAL));
@@ -213,7 +215,7 @@ void Statistics::printHeadersToConsole() {
     cout << setw(6) << "gen" << setw(9) << "pop" << setw(9) << "deaths" << setw(9)
          << "float" << setw(9) << "group" << setw(9) << "maxGroup" << setw(9) << "age" << setw(9)
          << "alpha" << setw(9) << "alphaAge" << setw(9) << "beta" << setw(9) << "betaAge" << setw(9)
-         << "help" << setw(9) << "disper" << setw(9) << "surv" << setw(9) << "relat" << endl;
+         << "help" << setw(9) << "disper" << setw(9) << "task" << setw(9) << "surv" << setw(9) << "relat" << endl;
 }
 
 
@@ -233,6 +235,7 @@ void Statistics::printToConsole(int generation, int deaths) {
               << setw(9) << setprecision(4) << betaAge.calculateMean()
               << setw(9) << setprecision(4) << help.calculateMean()
               << setw(9) << setprecision(4) << dispersal.calculateMean()
+              << setw(9) << setprecision(4) << task.calculateMean()
               << setw(9) << setprecision(2) << survival.calculateMean()
               << setw(9) << setprecision(2) << relatedness
               << endl;
@@ -265,8 +268,7 @@ void Statistics::printHeadersToFile() {
                                            << "\t" << "type" << "\t" << "age" << "\t"
                                            << "alpha" << "\t" << "alphaAge" << "\t" << "beta" << "\t"
                                            << "betaAge" << "\t" << "drift"
-                                           << "\t" << "help" << "\t" << "dispersal" << "\t" << "survival"
-                                           << endl;
+                                           << "\t" << "help" << "\t" << "dispersal" << "\t" << "survival" << endl;
 }
 
 void Statistics::printToFile(int replica, int generation, int deaths, int newBreederFloater,
