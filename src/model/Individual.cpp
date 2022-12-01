@@ -91,7 +91,7 @@ void Individual::calcHelp() {
 
 void Individual::calcTaskSpecialization() {
     if (fishType == HELPER) {
-        if (!parameters->isHelpReducesRank()) {
+        if (!parameters->isReactionNormTask()) {
             task = gamma;
             if (task < 0) { task = 0;
             } else if (task > 1) {task = 1;}
@@ -183,12 +183,12 @@ void Individual::mutate(int generation) // mutate genome of offspring
     // Gamma
     if (parameters->uniform(rng) < parameters->getMutationGamma()) {
         gamma += NormalG(rng);
-        if (!parameters->isHelpReducesRank()) { //TODO: change to whether age has an influence
+        if (!parameters->isReactionNormTask()) { //TODO: change to whether age has an influence
             if (gamma < 0) { gamma = 0; }
             else if (gamma > 1) { gamma = 1; }
         }
     }
-    if (parameters->isHelpReducesRank()) {
+    if (parameters->isReactionNormTask()) {
         if (parameters->uniform(rng) < parameters->getMutationGammaAge()) {
             gammaAge += NormalG(rng);
         }
@@ -218,7 +218,7 @@ void Individual::increaseAge() {
 
 /* CALCULATE RANK */
 void Individual::calculateRank() {
-    if (parameters->isHelpReducesRank()) {
+    if (parameters->isReactionNormTask()) {
         rank = age - parameters->getYh() * help;
         if (rank < 0.001) {
             rank = 0.001;

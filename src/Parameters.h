@@ -31,7 +31,7 @@ private:
     bool NO_RELATEDNESS;       //Apply implementation to remove the effect of relatedness?
     bool NO_RELATEDNESS_RANDOM_GROUP; // When applying no relatedness, helpers shuffled to random group instead of maintaining group size
     bool AGE_NO_INFLUENCE_RELATEDNESS; // Age no influence of who inherits territory, randomly sampled from candidate (helpers + sample floaters)
-    bool HELP_REDUCES_RANK; // If true: help reduces the rank and likelihood to inherit breeding position, if false: help reduces survival
+    bool REACTION_NORM_TASK; // If true: help reduces the rank and likelihood to inherit breeding position, if false: help reduces survival
 
     int MAX_COLONIES;     // max number of groups or colonies --> breeding spots.
     int NUM_GENERATIONS;
@@ -115,6 +115,8 @@ public:
 
     bool isEvolutionHelpAfterDispersal() const;
 
+    bool isReactionNormTask() const;
+
     bool isDirectBroodCareOnly() const;
 
     bool isLowSurvivalBreeder() const;
@@ -126,8 +128,6 @@ public:
     bool isNoRelatednessRandomGroup() const;
 
     bool isAgeNoInfluenceInheritance() const;
-
-    bool isHelpReducesRank() const;
 
     int getMaxColonies() const;
 
