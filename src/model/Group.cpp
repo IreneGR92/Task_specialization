@@ -205,10 +205,10 @@ void Group::newBreeder(vector<Individual> &floaters, int &newBreederFloater, int
     }
     //  Choose new breeder
     if (!parameters->isAgeNoInfluenceInheritance()) {
-        //    Choose breeder with higher likelihood for the highest age
+        //    Choose breeder with higher likelihood for the highest rank
         for (candidateIt = candidates.begin(); candidateIt < candidates.end(); ++candidateIt) {
             (*candidateIt)->calculateRank();
-            sumRank += (*candidateIt)->getRank(); //add all the age from the vector candidates
+            sumRank += (*candidateIt)->getRank(); //add all the ranks from the vector candidates
         }
 
         for (candidateIt = candidates.begin(); candidateIt < candidates.end(); ++candidateIt) {
@@ -295,7 +295,6 @@ void Group::increaseAge() {
 void Group::reproduce(int generation) { // populate offspring generation
     //Calculate fecundity
     fecundity = parameters->getK0() + parameters->getK1() * cumHelp / (1 + cumHelp);
-    //fecundity = parameters->getK0() + parameters->getK1() * cumHelp / (1 + cumHelp * parameters->getK1());
 
     poisson_distribution<int> PoissonFecundity(fecundity);
     realFecundity = PoissonFecundity(*parameters->getGenerator()); //integer number

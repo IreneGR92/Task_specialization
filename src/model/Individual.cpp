@@ -208,7 +208,7 @@ void Individual::increaseAge() {
 
 /* CALCULATE RANK */
 void Individual::calculateRank() {
-    if (parameters->isReactionNormTask()) {
+    if (fishType == HELPER && parameters->uniform(*parameters->getGenerator()) > task) {
         rank = age - parameters->getYh() * help;
         if (rank < 0.001) {
             rank = 0.001;
