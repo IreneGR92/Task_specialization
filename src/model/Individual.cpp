@@ -78,7 +78,6 @@ void Individual::calcHelp() {
         } else {
             help = alpha + alphaAge * age;
         }
-
         if (help < 0) { help = 0; }
 
     } else {
@@ -109,26 +108,17 @@ void Individual::calcTaskSpecialization() {
 
 void Individual::calculateSurvival(const int &groupSize) {
 
-    if (parameters->isNoGroupAugmentation()) {
-        if (fishType == FLOATER) {
-            this->survival = (1 - parameters->getM() * parameters->getN()) /
-                             (1 + exp(-parameters->getX0() - parameters->getXsn() * parameters->getFixedGroupSize() +
-                                      parameters->getXsh() * this->help));
-        } else {
-            this->survival = (1 - parameters->getM()) /
-                             (1 + exp(-parameters->getX0() - parameters->getXsn() * parameters->getFixedGroupSize() +
-                                      parameters->getXsh() * this->help));
-        }
-
+    if (fishType == FLOATER) {
+        this->survival = (1 - parameters->getM() * parameters->getN()) /
+                         (1 + exp(-parameters->getX0() - parameters->getXsn() * groupSize)); // TODO: if group size=0 for floaters, term Xn*N can be removed
     } else {
-        if (fishType == FLOATER) {
-            this->survival = (1 - parameters->getM() * parameters->getN()) /
-                             (1 + exp(-parameters->getX0() - parameters->getXsn() * groupSize +
-                                      parameters->getXsh() * this->help));
-        } else {
+        if (fishType == HELPER && parameters->uniform(*parameters->getGenerator()) < task) {
             this->survival = (1 - parameters->getM()) /
                              (1 + exp(-parameters->getX0() - parameters->getXsn() * groupSize +
-                                      parameters->getXsh() * this->help));
+                                  parameters->getXsh() * this->help));
+        } else {
+            this->survival = (1 - parameters->getM()) /
+                             (1 + exp(-parameters->getX0() - parameters->getXsn() * groupSize));
         }
     }
 }

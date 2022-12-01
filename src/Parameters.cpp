@@ -22,7 +22,6 @@ Parameters::Parameters(const string &url) {
     this->EVOLUTION_HELP_AFTER_DISPERSAL = config["EVOLUTION_HELP_AFTER_DISPERSAL"].as<bool>();
     this->DIRECT_BROOD_CARE_ONLY = config["DIRECT_BROOD_CARE_ONLY"].as<bool>();
     this->LOW_SURVIVAL_BREEDER = config["LOW_SURVIVAL_BREEDER"].as<bool>();
-    this->NO_GROUP_AUGMENTATION = config["NO_GROUP_AUGMENTATION"].as<bool>();
     this->NO_RELATEDNESS = config["NO_RELATEDNESS"].as<bool>();
     this->NO_RELATEDNESS_RANDOM_GROUP = config["NO_RELATEDNESS_RANDOM_GROUP"].as<bool>();
     this->AGE_NO_INFLUENCE_RELATEDNESS = config["AGE_NO_INFLUENCE_RELATEDNESS"].as<bool>();
@@ -92,7 +91,6 @@ void Parameters::print(std::ofstream &outputStream) {
             << "Reaction_norm_task?:" << "\t" << this->isReactionNormTask() << endl
             << "Direct_brood_care_only?:" << "\t" << this->isDirectBroodCareOnly() << endl
             << "Low_survival_breeder?:" << "\t" << this->isLowSurvivalBreeder() << endl
-            << "No_group_augmentation?:" << "\t" << this->isNoGroupAugmentation() << endl
             << "No_effect_relatedness?:" << "\t" << this->isNoRelatedness() << endl
             << "Non-related_helpers_random_group?:" << "\t" << this->isNoRelatednessRandomGroup() << endl
             << "No_effect_age_inheritance?:" << "\t" << this->isAgeNoInfluenceInheritance() << endl
@@ -154,10 +152,6 @@ bool Parameters::isDirectBroodCareOnly() const {
 
 bool Parameters::isLowSurvivalBreeder() const {
     return LOW_SURVIVAL_BREEDER;
-}
-
-bool Parameters::isNoGroupAugmentation() const {
-    return NO_GROUP_AUGMENTATION;
 }
 
 bool Parameters::isNoRelatedness() const {
