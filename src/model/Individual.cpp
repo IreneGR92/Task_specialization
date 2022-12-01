@@ -14,6 +14,8 @@ Individual::Individual(Individual &individual, FishType fishType, int &generatio
     this->alphaAge = individual.alphaAge;
     this->beta = individual.beta;
     this->betaAge = individual.betaAge;
+    this->gamma = individual.gamma;
+    this->gammaAge = individual.gammaAge;
     this->drift = individual.getDrift();
 
     this->dispersal = Parameters::NO_VALUE;
@@ -33,6 +35,8 @@ Individual::Individual(FishType fishType) {
     this->alphaAge = param->getInitAlphaAge();
     this->beta = param->getInitBeta();
     this->betaAge = param->getInitBetaAge();
+    this->gamma = param->getInitGamma();
+    this->gammaAge = param->getInitGammaAge();
     this->drift = param->driftUniform(*param->getGenerator());
     this->initializeIndividual(fishType);
 }
@@ -45,7 +49,7 @@ void Individual::initializeIndividual(FishType type) {
     this->fishType = type;
     this->inherit = true;
     this->age = 1;
-    this->rank = age; //TODO: change?
+    this->rank = age;
 }
 
 /* BECOME FLOATER (STAY VS DISPERSE) */
@@ -113,10 +117,12 @@ void Individual::calculateSurvival(const int &groupSize) {
 void Individual::mutate(int generation) // mutate genome of offspring
 {
     auto rng = *parameters->getGenerator();
-    std::normal_distribution<double> NormalA(0,
-                                             parameters->getStepAlpha()); //TODO: could be simplified if I decide to have all the steps size with the same magnitude
+    std::normal_distribution<double> NormalA(0, parameters->getStepAlpha()); //TODO: could be simplified
     std::normal_distribution<double> NormalB(0, parameters->getStepBeta());
+    std::normal_distribution<double> NormalG(0, parameters->getStepGamma());
     std::normal_distribution<double> NormalD(0, parameters->getStepDrift());
+
+    // Alpha
     double mutationAlpha;
     double mutationAlphaAge;
 
@@ -140,6 +146,7 @@ void Individual::mutate(int generation) // mutate genome of offspring
         }
     }
 
+    // Beta
     if (parameters->uniform(rng) < parameters->getMutationBeta()) {
         beta += NormalB(rng);
         if (!parameters->isReactionNormDispersal()) {
@@ -153,6 +160,21 @@ void Individual::mutate(int generation) // mutate genome of offspring
         }
     }
 
+    // Gamma
+    if (parameters->uniform(rng) < parameters->getMutationGamma()) {
+        gamma += NormalG(rng);
+        if (!parameters->isHelpReducesRank()) { //TODO: change to whether age has an influence
+            if (gamma < 0) { gamma = 0; }
+            else if (gamma > 1) { gamma = 1; }
+        }
+    }
+    if (parameters->isHelpReducesRank()) {
+        if (parameters->uniform(rng) < parameters->getMutationGammaAge()) {
+            gammaAge += NormalG(rng);
+        }
+    }
+
+    // Drift
     if (parameters->uniform(rng) < parameters->getMutationDrift()) {
         drift += NormalD(rng);
     }
@@ -174,6 +196,18 @@ void Individual::increaseAge() {
     this->increaseAge(true);
 }
 
+/* CALCULATE RANK */
+void Individual::calculateRank() {
+    if (parameters->isHelpReducesRank()) {
+        rank = age - parameters->getYh() * help;
+        if (rank < 0.001) {
+            rank = 0.001;
+        }
+    } else {
+        rank = age;
+    }
+}
+
 
 /* GETTERS AND SETTERS */
 
@@ -191,6 +225,14 @@ double Individual::getBeta() const {
 
 double Individual::getBetaAge() const {
     return betaAge;
+}
+
+double Individual::getGamma() const {
+    return gamma;
+}
+
+double Individual::getGammaAge() const {
+    return gammaAge;
 }
 
 double Individual::getDrift() const {
@@ -254,6 +296,10 @@ double Individual::get(Attribute type) const {
             return this->beta;
         case BETA_AGE:
             return this->betaAge;
+        case GAMMA:
+            return this->gamma;
+        case GAMMA_AGE:
+            return this->gammaAge;
         case HELP:
             return this->help;
         case DISPERSAL:
@@ -283,18 +329,7 @@ bool Individual::isViableBreeder() {
     }
 }
 
-void Individual::calculateRank() {
-    if (parameters->isHelpReducesRank()) {
-        rank = age - parameters->getYh() * help;
-        if (rank < 0.001) {
-            rank = 0.001;
-        }
-    } else {
-        rank = age;
-    }
 
-
-}
 
 
 

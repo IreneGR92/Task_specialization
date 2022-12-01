@@ -53,6 +53,11 @@ Parameters::Parameters(const string &url) {
     this->MUTATION_BETA = config["MUTATION_BETA"].as<double>();
     this->MUTATION_BETA_AGE = config["MUTATION_BETA_AGE"].as<double>();
     this->STEP_BETA = config["STEP_BETA"].as<double>();
+    this->INIT_GAMMA = config["INIT_GAMMA"].as<double>();
+    this->INIT_GAMMA_AGE = config["INIT_GAMMA_AGE"].as<double>();
+    this->MUTATION_GAMMA = config["MUTATION_GAMMA"].as<double>();
+    this->MUTATION_GAMMA_AGE = config["MUTATION_GAMMA_AGE"].as<double>();
+    this->STEP_GAMMA = config["STEP_GAMMA"].as<double>();
     this->MUTATION_DRIFT = config["MUTATION_DRIFT"].as<double>();
     this->STEP_DRIFT = config["STEP_DRIFT"].as<double>();
 
@@ -110,6 +115,8 @@ void Parameters::print(std::ofstream &outputStream) {
                  << "initAlphaAge:" << "\t" << this->getInitAlphaAge() << endl
                  << "initBeta:" << "\t" << this->getInitBeta() << endl
                  << "initBetaAge:" << "\t" << this->getInitBetaAge() << endl
+                 << "initGamma:" << "\t" << this->getInitGamma() << endl
+                 << "initGammaAge:" << "\t" << this->getInitGammaAge() << endl
                  << "mutAlpha:" << "\t" << this->getMutationAlpha() << endl
                  << "mutAlphaAge:" << "\t" << this->getMutationAlphaAge() << endl
                  << "mutBeta:" << "\t" << this->getMutationBeta() << endl
@@ -267,6 +274,26 @@ double Parameters::getMutationBetaAge() const {
 
 double Parameters::getStepBeta() const {
     return STEP_BETA;
+}
+
+double Parameters::getInitGamma() const {
+    return INIT_GAMMA;
+}
+
+double Parameters::getInitGammaAge() const {
+    return INIT_GAMMA_AGE;
+}
+
+double Parameters::getMutationGamma() const {
+    return MUTATION_GAMMA;
+}
+
+double Parameters::getMutationGammaAge() const {
+    return MUTATION_GAMMA_AGE;
+}
+
+double Parameters::getStepGamma() const {
+    return STEP_GAMMA;
 }
 
 double Parameters::getMutationDrift() const {
