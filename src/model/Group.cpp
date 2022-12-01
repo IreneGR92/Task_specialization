@@ -91,6 +91,7 @@ void Group::calculateCumulativeHelp() //Calculate accumulative help of all indiv
     for (Individual &helper: helpers) {
         assert(helper.getFishType() == HELPER);
         helper.calcHelp();
+        helper.calcTaskSpecialization();
         cumHelp += helper.getHelp();
     }
 }

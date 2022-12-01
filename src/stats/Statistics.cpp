@@ -73,6 +73,8 @@ void Statistics::calculateStatistics(const Population &populationObj) {
     alphaAge.addValues(individualsAll.get(ALPHA_AGE));
     beta.addValues(individualsAll.get(BETA));
     betaAge.addValues(individualsAll.get(BETA_AGE));
+    gamma.addValues(individualsAll.get(GAMMA));
+    gammaAge.addValues(individualsAll.get(GAMMA_AGE));
 
     //Phenotypes
     age.addValues(individualsAll.get(AGE));
@@ -215,6 +217,7 @@ void Statistics::printHeadersToConsole() {
     cout << setw(6) << "gen" << setw(9) << "pop" << setw(9) << "deaths" << setw(9)
          << "float" << setw(9) << "group" << setw(9) << "maxGroup" << setw(9) << "age" << setw(9)
          << "alpha" << setw(9) << "alphaAge" << setw(9) << "beta" << setw(9) << "betaAge" << setw(9)
+         << "gamma" << setw(9) << "gammaAge" << setw(9)
          << "help" << setw(9) << "disper" << setw(9) << "task" << setw(9) << "surv" << setw(9) << "relat" << endl;
 }
 
@@ -233,6 +236,8 @@ void Statistics::printToConsole(int generation, int deaths) {
               << setw(9) << setprecision(4) << alphaAge.calculateMean()
               << setw(9) << setprecision(4) << beta.calculateMean()
               << setw(9) << setprecision(4) << betaAge.calculateMean()
+              << setw(9) << setprecision(4) << gamma.calculateMean()
+              << setw(9) << setprecision(4) << gammaAge.calculateMean()
               << setw(9) << setprecision(4) << help.calculateMean()
               << setw(9) << setprecision(4) << dispersal.calculateMean()
               << setw(9) << setprecision(4) << task.calculateMean()
