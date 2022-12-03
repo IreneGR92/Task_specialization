@@ -85,15 +85,15 @@ void Parameters::print() {
 void Parameters::print(std::ofstream &outputStream) {
     outputStream << "PARAMETER VALUES" << endl
 
-            << "Reaction_norm_help?:" << "\t" << this->isReactionNormHelp() << endl
-            << "Reaction_norm_dispersal?:" << "\t" << this->isReactionNormDispersal() << endl
-            << "Evolution_help_after_dispersal?:" << "\t" << this->isEvolutionHelpAfterDispersal() << endl
-            << "Reaction_norm_task?:" << "\t" << this->isReactionNormTask() << endl
-            << "Direct_brood_care_only?:" << "\t" << this->isDirectBroodCareOnly() << endl
-            << "Low_survival_breeder?:" << "\t" << this->isLowSurvivalBreeder() << endl
-            << "No_effect_relatedness?:" << "\t" << this->isNoRelatedness() << endl
-            << "Non-related_helpers_random_group?:" << "\t" << this->isNoRelatednessRandomGroup() << endl
-            << "No_effect_age_inheritance?:" << "\t" << this->isAgeNoInfluenceInheritance() << endl
+                 << "Reaction_norm_help?:" << "\t" << this->isReactionNormHelp() << endl
+                 << "Reaction_norm_dispersal?:" << "\t" << this->isReactionNormDispersal() << endl
+                 << "Evolution_help_after_dispersal?:" << "\t" << this->isEvolutionHelpAfterDispersal() << endl
+                 << "Reaction_norm_task?:" << "\t" << this->isReactionNormTask() << endl
+                 << "Direct_brood_care_only?:" << "\t" << this->isDirectBroodCareOnly() << endl
+                 << "Low_survival_breeder?:" << "\t" << this->isLowSurvivalBreeder() << endl
+                 << "No_effect_relatedness?:" << "\t" << this->isNoRelatedness() << endl
+                 << "Non-related_helpers_random_group?:" << "\t" << this->isNoRelatednessRandomGroup() << endl
+                 << "No_effect_age_inheritance?:" << "\t" << this->isAgeNoInfluenceInheritance() << endl
                  << "Initial_population:" << "\t" << this->getMaxColonies() * (this->getInitNumHelpers() + 1) << endl
                  << "Number_of_colonies:" << "\t" << this->getMaxColonies() << endl
                  << "Number_generations:" << "\t" << this->getNumGenerations() << endl
@@ -119,9 +119,12 @@ void Parameters::print(std::ofstream &outputStream) {
                  << "mutAlphaAge:" << "\t" << this->getMutationAlphaAge() << endl
                  << "mutBeta:" << "\t" << this->getMutationBeta() << endl
                  << "mutBetaAge:" << "\t" << this->getMutationBetaAge() << endl
+                 << "mutGamma:" << "\t" << this->getMutationGamma() << endl
+                 << "mutGammaAge:" << "\t" << this->getMutationGammaAge() << endl
                  << "mutDrift:" << "\t" << this->getMutationDrift() << endl
                  << "stepAlpha:" << "\t" << this->getStepAlpha() << endl
                  << "stepBeta:" << "\t" << this->getStepBeta() << endl
+                 << "stepGamma:" << "\t" << this->getStepGamma() << endl
                  << "stepDrift:" << "\t" << this->getStepDrift() << endl << endl;
 }
 
