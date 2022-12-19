@@ -42,6 +42,8 @@ int main(int count, char **argv) {
 
     for (int replica = 0; replica < parameters->getMaxNumReplicates(); replica++) {
 
+        std::cout << "REPLICA = " << replica << std::endl; //TODO: for debugging
+
         auto *simulation = new Simulation(replica);
         simulation->run();
         delete simulation;

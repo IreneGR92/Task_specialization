@@ -50,6 +50,10 @@ void Simulation::run() {
             }
         }
 
+        if (replica == 0 && generation == 2000){
+            std::cout << "HERE" << std::endl; //TODO: Stopper for debugging
+        }
+
 
         population.mortality();
         population.newBreeder();

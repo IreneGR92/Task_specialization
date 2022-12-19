@@ -10,7 +10,7 @@
 
 class Individual {
 
-    Parameters *parameters{};
+    Parameters *parameters;
 
     double alpha;
     double alphaAge;
@@ -20,15 +20,15 @@ class Individual {
     double gammaAge;
     double drift;
 
-    double dispersal{};
-    double help{};
-    double task{};
-    double survival{};
+    double dispersal;
+    double help;
+    double task;
+    double survival;
 
     FishType fishType;                                                // possible classes: breeder, helper, floater
-    int age{};
+    int age;
     double rank;
-    bool inherit{};                                                    //did the new breeder inherit the territory or did it disperse?
+    bool inherit;                                                    //did the new breeder inherit the territory or did it disperse?
 
     void mutate(int generation);
 

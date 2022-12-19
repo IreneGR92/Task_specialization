@@ -51,7 +51,7 @@ void Individual::initializeIndividual(FishType type) {
     this->fishType = type;
     this->inherit = true;
     this->age = 1;
-    this->rank = age;
+    this->rank = Parameters::NO_VALUE;
 }
 
 /* BECOME FLOATER (STAY VS DISPERSE) */
