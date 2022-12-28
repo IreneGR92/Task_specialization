@@ -29,7 +29,7 @@
 
 # For array jobs
 # Indicate how many input files you have
-#SBATCH --array=0-69 //TODO: Number of runs, remember to change!
+#SBATCH --array=0-69
 
 #### Your shell commands below this line ####
 
