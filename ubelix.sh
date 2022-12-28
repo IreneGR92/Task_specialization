@@ -7,7 +7,7 @@
 #SBATCH --mail-type=end,fail
 
 # Job name
-#SBATCH --job-name="GroupAugmentation"
+#SBATCH --job-name="TaskSpecialization"
 
 # Runtime and memory
 #SBATCH --time=96:00:00
@@ -29,19 +29,83 @@
 
 # For array jobs
 # Indicate how many input files you have
-#SBATCH --array=0-5 //TODO: Number of runs, remember to change!
+#SBATCH --array=0-69 //TODO: Number of runs, remember to change!
 
 #### Your shell commands below this line ####
 
 declare -a arr=(
 
 #   MUTATION MODIFIED  #
-"no-relatedness_Xn0.yml"
-"no-relatedness_Xn1.yml"
-"no-relatedness_Xn3.yml"
-"Xn0.yml"
-"Xn1.yml"
-"Xn3.yml"
+"default_bias1-RN-m01.ylm"
+"default_bias1-RN-m02.ylm"
+"default_bias1-RN-m03.ylm"
+"default_bias1-RN-m015.ylm"
+"default_bias1-RN-m025.ylm"
+"default_bias2-RN-m01.ylm"
+"default_bias2-RN-m02.ylm"
+"default_bias2-RN-m03.ylm"
+"default_bias2-RN-m015.ylm"
+"default_bias2-RN-m025.ylm"
+"default_bias3-RN-m01.ylm"
+"default_bias3-RN-m02.ylm"
+"default_bias3-RN-m03.ylm"
+"default_bias3-RN-m015.ylm"
+"default_bias3-RN-m025.ylm"
+"default_bias4-RN-m01.ylm"
+"default_bias4-RN-m02.ylm"
+"default_bias4-RN-m03.ylm"
+"default_bias4-RN-m015.ylm"
+"default_bias4-RN-m025.ylm"
+"default_bias15-RN-m01.ylm"
+"default_bias15-RN-m02.ylm"
+"default_bias15-RN-m03.ylm"
+"default_bias15-RN-m015.ylm"
+"default_bias15-RN-m025.ylm"
+"default_bias25-RN-m01.ylm"
+"default_bias25-RN-m02.ylm"
+"default_bias25-RN-m03.ylm"
+"default_bias25-RN-m015.ylm"
+"default_bias25-RN-m025.ylm"
+"default_bias35-RN-m01.ylm"
+"default_bias35-RN-m02.ylm"
+"default_bias35-RN-m03.ylm"
+"default_bias35-RN-m015.ylm"
+"default_bias35-RN-m025.ylm"
+"noRelatedness_bias1-RN-m01.ylm"
+"noRelatedness_bias1-RN-m02.ylm"
+"noRelatedness_bias1-RN-m03.ylm"
+"noRelatedness_bias1-RN-m015.ylm"
+"noRelatedness_bias1-RN-m025.ylm"
+"noRelatedness_bias2-RN-m01.ylm"
+"noRelatedness_bias2-RN-m02.ylm"
+"noRelatedness_bias2-RN-m03.ylm"
+"noRelatedness_bias2-RN-m015.ylm"
+"noRelatedness_bias2-RN-m025.ylm"
+"noRelatedness_bias3-RN-m01.ylm"
+"noRelatedness_bias3-RN-m02.ylm"
+"noRelatedness_bias3-RN-m03.ylm"
+"noRelatedness_bias3-RN-m015.ylm"
+"noRelatedness_bias3-RN-m025.ylm"
+"noRelatedness_bias4-RN-m01.ylm"
+"noRelatedness_bias4-RN-m02.ylm"
+"noRelatedness_bias4-RN-m03.ylm"
+"noRelatedness_bias4-RN-m015.ylm"
+"noRelatedness_bias4-RN-m025.ylm"
+"noRelatedness_bias15-RN-m01.ylm"
+"noRelatedness_bias15-RN-m02.ylm"
+"noRelatedness_bias15-RN-m03.ylm"
+"noRelatedness_bias15-RN-m015.ylm"
+"noRelatedness_bias15-RN-m025.ylm"
+"noRelatedness_bias25-RN-m01.ylm"
+"noRelatedness_bias25-RN-m02.ylm"
+"noRelatedness_bias25-RN-m03.ylm"
+"noRelatedness_bias25-RN-m015.ylm"
+"noRelatedness_bias25-RN-m025.ylm"
+"noRelatedness_bias35-RN-m01.ylm"
+"noRelatedness_bias35-RN-m02.ylm"
+"noRelatedness_bias35-RN-m03.ylm"
+"noRelatedness_bias35-RN-m015.ylm"
+"noRelatedness_bias35-RN-m025.ylm"
 
 		)
 
