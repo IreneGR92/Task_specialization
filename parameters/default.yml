@@ -61,7 +61,6 @@ MUTATION_GAMMA: 0.05
 MUTATION_GAMMA_AGE: 0.05
 STEP_GAMMA: 0.04
 
-
 #For relatedness
 MUTATION_DRIFT: 0.05        # mutation rate in the neutral selected value to track level of relatedness
 STEP_DRIFT: 0.04            # mutation step size in the neutral genetic value to track level of relatedness
