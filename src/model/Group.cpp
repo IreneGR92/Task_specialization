@@ -106,12 +106,7 @@ void Group::survivalGroup() {
     }
 
     //Calculate the survival of the breeder
-    if (parameters->isLowSurvivalBreeder()) {
-        this->breeder.calculateSurvival(
-                parameters->getFixedGroupSize()); //survival for breeder does not include group size benefits
-    } else {
         this->breeder.calculateSurvival(groupSize);
-    }
 }
 
 void Group::mortalityGroup(int &deaths) {

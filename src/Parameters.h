@@ -26,7 +26,6 @@ private:
     bool REACTION_NORM_DISPERSAL; // Apply reaction norm to age for dispersal?
     bool EVOLUTION_HELP_AFTER_DISPERSAL; // help evolves only after the evolution of dispersal?
     bool DIRECT_BROOD_CARE_ONLY; // right after an individual becomes breeder, it does not receive help for the first breeding cycle
-    bool LOW_SURVIVAL_BREEDER;
     bool NO_RELATEDNESS;       //Apply implementation to remove the effect of relatedness?
     bool NO_RELATEDNESS_RANDOM_GROUP; // When applying no relatedness, helpers shuffled to random group instead of maintaining group size
     bool AGE_NO_INFLUENCE_RELATEDNESS; // Age no influence of who inherits territory, randomly sampled from candidate (helpers + sample floaters)
@@ -40,7 +39,6 @@ private:
 //Fix values
     int INIT_NUM_HELPERS;     //initial number of helpers per group
     double BIAS_FLOAT_BREEDER; //mean of number of groups a floater can visit to try to become a breeder compared to 1 group for helpers
-    int FIXED_GROUP_SIZE;       //in the implementation of no group augmentation, virtual group size for survival for breeder and helpers
     int MIN_AGE_BECOME_BREEDER; //minimum age for individuals to be able to become breeders
 
 // Modifiers in survival.
