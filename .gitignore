@@ -81,8 +81,6 @@ cmake-build-release
 *.lastbuildstate
 *.tlog
 *.db
-Group_augmentation_RN/*
-VS/*
 
 *.Rhistory
 .vs/*

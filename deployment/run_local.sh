@@ -7,7 +7,7 @@
 #SBATCH --mail-type=end,fail
 
 # Job name
-#SBATCH --job-name="GroupAugmentation"
+#SBATCH --job-name="TaskSpecialization"
 
 # Runtime and memory
 #SBATCH --time=300:00:00
