@@ -30,7 +30,7 @@ Yh: 0.08   # cost of help on rank
 
 #Modifiers in fecundity
 K0: 1    # min fecundity, fecundity when no help provided.
-K1: 1    # benefit of cumHelp in the fecundity
+Kh: 1    # benefit of cumHelp in the fecundity
 
 
 #Genetic values

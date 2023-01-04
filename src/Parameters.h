@@ -51,7 +51,7 @@ private:
 
 //Modifiers in fecundity
     double K0;    // min fecundity, fecundity when no help provided.
-    double K1;    // benefit of cumHelp in the fecundity
+    double Kh;    // benefit of cumHelp in the fecundity
 
 
 //Genetic values
@@ -156,7 +156,7 @@ public:
 
     double getK0() const;
 
-    double getK1() const;
+    double getKh() const;
 
     double getInitAlpha() const;
 
