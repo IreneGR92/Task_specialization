@@ -73,6 +73,8 @@ public:
 
     double getHelp() const;
 
+    bool getHelpType() const;
+
     double getTask() const;
 
     void setHelp(double help_);

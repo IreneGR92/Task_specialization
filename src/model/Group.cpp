@@ -12,7 +12,8 @@ Group::Group() : breeder(BREEDER) {
     this->parameters = Parameters::instance();
 
     breederAlive = true;
-    cumHelp = Parameters::NO_VALUE;
+    cumHelpType0 = Parameters::NO_VALUE;
+    cumHelpType1 = Parameters::NO_VALUE;
     fecundity = Parameters::NO_VALUE;
     realFecundity = Parameters::NO_VALUE;
 
@@ -85,14 +86,20 @@ std::vector<Individual> Group::reassignNoRelatedness(int index) {
 
 void Group::calculateCumulativeHelp() //Calculate accumulative help of all individuals inside of each group.
 {
-    cumHelp = 0;
+    cumHelpType0 = 0;
+    cumHelpType1 = 0;
 
     //Level of help for helpers
     for (Individual &helper: helpers) {
         assert(helper.getFishType() == HELPER);
         helper.calcHelp();
         helper.calcTaskSpecialization();
-        cumHelp += helper.getHelp();
+
+        if (helper.getHelpType() == 0){
+            cumHelpType0 += helper.getHelp();
+        } else {
+            cumHelpType1 += helper.getHelp();
+        }
     }
 }
 
@@ -132,7 +139,8 @@ void Group::mortalityGroup(int &deaths) {
         breederAlive = false;
         deaths++;
         if (parameters->isDirectBroodCareOnly()) {
-            cumHelp = 0; //removes help for new breeder
+            cumHelpType0 = 0; //removes help for new breeder
+            cumHelpType1 = 0;
         }
     }
     this->calculateGroupSize(); //update group size after mortality
@@ -289,6 +297,8 @@ void Group::increaseAge() {
 
 void Group::reproduce(int generation) { // populate offspring generation
     //Calculate fecundity
+    double cumHelp = cumHelpType0 + cumHelpType1;
+
     fecundity = parameters->getK0() + parameters->getKh() * cumHelp / (1 + cumHelp);
 
     poisson_distribution<int> PoissonFecundity(fecundity);
@@ -316,8 +326,12 @@ bool Group::isBreederAlive() const {
     return breederAlive;
 }
 
-double Group::getCumHelp() const {
-    return cumHelp;
+double Group::getCumHelpType0() const {
+    return cumHelpType0;
+}
+
+double Group::getCumHelpType1() const {
+    return cumHelpType1;
 }
 
 std::vector<double> Group::get(Attribute attribute, bool includeBreeder) const {

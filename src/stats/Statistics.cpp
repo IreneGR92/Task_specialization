@@ -24,7 +24,8 @@ void Statistics::calculateStatistics(const Population &populationObj) {
     IndividualVector helpers;
     IndividualVector individualsAll;
     std::vector<double> groupSizes;
-    std::vector<double> cumHelps;
+    std::vector<double> cumHelpsType0;
+    std::vector<double> cumHelpsType1;
 
     for (const Individual &helper: helpers) {
         if (helper.getFishType() != HELPER) {
@@ -52,7 +53,8 @@ void Statistics::calculateStatistics(const Population &populationObj) {
         helpers.merge(group.getHelpers());
 
         groupSizes.push_back(group.getGroupSize());
-        cumHelps.push_back(group.getCumHelp());
+        cumHelpsType0.push_back(group.getCumHelpType0());
+        cumHelpsType1.push_back(group.getCumHelpType1());
     }
 
     individualsAll.merge(helpers);
@@ -98,7 +100,8 @@ void Statistics::calculateStatistics(const Population &populationObj) {
 
     //Group attributes
     groupSize.addValues(groupSizes);
-    cumulativeHelp.addValues(cumHelps);
+    cumulativeHelpType0.addValues(cumHelpsType0);
+    cumulativeHelpType1.addValues(cumHelpsType1);
 
 
 
@@ -220,7 +223,7 @@ void Statistics::printHeadersToConsole() {
          << "float" << setw(9) << "group" << setw(9) << "maxGroup" << setw(9) << "age" << setw(9)
          << "alpha" << setw(9) << "alphaAge" << setw(9) << "beta" << setw(9) << "betaAge" << setw(9)
          << "gamma" << setw(9) << "gammaAge" << setw(9)
-         << "help" << setw(9) << "disper" << setw(9) << "task" << setw(9) << "surv" << setw(9) << "relat" << endl;
+         << "disper" << setw(9) << "help" << setw(9)  << "task" << setw(9) << "surv" << setw(9) << "relat" << endl;
 }
 
 
@@ -240,8 +243,8 @@ void Statistics::printToConsole(int generation, int deaths) {
               << setw(9) << setprecision(4) << betaAge.calculateMean()
               << setw(9) << setprecision(4) << gamma.calculateMean()
               << setw(9) << setprecision(4) << gammaAge.calculateMean()
-              << setw(9) << setprecision(4) << help.calculateMean()
               << setw(9) << setprecision(4) << dispersal.calculateMean()
+              << setw(9) << setprecision(4) << help.calculateMean()
               << setw(9) << setprecision(4) << task.calculateMean()
               << setw(9) << setprecision(2) << survival.calculateMean()
               << setw(9) << setprecision(2) << relatedness
@@ -260,7 +263,8 @@ void Statistics::printHeadersToFile() {
                                  << "meanAlpha" << "\t" << "meanAlphaAge" << "\t"
                                  << "meanBeta" << "\t" << "meanBetaAge" << "\t"
                                  << "meanGamma" << "\t" << "meanGammaAge" << "\t"
-                                 << "meanHelp" << "\t" << "meanCumHelp" << "\t" << "meanDispersal" << "\t"
+                                 << "meanDispersal" << "\t"
+                                 << "meanHelp" << "\t" << "meanCumHelp0" << "\t" << "meanCumHelp1" << "\t"
                                  << "meanTask" << "\t"
                                  << "meanSurvival" << "\t" << "meanSurvival_H" << "\t" << "meanSurvival_F" << "\t"
                                  << "meanSurvival_B" << "\t" << "Relatedness" << "\t"
@@ -269,7 +273,8 @@ void Statistics::printHeadersToFile() {
                                  << "SD_Alpha" << "\t" << "SD_AlphaAge" << "\t"
                                  << "SD_Beta" << "\t" << "SD_BetaAge" << "\t"
                                  << "SD_Gamma" << "\t" << "SD_GammaAge" << "\t"
-                                 << "SD_Help" << "\t" << "SD_CumHelp" << "\t" << "SD_Dispersal" << "\t"
+                                 << "SD_Dispersal" << "\t"
+                                 << "SD_Help" << "\t" << "SD_CumHelp0" << "\t" << "SD_CumHelp1" << "\t"
                                  << "SD_Task" << "\t"
                                  << "SD_Survival" << "\t" << "SD_Survival_H" << "\t" << "SD_Survival_F"
                                  << "\t" << "SD_Survival_B" << "\t"
@@ -283,7 +288,7 @@ void Statistics::printHeadersToFile() {
                                            << "alpha" << "\t" << "alphaAge" << "\t"
                                            << "beta" << "\t" << "betaAge" << "\t"
                                            << "gamma" << "\t" << "gammaAge" << "\t" << "drift"<< "\t"
-                                           << "help" << "\t" << "dispersal" << "\t" << "task" << "\t"
+                                           << "dispersal" << "\t" << "help" << "\t" << "task" << "\t" << "helpType" << "\t"
                                            << "survival" << endl;
 }
 
@@ -307,9 +312,10 @@ void Statistics::printToFile(int replica, int generation, int deaths, int newBre
                                  << "\t" << setprecision(4) << betaAge.calculateMean()
                                  << "\t" << setprecision(4) << gamma.calculateMean()
                                  << "\t" << setprecision(4) << gammaAge.calculateMean()
-                                 << "\t" << setprecision(4) << help.calculateMean()
-                                 << "\t" << setprecision(4) << cumulativeHelp.calculateMean()
                                  << "\t" << setprecision(4) << dispersal.calculateMean()
+                                 << "\t" << setprecision(4) << help.calculateMean()
+                                 << "\t" << setprecision(4) << cumulativeHelpType0.calculateMean()
+                                 << "\t" << setprecision(4) << cumulativeHelpType1.calculateMean()
                                  << "\t" << setprecision(4) << task.calculateMean()
                                  << "\t" << setprecision(4) << survival.calculateMean()
                                  << "\t" << setprecision(4) << survivalHelpers.calculateMean()
@@ -327,9 +333,10 @@ void Statistics::printToFile(int replica, int generation, int deaths, int newBre
                                  << "\t" << setprecision(4) << betaAge.calculateSD()
                                  << "\t" << setprecision(4) << gamma.calculateSD()
                                  << "\t" << setprecision(4) << gammaAge.calculateSD()
-                                 << "\t" << setprecision(4) << help.calculateSD()
-                                 << "\t" << setprecision(4) << cumulativeHelp.calculateSD()
                                  << "\t" << setprecision(4) << dispersal.calculateSD()
+                                 << "\t" << setprecision(4) << help.calculateSD()
+                                 << "\t" << setprecision(4) << cumulativeHelpType0.calculateSD()
+                                 << "\t" << setprecision(4) << cumulativeHelpType1.calculateSD()
                                  << "\t" << setprecision(4) << task.calculateSD()
                                  << "\t" << setprecision(4) << survival.calculateSD()
                                  << "\t" << setprecision(4) << survivalHelpers.calculateSD()
@@ -386,9 +393,10 @@ void Statistics::printIndividual(Individual individual, int generation, int grou
                                            << "\t" << setprecision(4) << individual.getGamma()
                                            << "\t" << setprecision(4) << individual.getGammaAge()
                                            << "\t" << setprecision(4) << individual.getDrift()
-                                           << "\t" << setprecision(4) << individual.getHelp()
                                            << "\t" << setprecision(4) << individual.getDispersal()
+                                           << "\t" << setprecision(4) << individual.getHelp()
                                            << "\t" << setprecision(4) << individual.getTask()
+                                           << "\t" << setprecision(4) << individual.getHelpType()
                                            << "\t" << setprecision(4) << individual.getSurvival()
                                            << endl;
 }

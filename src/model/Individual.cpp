@@ -266,6 +266,10 @@ double Individual::getHelp() const {
     return help;
 }
 
+bool Individual::getHelpType() const {
+    return helpType;
+}
+
 double Individual::getTask() const {
     return task;
 }
