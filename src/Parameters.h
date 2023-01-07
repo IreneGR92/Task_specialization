@@ -25,11 +25,13 @@ private:
     bool REACTION_NORM_HELP;    //Apply reaction norm to age for dispersal?
     bool REACTION_NORM_DISPERSAL; // Apply reaction norm to age for dispersal?
     bool EVOLUTION_HELP_AFTER_DISPERSAL; // help evolves only after the evolution of dispersal?
+    bool REACTION_NORM_TASK; // If true: help reduces the rank and likelihood to inherit breeding position, if false: help reduces survival
+    bool NEED_DIVISION_LABOUR; //If true, individuals in a group must split the type of help provided to have an optimum increase on fecundity, as there is need of both defence and feeding
     bool DIRECT_BROOD_CARE_ONLY; // right after an individual becomes breeder, it does not receive help for the first breeding cycle
     bool NO_RELATEDNESS;       //Apply implementation to remove the effect of relatedness?
     bool NO_RELATEDNESS_RANDOM_GROUP; // When applying no relatedness, helpers shuffled to random group instead of maintaining group size
     bool AGE_NO_INFLUENCE_RELATEDNESS; // Age no influence of who inherits territory, randomly sampled from candidate (helpers + sample floaters)
-    bool REACTION_NORM_TASK; // If true: help reduces the rank and likelihood to inherit breeding position, if false: help reduces survival
+
 
     int MAX_COLONIES;     // max number of groups or colonies --> breeding spots.
     int NUM_GENERATIONS;
@@ -113,6 +115,8 @@ public:
     bool isEvolutionHelpAfterDispersal() const;
 
     bool isReactionNormTask() const;
+
+    bool isNeedDivisionLabour() const;
 
     bool isDirectBroodCareOnly() const;
 
