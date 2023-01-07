@@ -52,7 +52,7 @@ private:
 //Modifiers in fecundity
     double K0;    // min fecundity, fecundity when no help provided.
     double Kh;    // benefit of cumHelp in the fecundity
-
+    double Km;    // reduced the need for division of labour, the higher the value the less need for DOL
 
 //Genetic values
 
@@ -153,6 +153,8 @@ public:
     double getK0() const;
 
     double getKh() const;
+
+    double getKm() const;
 
     double getInitAlpha() const;
 

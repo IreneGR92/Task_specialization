@@ -297,9 +297,23 @@ void Group::increaseAge() {
 
 void Group::reproduce(int generation) { // populate offspring generation
     //Calculate fecundity
-    double cumHelp = cumHelpType0 + cumHelpType1;
 
-    fecundity = parameters->getK0() + parameters->getKh() * cumHelp / (1 + cumHelp);
+    double maxCumHelp = (cumHelpType0 + cumHelpType1) / 2 + parameters->getKm(); //TODO: change 0.1 to a parameter
+    double allowedCumHelp0 = cumHelpType0;
+    double allowedCumHelp1 = cumHelpType1;
+
+    if (cumHelpType0 > maxCumHelp) {
+        allowedCumHelp0 = maxCumHelp;
+    }
+
+    if (cumHelpType1 > maxCumHelp) {
+        allowedCumHelp1 = maxCumHelp;
+    }
+
+    double totalCumHelp = allowedCumHelp0 + allowedCumHelp1;
+
+
+    fecundity = parameters->getK0() + parameters->getKh() * totalCumHelp / (1 + totalCumHelp);
 
     poisson_distribution<int> PoissonFecundity(fecundity);
     realFecundity = PoissonFecundity(*parameters->getGenerator()); //integer number

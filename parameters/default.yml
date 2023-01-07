@@ -31,6 +31,7 @@ Yh: 0.08   # cost of help on rank
 #Modifiers in fecundity
 K0: 1    # min fecundity, fecundity when no help provided.
 Kh: 1    # benefit of cumHelp in the fecundity
+Km: 0.1  # reduced the need for division of labour, the higher the value the less need for DOL
 
 
 #Genetic values

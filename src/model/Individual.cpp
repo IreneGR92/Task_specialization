@@ -20,7 +20,7 @@ Individual::Individual(Individual &individual, FishType fishType, int &generatio
 
     this->dispersal = Parameters::NO_VALUE;
     this->help = Parameters::NO_VALUE;
-    this->helpType = 0; //TODO: change?
+    this->helpType = 0;
     this->task = Parameters::NO_VALUE;
 
     this->initializeIndividual(fishType);
@@ -47,7 +47,7 @@ void Individual::initializeIndividual(FishType type) {
     this->parameters = Parameters::instance();
     this->dispersal = Parameters::NO_VALUE;
     this->help = 0;
-    this->helpType = 0; //TODO: change?
+    this->helpType = 0;
     this->task = Parameters::NO_VALUE;
     this->survival = Parameters::NO_VALUE;
     this->fishType = type;
@@ -182,7 +182,7 @@ void Individual::mutate(int generation) // mutate genome of offspring
     // Gamma
     if (parameters->uniform(rng) < parameters->getMutationGamma()) {
         gamma += NormalG(rng);
-        if (!parameters->isReactionNormTask()) { //TODO: change to whether age has an influence
+        if (!parameters->isReactionNormTask()) {
             if (gamma < 0) { gamma = 0; }
             else if (gamma > 1) { gamma = 1; }
         }

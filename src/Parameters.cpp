@@ -40,6 +40,7 @@ Parameters::Parameters(const string &url) {
     this->Yh = config["Yh"].as<double>();
     this->K0 = config["K0"].as<double>();
     this->Kh = config["Kh"].as<double>();
+    this->Km = config["Km"].as<double>();
     this->INIT_ALPHA = config["INIT_ALPHA"].as<double>();
     this->INIT_ALPHA_AGE = config["INIT_ALPHA_AGE"].as<double>();
     this->MUTATION_ALPHA = config["MUTATION_ALPHA"].as<double>();
@@ -105,6 +106,7 @@ void Parameters::print(std::ofstream &outputStream) {
                  << "Yh(Cost_help_rank):" << "\t" << this->getYh() << endl
                  << "K0(Base_fecundity):" << "\t" << this->getK0() << endl
                  << "Kh(Benefit_help_fecundity):" << "\t" << this->getKh() << endl
+                 << "Km(Reduced_need_DOL):" << "\t" << this->getKm() << endl
                  << "initAlpha:" << "\t" << this->getInitAlpha() << endl
                  << "initAlphaAge:" << "\t" << this->getInitAlphaAge() << endl
                  << "initBeta:" << "\t" << this->getInitBeta() << endl
@@ -219,6 +221,10 @@ double Parameters::getK0() const {
 
 double Parameters::getKh() const {
     return Kh;
+}
+
+double Parameters::getKm() const {
+    return Km;
 }
 
 double Parameters::getInitAlpha() const {
