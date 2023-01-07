@@ -116,10 +116,6 @@ public:
 
     bool isDirectBroodCareOnly() const;
 
-    bool isLowSurvivalBreeder() const;
-
-    bool isNoGroupAugmentation() const;
-
     bool isNoRelatedness() const;
 
     bool isNoRelatednessRandomGroup() const;

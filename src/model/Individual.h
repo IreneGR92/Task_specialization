@@ -22,6 +22,7 @@ class Individual {
 
     double dispersal;
     double help;
+    bool helpType;
     double task;
     double survival;
 

@@ -20,6 +20,7 @@ Individual::Individual(Individual &individual, FishType fishType, int &generatio
 
     this->dispersal = Parameters::NO_VALUE;
     this->help = Parameters::NO_VALUE;
+    this->helpType = 0; //TODO: change?
     this->task = Parameters::NO_VALUE;
 
     this->initializeIndividual(fishType);
@@ -46,6 +47,7 @@ void Individual::initializeIndividual(FishType type) {
     this->parameters = Parameters::instance();
     this->dispersal = Parameters::NO_VALUE;
     this->help = 0;
+    this->helpType = 0; //TODO: change?
     this->task = Parameters::NO_VALUE;
     this->survival = Parameters::NO_VALUE;
     this->fishType = type;
@@ -97,6 +99,13 @@ void Individual::calcTaskSpecialization() {
         } else {
             task = 1 / (1 + exp(gammaAge * age - gamma));
         }
+
+        if (parameters->uniform(*parameters->getGenerator()) > task){
+            helpType = 0; // cost in rank
+        } else {
+            helpType = 1; // cost in survival
+        }
+
     } else {
         task = Parameters::NO_VALUE;
         std::cout << "Error: floaters get a task value" << std::endl;
@@ -112,7 +121,7 @@ void Individual::calculateSurvival(const int &groupSize) {
         this->survival = (1 - parameters->getM() * parameters->getN()) /
                          (1 + exp(-parameters->getX0() - parameters->getXsn() * groupSize)); // TODO: if group size=0 for floaters, term Xn*N can be removed
     } else {
-        if (fishType == HELPER && parameters->uniform(*parameters->getGenerator()) < task) {
+        if (fishType == HELPER && helpType == 1) {
             this->survival = (1 - parameters->getM()) /
                              (1 + exp(-parameters->getX0() - parameters->getXsn() * groupSize +
                                   parameters->getXsh() * this->help));
@@ -208,7 +217,7 @@ void Individual::increaseAge() {
 
 /* CALCULATE RANK */
 void Individual::calculateRank() {
-    if (fishType == HELPER && parameters->uniform(*parameters->getGenerator()) > task) {
+    if (fishType == HELPER && helpType == 0) {
         rank = age - parameters->getYh() * help;
         if (rank < 0.001) {
             rank = 0.001;
@@ -318,6 +327,8 @@ double Individual::get(Attribute type) const {
             return this->gammaAge;
         case HELP:
             return this->help;
+        case HELP_TYPE:
+            return this->helpType;
         case DISPERSAL:
             return this->dispersal;
         case TASK:
