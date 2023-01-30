@@ -216,7 +216,7 @@ void Group::newBreeder(vector<Individual> &floaters, int &newBreederFloater, int
 
         for (candidateIt = candidates.begin(); candidateIt < candidates.end(); ++candidateIt) {
             position.push_back(static_cast<double>((*candidateIt)->getRank()) / static_cast<double>(sumRank) +
-                               currentPosition); //creates a vector with proportional segments to the age of each individual
+                               currentPosition); //creates a vector with proportional segments to the rank of each individual
             currentPosition = position[position.size() - 1];
         }
 
@@ -227,6 +227,7 @@ void Group::newBreeder(vector<Individual> &floaters, int &newBreederFloater, int
             {
                 breeder = **candidateIt; //substitute the previous dead breeder
                 breederAlive = true;
+                breeder.setAgeBecomeBreeder(breeder.getAge());
 
                 if ((*candidateIt)->getFishType() == FLOATER) //delete the ind from the vector floaters
                 {
@@ -260,6 +261,7 @@ void Group::newBreeder(vector<Individual> &floaters, int &newBreederFloater, int
 
             candidateIt = candidates.begin() + candidateID;
             breeder = **candidateIt; //substitute the previous dead breeder
+            breeder.setAgeBecomeBreeder(breeder.getAge());
             breederAlive = true;
 
             if ((*candidateIt)->getFishType() == FLOATER) {//delete the ind from the vector floaters

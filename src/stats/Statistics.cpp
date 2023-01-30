@@ -15,9 +15,7 @@ void Statistics::calculateStatistics(const Population &populationObj) {
     population = 0, totalFloaters = 0, totalHelpers = 0, totalBreeders = 0,
 
             //Relatedness
-    relatedness = 0.0, driftGroupSize = 0,
-    meanDriftB = 0.0, sumDriftB = 0.0, meanDriftH = 0.0, sumDriftH = 0.0,
-    meanDriftBH = 0.0, meanDriftBB = 0.0, sumDriftBH = 0.0, sumDriftBB = 0.0;
+    relatedness = 0.0;
 
 
     IndividualVector breeders;
@@ -83,6 +81,7 @@ void Statistics::calculateStatistics(const Population &populationObj) {
     ageHelpers.addValues(helpers.get(AGE));
     ageBreeders.addValues(breeders.get(AGE));
     ageFloaters.addValues(populationObj.getFloaters().get(AGE));
+    ageBecomeBreeder.addValues(breeders.get(AGE_BECOME_BREEDER));
 
     help.addValues(helpers.get(HELP));
 
@@ -257,9 +256,9 @@ void Statistics::printToConsole(int generation, int deaths) {
 void Statistics::printHeadersToFile() {
     // column headings in output file main
     *parameters->getMainWriter() << "Replica" << "\t" << "Generation" << "\t" << "Population" << "\t"
-                                 << "Deaths" << "\t" << "Floaters" << "\t"
-                                 << "Group_size" << "\t" << "Age" << "\t" << "Age_H" << "\t" << "Age_F"
-                                 << "\t" << "Age_B" << "\t"
+                                 << "Deaths" << "\t" << "Floaters" << "\t" << "Group_size" << "\t"
+                                 << "Age" << "\t" << "Age_H" << "\t" << "Age_F" << "\t"
+                                 << "Age_B" << "\t" << "Age_New_Breeder" << "\t"
                                  << "meanAlpha" << "\t" << "meanAlphaAge" << "\t"
                                  << "meanBeta" << "\t" << "meanBetaAge" << "\t"
                                  << "meanGamma" << "\t" << "meanGammaAge" << "\t"
@@ -306,6 +305,7 @@ void Statistics::printToFile(int replica, int generation, int deaths, int newBre
                                  << "\t" << setprecision(4) << ageHelpers.calculateMean()
                                  << "\t" << setprecision(4) << ageFloaters.calculateMean()
                                  << "\t" << setprecision(4) << ageBreeders.calculateMean()
+                                 << "\t" << setprecision(4) << ageBecomeBreeder.calculateMean()
                                  << "\t" << setprecision(4) << alpha.calculateMean()
                                  << "\t" << setprecision(4) << alphaAge.calculateMean()
                                  << "\t" << setprecision(4) << beta.calculateMean()

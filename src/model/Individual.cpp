@@ -53,6 +53,7 @@ void Individual::initializeIndividual(FishType type) {
     this->fishType = type;
     this->inherit = true;
     this->age = 1;
+    this->ageBecomeBreeder = Parameters::NO_VALUE;
     this->rank = Parameters::NO_VALUE;
 }
 
@@ -303,6 +304,10 @@ int Individual::getAge() const {
     return age;
 }
 
+void Individual::setAgeBecomeBreeder(int ageBecomeBreeder_) {
+    Individual::ageBecomeBreeder = ageBecomeBreeder_;
+}
+
 double Individual::getRank() const {
     return rank;
 }
@@ -343,6 +348,8 @@ double Individual::get(Attribute type) const {
             return this->drift;
         case AGE:
             return this->age;
+        case AGE_BECOME_BREEDER:
+            return this->ageBecomeBreeder;
         case RANK:
             return this->rank;
     }
