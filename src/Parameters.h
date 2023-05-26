@@ -30,7 +30,7 @@ private:
     bool DIRECT_BROOD_CARE_ONLY; // right after an individual becomes breeder, it does not receive help for the first breeding cycle
     bool NO_RELATEDNESS;       //Apply implementation to remove the effect of relatedness?
     bool NO_RELATEDNESS_RANDOM_GROUP; // When applying no relatedness, helpers shuffled to random group instead of maintaining group size
-    bool AGE_NO_INFLUENCE_RELATEDNESS; // Age no influence of who inherits territory, randomly sampled from candidate (helpers + sample floaters)
+    bool AGE_NO_INFLUENCE_INHERITANCE; // Age no influence of who inherits territory, randomly sampled from candidate (helpers + sample floaters)
 
 
     int MAX_COLONIES;     // max number of groups or colonies --> breeding spots.

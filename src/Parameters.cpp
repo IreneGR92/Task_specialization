@@ -23,7 +23,7 @@ Parameters::Parameters(const string &url) {
     this->DIRECT_BROOD_CARE_ONLY = config["DIRECT_BROOD_CARE_ONLY"].as<bool>();
     this->NO_RELATEDNESS = config["NO_RELATEDNESS"].as<bool>();
     this->NO_RELATEDNESS_RANDOM_GROUP = config["NO_RELATEDNESS_RANDOM_GROUP"].as<bool>();
-    this->AGE_NO_INFLUENCE_RELATEDNESS = config["AGE_NO_INFLUENCE_RELATEDNESS"].as<bool>();
+    this->AGE_NO_INFLUENCE_INHERITANCE = config["AGE_NO_INFLUENCE_INHERITANCE"].as<bool>();
     this->REACTION_NORM_TASK = config["REACTION_NORM_TASK"].as<bool>();
     this->NEED_DIVISION_LABOUR = config["NEED_DIVISION_LABOUR"].as<bool>();
     this->MAX_COLONIES = config["MAX_COLONIES"].as<int>();
@@ -166,7 +166,7 @@ bool Parameters::isNoRelatednessRandomGroup() const {
 }
 
 bool Parameters::isAgeNoInfluenceInheritance() const {
-    return AGE_NO_INFLUENCE_RELATEDNESS;
+    return AGE_NO_INFLUENCE_INHERITANCE;
 }
 
 int Parameters::getMaxColonies() const {
