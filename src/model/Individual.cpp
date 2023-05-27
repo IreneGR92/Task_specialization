@@ -118,17 +118,26 @@ void Individual::calcTaskSpecialization() {
 
 void Individual::calculateSurvival(const int &groupSize) {
 
-    if (fishType == FLOATER) {
-        this->survival = (1 - parameters->getM() * parameters->getN()) /
-                         (1 + exp(-parameters->getX0() - parameters->getXsn() * groupSize)); // TODO: if group size=0 for floaters, term Xn*N can be removed
-    } else {
-        if (fishType == HELPER && helpType == 1) {
-            this->survival = (1 - parameters->getM()) /
-                             (1 + exp(-parameters->getX0() - parameters->getXsn() * groupSize +
-                                  parameters->getXsh() * this->help));
+    if (parameters->isNoGroupAugmentation()) {
+        if (fishType == FLOATER) {
+            this->survival = (1 - parameters->getM() * parameters->getN()) /
+                             (1 + exp(-parameters->getX0() - parameters->getXsn() * parameters->getFixedGroupSize() +
+                                      parameters->getXsh() * this->help));
         } else {
             this->survival = (1 - parameters->getM()) /
-                             (1 + exp(-parameters->getX0() - parameters->getXsn() * groupSize));
+                             (1 + exp(-parameters->getX0() - parameters->getXsn() * parameters->getFixedGroupSize() +
+                                      parameters->getXsh() * this->help));
+        }
+
+    } else {
+        if (fishType == FLOATER) {
+            this->survival = (1 - parameters->getM() * parameters->getN()) /
+                             (1 + exp(-parameters->getX0() - parameters->getXsn() * groupSize +
+                                      parameters->getXsh() * this->help));
+        } else {
+            this->survival = (1 - parameters->getM()) /
+                             (1 + exp(-parameters->getX0() - parameters->getXsn() * groupSize +
+                                      parameters->getXsh() * this->help));
         }
     }
 }

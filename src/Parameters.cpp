@@ -21,6 +21,7 @@ Parameters::Parameters(const string &url) {
     this->REACTION_NORM_DISPERSAL = config["REACTION_NORM_DISPERSAL"].as<bool>();
     this->EVOLUTION_HELP_AFTER_DISPERSAL = config["EVOLUTION_HELP_AFTER_DISPERSAL"].as<bool>();
     this->DIRECT_BROOD_CARE_ONLY = config["DIRECT_BROOD_CARE_ONLY"].as<bool>();
+    this->NO_GROUP_AUGMENTATION = config["NO_GROUP_AUGMENTATION"].as<bool>();
     this->NO_RELATEDNESS = config["NO_RELATEDNESS"].as<bool>();
     this->NO_RELATEDNESS_RANDOM_GROUP = config["NO_RELATEDNESS_RANDOM_GROUP"].as<bool>();
     this->AGE_NO_INFLUENCE_INHERITANCE = config["AGE_NO_INFLUENCE_INHERITANCE"].as<bool>();
@@ -33,6 +34,7 @@ Parameters::Parameters(const string &url) {
     this->INIT_NUM_HELPERS = config["INIT_NUM_HELPERS"].as<int>();
     this->BIAS_FLOAT_BREEDER = config["BIAS_FLOAT_BREEDER"].as<double>();
     this->MIN_AGE_BECOME_BREEDER = config["MIN_AGE_BECOME_BREEDER"].as<int>();
+    this->FIXED_GROUP_SIZE = config["FIXED_GROUP_SIZE"].as<int>();
     this->m = config["m"].as<double>();
     this->n = config["n"].as<double>();
     this->X0 = config["X0"].as<double>();
@@ -91,6 +93,7 @@ void Parameters::print(std::ofstream &outputStream) {
                  << "Reaction_norm_task?:" << "\t" << this->isReactionNormTask() << endl
                  << "Need_division_labour?:" << "\t" << this->isNeedDivisionLabour() << endl
                  << "Direct_brood_care_only?:" << "\t" << this->isDirectBroodCareOnly() << endl
+                 << "No_group_augmentation?:" << "\t" << this->isNoGroupAugmentation() << endl
                  << "No_effect_relatedness?:" << "\t" << this->isNoRelatedness() << endl
                  << "Non-related_helpers_random_group?:" << "\t" << this->isNoRelatednessRandomGroup() << endl
                  << "No_effect_age_inheritance?:" << "\t" << this->isAgeNoInfluenceInheritance() << endl
@@ -99,6 +102,7 @@ void Parameters::print(std::ofstream &outputStream) {
                  << "Number_generations:" << "\t" << this->getNumGenerations() << endl
                  << "Number_replicates:" << "\t" << this->getMaxNumReplicates() << endl
                  << "Min_age_become_breeder:" << "\t" << this->getMinAgeBecomeBreeder() << endl
+                 << "Fixed_group_size:" << "\t" << this->getFixedGroupSize() << endl
                  << "Bias_float_breeder:" << "\t" << this->getBiasFloatBreeder() << endl
                  << "m(Overall_mortality):" << "\t" << this->getM() << endl
                  << "n(Mortality_dispersal):" << "\t" << this->getN() << endl
@@ -157,6 +161,10 @@ bool Parameters::isDirectBroodCareOnly() const {
     return DIRECT_BROOD_CARE_ONLY;
 }
 
+bool Parameters::isNoGroupAugmentation() const {
+    return NO_GROUP_AUGMENTATION;
+}
+
 bool Parameters::isNoRelatedness() const {
     return NO_RELATEDNESS;
 }
@@ -195,6 +203,10 @@ double Parameters::getBiasFloatBreeder() const {
 
 int Parameters::getMinAgeBecomeBreeder() const {
     return MIN_AGE_BECOME_BREEDER;
+}
+
+int Parameters::getFixedGroupSize() const {
+    return FIXED_GROUP_SIZE;
 }
 
 double Parameters::getM() const {

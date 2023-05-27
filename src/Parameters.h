@@ -28,6 +28,7 @@ private:
     bool REACTION_NORM_TASK; // If true: help reduces the rank and likelihood to inherit breeding position, if false: help reduces survival
     bool NEED_DIVISION_LABOUR; //If true, individuals in a group must split the type of help provided to have an optimum increase on fecundity, as there is need of both defence and feeding
     bool DIRECT_BROOD_CARE_ONLY; // right after an individual becomes breeder, it does not receive help for the first breeding cycle
+    bool NO_GROUP_AUGMENTATION;
     bool NO_RELATEDNESS;       //Apply implementation to remove the effect of relatedness?
     bool NO_RELATEDNESS_RANDOM_GROUP; // When applying no relatedness, helpers shuffled to random group instead of maintaining group size
     bool AGE_NO_INFLUENCE_INHERITANCE; // Age no influence of who inherits territory, randomly sampled from candidate (helpers + sample floaters)
@@ -42,6 +43,7 @@ private:
     int INIT_NUM_HELPERS;     //initial number of helpers per group
     double BIAS_FLOAT_BREEDER; //mean of number of groups a floater can visit to try to become a breeder compared to 1 group for helpers
     int MIN_AGE_BECOME_BREEDER; //minimum age for individuals to be able to become breeders
+    int FIXED_GROUP_SIZE;       //in the implementation of no group augmentation, virtual group size for survival for breeder and helpers
 
 // Modifiers in survival.
     double m;      //base mortality
@@ -119,6 +121,8 @@ public:
     bool isNeedDivisionLabour() const;
 
     bool isDirectBroodCareOnly() const;
+
+    bool isNoGroupAugmentation() const;
 
     bool isNoRelatedness() const;
 

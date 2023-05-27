@@ -5,6 +5,7 @@ EVOLUTION_HELP_AFTER_DISPERSAL: false     # Help evolves only after the evolutio
 REACTION_NORM_TASK: true # Apply reaction norm to age for the level of task specialization
 NEED_DIVISION_LABOUR: false # If true, individuals in a group must split the type of help provided to have an optimum increase on fecundity, as there is need of both defence and feeding
 DIRECT_BROOD_CARE_ONLY: true      # Breeder does not receive help during the first breeding cycle after becoming new breeder
+NO_GROUP_AUGMENTATION: false
 NO_RELATEDNESS: false     # Apply implementation to remove the effect of relatedness?
 NO_RELATEDNESS_RANDOM_GROUP: false # In the non relatedness implementation, put non-related helpers to random groups without maintaining group size, removing kin selection from evolution of philopatry
 AGE_NO_INFLUENCE_INHERITANCE: false # Age no influence of who inherits territory, randomly sampled from candidate (helpers + sample floaters)
@@ -18,12 +19,12 @@ SKIP: 1000   # interval between print-outs
 #Fix values
 INIT_NUM_HELPERS: 3     # initial number of helpers per group
 BIAS_FLOAT_BREEDER: 2  # mean of number of groups a floater can visit to try to become a breeder compared to 1 group for helpers
-MIN_AGE_BECOME_BREEDER: 1 # minimum age for individuals to be able to become breeders, 1 is no restriction		# in the implementation of no group augmentation, virtual group size for survival for breeder and helpers
+MIN_AGE_BECOME_BREEDER: 1 # minimum age for individuals to be able to become breeders, 1 is no restriction
 
 # Modifiers in survival
 m: 0.25    # mortality due to predation
 n: 1      # multiplier to m for lower mortality of floaters (only in the new logistic survival formula)
-X0: -1.5   # base survival without the effect of help or group size
+X0: 1.5   # base survival without the effect of help or group size
 Xsh: 5    # cost of help in survival
 Xsn: 0    # benefit of group size in survival
 
