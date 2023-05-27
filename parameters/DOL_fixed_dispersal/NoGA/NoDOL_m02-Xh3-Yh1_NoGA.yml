@@ -5,7 +5,7 @@ EVOLUTION_HELP_AFTER_DISPERSAL: false     # Help evolves only after the evolutio
 REACTION_NORM_TASK: true # Apply reaction norm to age for the level of task specialization
 NEED_DIVISION_LABOUR: false # If true, individuals in a group must split the type of help provided to have an optimum increase on fecundity, as there is need of both defence and feeding
 DIRECT_BROOD_CARE_ONLY: true      # Breeder does not receive help during the first breeding cycle after becoming new breeder
-NO_GROUP_AUGMENTATION: false
+NO_GROUP_AUGMENTATION: true
 NO_RELATEDNESS: false     # Apply implementation to remove the effect of relatedness?
 NO_RELATEDNESS_RANDOM_GROUP: false # In the non relatedness implementation, put non-related helpers to random groups without maintaining group size, removing kin selection from evolution of philopatry
 AGE_NO_INFLUENCE_INHERITANCE: false # Age no influence of who inherits territory, randomly sampled from candidate (helpers + sample floaters)
@@ -27,7 +27,7 @@ m: 0.2    # mortality due to predation
 n: 1      # multiplier to m for lower mortality of floaters (only in the new logistic survival formula)
 X0: 1.5   # base survival without the effect of help or group size
 Xsh: 3    # cost of help in survival
-Xsn: 0    # benefit of group size in survival
+Xsn: 3    # benefit of group size in survival
 
 # Costs of help
 Yh: 1   # cost of help on rank
