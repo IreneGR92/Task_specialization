@@ -35,12 +35,6 @@
 
 declare -a arr=(
 
-"DOL_m02-Xh3-Yh1_NoGA.yml"
-"DOL_m02-Xh3-Yh008_NoGA.yml"
-"DOL_m02-Xh5-Yh1_NoGA.yml"
-"DOL_m02-Xh5-Yh008_NoGA.yml"
-"DOL_m02-Xh15-Yh1_NoGA.yml"
-"DOL_m02-Xh15-Yh008_NoGA.yml"
 "DOL_m015-Xh3-Yh1_NoGA.yml"
 "DOL_m015-Xh3-Yh008_NoGA.yml"
 "DOL_m015-Xh5-Yh1_NoGA.yml"
@@ -53,12 +47,6 @@ declare -a arr=(
 "DOL_m025-Xh5-Yh008_NoGA.yml"
 "DOL_m025-Xh15-Yh1_NoGA.yml"
 "DOL_m025-Xh15-Yh008_NoGA.yml"
-"NoDOL_m02-Xh3-Yh1_NoGA.yml"
-"NoDOL_m02-Xh3-Yh008_NoGA.yml"
-"NoDOL_m02-Xh5-Yh1_NoGA.yml"
-"NoDOL_m02-Xh5-Yh008_NoGA.yml"
-"NoDOL_m02-Xh15-Yh1_NoGA.yml"
-"NoDOL_m02-Xh15-Yh008_NoGA.yml"
 "NoDOL_m015-Xh3-Yh1_NoGA.yml"
 "NoDOL_m015-Xh3-Yh008_NoGA.yml"
 "NoDOL_m015-Xh5-Yh1_NoGA.yml"
