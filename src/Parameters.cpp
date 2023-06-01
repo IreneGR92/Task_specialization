@@ -34,7 +34,7 @@ Parameters::Parameters(const string &url) {
     this->INIT_NUM_HELPERS = config["INIT_NUM_HELPERS"].as<int>();
     this->BIAS_FLOAT_BREEDER = config["BIAS_FLOAT_BREEDER"].as<double>();
     this->MIN_AGE_BECOME_BREEDER = config["MIN_AGE_BECOME_BREEDER"].as<int>();
-    this->FIXED_GROUP_SIZE = config["FIXED_GROUP_SIZE"].as<int>();
+    this->FIXED_GROUP_SIZE = config["FIXED_GROUP_SIZE"].as<double>();
     this->m = config["m"].as<double>();
     this->n = config["n"].as<double>();
     this->X0 = config["X0"].as<double>();
@@ -205,7 +205,7 @@ int Parameters::getMinAgeBecomeBreeder() const {
     return MIN_AGE_BECOME_BREEDER;
 }
 
-int Parameters::getFixedGroupSize() const {
+double Parameters::getFixedGroupSize() const {
     return FIXED_GROUP_SIZE;
 }
 
