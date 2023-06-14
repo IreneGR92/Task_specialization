@@ -227,14 +227,26 @@ void Individual::increaseAge() {
 
 /* CALCULATE RANK */
 void Individual::calculateRank() {
-    if (fishType == HELPER && helpType == 0) {
-        rank = age - parameters->getYh() * help;
-        if (rank < 0.001) {
-            rank = 0.001;
+    if (!parameters->isAgeNoInfluenceInheritance()){
+        if (fishType == HELPER && helpType == 0) {
+            rank = age - parameters->getYh() * help;
+            if (rank < 0.001) {
+                rank = 0.001;
+            }
+        } else {
+            rank = age;
         }
     } else {
-        rank = age;
+        if (fishType == HELPER && helpType == 0) {
+            rank = 3 - parameters->getYh() * help; // TODO: change individual fixed condition to a parameter instead of value 3
+            if (rank < 0.001) {
+                rank = 0.001;
+            }
+        } else {
+            rank = 3;
+        }
     }
+
 }
 
 
