@@ -43,6 +43,7 @@ private:
     int INIT_NUM_HELPERS;     //initial number of helpers per group
     double BIAS_FLOAT_BREEDER; //mean of number of groups a floater can visit to try to become a breeder compared to 1 group for helpers
     int MIN_AGE_BECOME_BREEDER; //minimum age for individuals to be able to become breeders
+    int FIXED_IND_QUALITY;      // in the "age no influence on inheritance", rank of all individuals before effect of help
     double FIXED_GROUP_SIZE;       //in the implementation of no group augmentation, virtual group size for survival for breeder and helpers
 
 // Modifiers in survival.
@@ -145,6 +146,8 @@ public:
     double getFixedGroupSize() const;
 
     int getMinAgeBecomeBreeder() const;
+
+    int getFixedIndQuality() const;
 
     double getM() const;
 

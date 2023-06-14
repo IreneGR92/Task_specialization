@@ -238,15 +238,14 @@ void Individual::calculateRank() {
         }
     } else {
         if (fishType == HELPER && helpType == 0) {
-            rank = 3 - parameters->getYh() * help; // TODO: change individual fixed condition to a parameter instead of value 3
+            rank = parameters->getFixedIndQuality() - parameters->getYh() * help;
             if (rank < 0.001) {
                 rank = 0.001;
             }
         } else {
-            rank = 3;
+            rank = parameters->getFixedIndQuality();
         }
     }
-
 }
 
 

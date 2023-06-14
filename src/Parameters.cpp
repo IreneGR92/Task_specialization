@@ -34,6 +34,7 @@ Parameters::Parameters(const string &url) {
     this->INIT_NUM_HELPERS = config["INIT_NUM_HELPERS"].as<int>();
     this->BIAS_FLOAT_BREEDER = config["BIAS_FLOAT_BREEDER"].as<double>();
     this->MIN_AGE_BECOME_BREEDER = config["MIN_AGE_BECOME_BREEDER"].as<int>();
+    this->FIXED_IND_QUALITY = config["FIXED_IND_QUALITY"].as<int>();
     this->FIXED_GROUP_SIZE = config["FIXED_GROUP_SIZE"].as<double>();
     this->m = config["m"].as<double>();
     this->n = config["n"].as<double>();
@@ -102,6 +103,7 @@ void Parameters::print(std::ofstream &outputStream) {
                  << "Number_generations:" << "\t" << this->getNumGenerations() << endl
                  << "Number_replicates:" << "\t" << this->getMaxNumReplicates() << endl
                  << "Min_age_become_breeder:" << "\t" << this->getMinAgeBecomeBreeder() << endl
+                 << "Fixed_ind_quality:" << "\t" << this->getFixedIndQuality() << endl
                  << "Fixed_group_size:" << "\t" << this->getFixedGroupSize() << endl
                  << "Bias_float_breeder:" << "\t" << this->getBiasFloatBreeder() << endl
                  << "m(Overall_mortality):" << "\t" << this->getM() << endl
@@ -203,6 +205,10 @@ double Parameters::getBiasFloatBreeder() const {
 
 int Parameters::getMinAgeBecomeBreeder() const {
     return MIN_AGE_BECOME_BREEDER;
+}
+
+int Parameters::getFixedIndQuality() const {
+    return FIXED_IND_QUALITY;
 }
 
 double Parameters::getFixedGroupSize() const {
