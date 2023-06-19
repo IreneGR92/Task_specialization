@@ -29,7 +29,7 @@
 
 # For array jobs
 # Indicate how many input files you have
-#SBATCH --array=0-59
+#SBATCH --array=0-49
 
 #### Your shell commands below this line ####
 
