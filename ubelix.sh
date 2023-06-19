@@ -29,7 +29,7 @@
 
 # For array jobs
 # Indicate how many input files you have
-#SBATCH --array=0-107
+#SBATCH --array=0-59
 
 #### Your shell commands below this line ####
 
@@ -37,31 +37,21 @@ declare -a arr=(
 
 
 "DOL_m03-Xh7-Yh006_default_noAge.yml"
-"DOL_m015-Xh3-Yh006_default_noAge.yml"
-"DOL_m015-Xh3-Yh008_default_noAge.yml"
-"DOL_m015-Xh5-Yh006_default_noAge.yml"
-"DOL_m015-Xh5-Yh008_default_noAge.yml"
-"DOL_m015-Xh7-Yh006_default_noAge.yml"
-"DOL_m015-Xh7-Yh008_default_noAge.yml"
-"DOL_m025-Xh3-Yh006_default_noAge.yml"
-"DOL_m025-Xh3-Yh008_default_noAge.yml"
-"DOL_m025-Xh5-Yh006_default_noAge.yml"
-"DOL_m025-Xh5-Yh008_default_noAge.yml"
-"DOL_m025-Xh7-Yh006_default_noAge.yml"
-"DOL_m025-Xh7-Yh008_default_noAge.yml"
 "NoDOL_m01-Xh7-Yh008_default_noAge.yml"
+
+"DOL_m015-Xh3-Yh006_default_noAge.yml"
+"DOL_m015-Xh5-Yh006_default_noAge.yml"
+"DOL_m015-Xh7-Yh006_default_noAge.yml"
+"DOL_m025-Xh3-Yh006_default_noAge.yml"
+"DOL_m025-Xh5-Yh006_default_noAge.yml"
+"DOL_m025-Xh7-Yh006_default_noAge.yml"
 "NoDOL_m015-Xh3-Yh006_default_noAge.yml"
-"NoDOL_m015-Xh3-Yh008_default_noAge.yml"
 "NoDOL_m015-Xh5-Yh006_default_noAge.yml"
-"NoDOL_m015-Xh5-Yh008_default_noAge.yml"
 "NoDOL_m015-Xh7-Yh006_default_noAge.yml"
-"NoDOL_m015-Xh7-Yh008_default_noAge.yml"
 "NoDOL_m025-Xh3-Yh006_default_noAge.yml"
-"NoDOL_m025-Xh3-Yh008_default_noAge.yml"
 "NoDOL_m025-Xh5-Yh006_default_noAge.yml"
-"NoDOL_m025-Xh5-Yh008_default_noAge.yml"
 "NoDOL_m025-Xh7-Yh006_default_noAge.yml"
-"NoDOL_m025-Xh7-Yh008_default_noAge.yml"
+
 
 "DOL_m01-Xh3-Yh006_NoGA_noAge.yml"
 "DOL_m01-Xh3-Yh008_NoGA_noAge.yml"
@@ -75,55 +65,33 @@ declare -a arr=(
 "NoDOL_m01-Xh5-Yh008_NoGA_noAge.yml"
 "NoDOL_m01-Xh7-Yh006_NoGA_noAge.yml"
 "NoDOL_m01-Xh7-Yh008_NoGA_noAge.yml"
+
 "DOL_m015-Xh3-Yh006_noGA_noAge.yml"
-"DOL_m015-Xh3-Yh008_noGA_noAge.yml"
 "DOL_m015-Xh5-Yh006_noGA_noAge.yml"
-"DOL_m015-Xh5-Yh008_noGA_noAge.yml"
 "DOL_m015-Xh7-Yh006_noGA_noAge.yml"
-"DOL_m015-Xh7-Yh008_noGA_noAge.yml"
 "DOL_m025-Xh3-Yh006_noGA_noAge.yml"
-"DOL_m025-Xh3-Yh008_noGA_noAge.yml"
 "DOL_m025-Xh5-Yh006_noGA_noAge.yml"
-"DOL_m025-Xh5-Yh008_noGA_noAge.yml"
 "DOL_m025-Xh7-Yh006_noGA_noAge.yml"
-"DOL_m025-Xh7-Yh008_noGA_noAge.yml"
 "NoDOL_m015-Xh3-Yh006_noGA_noAge.yml"
-"NoDOL_m015-Xh3-Yh008_noGA_noAge.yml"
 "NoDOL_m015-Xh5-Yh006_noGA_noAge.yml"
-"NoDOL_m015-Xh5-Yh008_noGA_noAge.yml"
 "NoDOL_m015-Xh7-Yh006_noGA_noAge.yml"
-"NoDOL_m015-Xh7-Yh008_noGA_noAge.yml"
 "NoDOL_m025-Xh3-Yh006_noGA_noAge.yml"
-"NoDOL_m025-Xh3-Yh008_noGA_noAge.yml"
 "NoDOL_m025-Xh5-Yh006_noGA_noAge.yml"
-"NoDOL_m025-Xh5-Yh008_noGA_noAge.yml"
 "NoDOL_m025-Xh7-Yh006_noGA_noAge.yml"
-"NoDOL_m025-Xh7-Yh008_noGA_noAge.yml"
+
 
 "DOL_m015-Xh3-Yh006_NoRelatedness_noAge.yml"
-"DOL_m015-Xh3-Yh008_NoRelatedness_noAge.yml"
 "DOL_m015-Xh5-Yh006_NoRelatedness_noAge.yml"
-"DOL_m015-Xh5-Yh008_NoRelatedness_noAge.yml"
 "DOL_m015-Xh7-Yh006_NoRelatedness_noAge.yml"
-"DOL_m015-Xh7-Yh008_NoRelatedness_noAge.yml"
 "DOL_m025-Xh3-Yh006_NoRelatedness_noAge.yml"
-"DOL_m025-Xh3-Yh008_NoRelatedness_noAge.yml"
 "DOL_m025-Xh5-Yh006_NoRelatedness_noAge.yml"
-"DOL_m025-Xh5-Yh008_NoRelatedness_noAge.yml"
 "DOL_m025-Xh7-Yh006_NoRelatedness_noAge.yml"
-"DOL_m025-Xh7-Yh008_NoRelatedness_noAge.yml"
 "NoDOL_m015-Xh3-Yh006_NoRelatedness_noAge.yml"
-"NoDOL_m015-Xh3-Yh008_NoRelatedness_noAge.yml"
 "NoDOL_m015-Xh5-Yh006_NoRelatedness_noAge.yml"
-"NoDOL_m015-Xh5-Yh008_NoRelatedness_noAge.yml"
 "NoDOL_m015-Xh7-Yh006_NoRelatedness_noAge.yml"
-"NoDOL_m015-Xh7-Yh008_NoRelatedness_noAge.yml"
 "NoDOL_m025-Xh3-Yh006_NoRelatedness_noAge.yml"
-"NoDOL_m025-Xh3-Yh008_NoRelatedness_noAge.yml"
 "NoDOL_m025-Xh5-Yh006_NoRelatedness_noAge.yml"
-"NoDOL_m025-Xh5-Yh008_NoRelatedness_noAge.yml"
 "NoDOL_m025-Xh7-Yh006_NoRelatedness_noAge.yml"
-"NoDOL_m025-Xh7-Yh008_NoRelatedness_noAge.yml"
 
 		)
 
