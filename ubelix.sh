@@ -134,7 +134,7 @@ declare -a arr=(
 "NoDOL_m01-Xh7-Yh004_NoGA.yml"
 "NoDOL_m01-Xh7-Yh006_NoGA.yml"
 "NoDOL_m02-Xh3-Yh004_NoGA.yml"
-"NoDOL_m02-Xh3-Yh006_NoGA.yml"""
+"NoDOL_m02-Xh3-Yh006_NoGA.yml"
 "NoDOL_m02-Xh5-Yh004_NoGA.yml"
 "NoDOL_m02-Xh5-Yh006_NoGA.yml"
 "NoDOL_m02-Xh7-Yh004_NoGA.yml"
