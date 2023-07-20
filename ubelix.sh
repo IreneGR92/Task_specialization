@@ -29,7 +29,7 @@
 
 # For array jobs
 # Indicate how many input files you have
-#SBATCH --array=0-143
+#SBATCH --array=0-135
 
 #### Your shell commands below this line ####
 
@@ -71,6 +71,31 @@ declare -a arr=(
 "NoDOL_m03-Xh5-Yh006_default.yml"
 "NoDOL_m03-Xh7-Yh004_default.yml"
 "NoDOL_m03-Xh7-Yh006_default.yml"
+"DOL_m015-Xh3-Yh004_default.yml"
+"DOL_m015-Xh3-Yh006_default.yml"
+"DOL_m015-Xh5-Yh004_default.yml"
+"DOL_m015-Xh5-Yh006_default.yml"
+"DOL_m015-Xh7-Yh004_default.yml"
+"DOL_m015-Xh7-Yh006_default.yml"
+"DOL_m025-Xh3-Yh004_default.yml"
+"DOL_m025-Xh3-Yh006_default.yml"
+"DOL_m025-Xh5-Yh004_default.yml"
+"DOL_m025-Xh5-Yh006_default.yml"
+"DOL_m025-Xh7-Yh004_default.yml"
+"DOL_m025-Xh7-Yh006_default.yml"
+"NoDOL_m015-Xh3-Yh004_default.yml"
+"NoDOL_m015-Xh3-Yh006_default.yml"
+"NoDOL_m015-Xh5-Yh004_default.yml"
+"NoDOL_m015-Xh5-Yh006_default.yml"
+"NoDOL_m015-Xh7-Yh004_default.yml"
+"NoDOL_m015-Xh7-Yh006_default.yml"
+"NoDOL_m025-Xh3-Yh004_default.yml"
+"NoDOL_m025-Xh3-Yh006_default.yml"
+"NoDOL_m025-Xh5-Yh004_default.yml"
+"NoDOL_m025-Xh5-Yh006_default.yml"
+"NoDOL_m025-Xh7-Yh004_default.yml"
+"NoDOL_m025-Xh7-Yh006_default.yml"
+
 
 "DOL_m01-Xh3-Yh004_NoRelatedness.yml"
 "DOL_m01-Xh3-Yh006_NoRelatedness.yml"
@@ -145,44 +170,6 @@ declare -a arr=(
 "NoDOL_m03-Xh5-Yh006_NoGA.yml"
 "NoDOL_m03-Xh7-Yh004_NoGA.yml"
 "NoDOL_m03-Xh7-Yh006_NoGA.yml"
-
-"DOL_m01-Xh3-Yh004_Xn0.yml"
-"DOL_m01-Xh3-Yh006_Xn0.yml"
-"DOL_m01-Xh5-Yh004_Xn0.yml"
-"DOL_m01-Xh5-Yh006_Xn0.yml"
-"DOL_m01-Xh7-Yh004_Xn0.yml"
-"DOL_m01-Xh7-Yh006_Xn0.yml"
-"DOL_m02-Xh3-Yh004_Xn0.yml"
-"DOL_m02-Xh3-Yh006_Xn0.yml"
-"DOL_m02-Xh5-Yh004_Xn0.yml"
-"DOL_m02-Xh5-Yh006_Xn0.yml"
-"DOL_m02-Xh7-Yh004_Xn0.yml"
-"DOL_m02-Xh7-Yh006_Xn0.yml"
-"DOL_m03-Xh3-Yh004_Xn0.yml"
-"DOL_m03-Xh3-Yh006_Xn0.yml"
-"DOL_m03-Xh5-Yh004_Xn0.yml"
-"DOL_m03-Xh5-Yh006_Xn0.yml"
-"DOL_m03-Xh7-Yh004_Xn0.yml"
-"DOL_m03-Xh7-Yh006_Xn0.yml"
-"NoDOL_m01-Xh3-Yh004_Xn0.yml"
-"NoDOL_m01-Xh3-Yh006_Xn0.yml"
-"NoDOL_m01-Xh5-Yh004_Xn0.yml"
-"NoDOL_m01-Xh5-Yh006_Xn0.yml"
-"NoDOL_m01-Xh7-Yh004_Xn0.yml"
-"NoDOL_m01-Xh7-Yh006_Xn0.yml"
-"NoDOL_m02-Xh3-Yh004_Xn0.yml"
-"NoDOL_m02-Xh3-Yh006_Xn0.yml"
-"NoDOL_m02-Xh5-Yh004_Xn0.yml"
-"NoDOL_m02-Xh5-Yh006_Xn0.yml"
-"NoDOL_m02-Xh7-Yh004_Xn0.yml"
-"NoDOL_m02-Xh7-Yh006_Xn0.yml"
-"NoDOL_m03-Xh3-Yh004_Xn0.yml"
-"NoDOL_m03-Xh3-Yh006_Xn0.yml"
-"NoDOL_m03-Xh5-Yh004_Xn0.yml"
-"NoDOL_m03-Xh5-Yh006_Xn0.yml"
-"NoDOL_m03-Xh7-Yh004_Xn0.yml"
-"NoDOL_m03-Xh7-Yh006_Xn0.yml"
-
 
 
 		)
