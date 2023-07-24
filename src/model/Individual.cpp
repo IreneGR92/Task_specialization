@@ -120,24 +120,30 @@ void Individual::calculateSurvival(const int &groupSize) {
 
     if (parameters->isNoGroupAugmentation()) {
         if (fishType == FLOATER) {
-            this->survival = (1 - parameters->getM() * parameters->getN()) /
-                             (1 + exp(-parameters->getX0() - parameters->getXsn() * parameters->getFixedGroupSize() +
-                                      parameters->getXsh() * this->help));
+            this->survival = (1 - parameters->getM() * parameters->getN()) / (1 + exp(-parameters->getX0()));
         } else {
-            this->survival = (1 - parameters->getM()) /
-                             (1 + exp(-parameters->getX0() - parameters->getXsn() * parameters->getFixedGroupSize() +
-                                      parameters->getXsh() * this->help));
+            if (fishType == HELPER && helpType == 1) {
+                this->survival = (1 - parameters->getM()) /
+                                 (1 + exp(-parameters->getX0() - parameters->getXsn() * parameters->getFixedGroupSize() +
+                                          parameters->getXsh() * this->help));
+            } else {
+                this->survival = (1 - parameters->getM()) /
+                                 (1 + exp(-parameters->getX0() - parameters->getXsn() * parameters->getFixedGroupSize()));
+            }
         }
 
     } else {
         if (fishType == FLOATER) {
-            this->survival = (1 - parameters->getM() * parameters->getN()) /
-                             (1 + exp(-parameters->getX0() - parameters->getXsn() * groupSize +
-                                      parameters->getXsh() * this->help));
+            this->survival = (1 - parameters->getM() * parameters->getN()) / (1 + exp(-parameters->getX0()));
         } else {
-            this->survival = (1 - parameters->getM()) /
-                             (1 + exp(-parameters->getX0() - parameters->getXsn() * groupSize +
-                                      parameters->getXsh() * this->help));
+            if (fishType == HELPER && helpType == 1) {
+                this->survival = (1 - parameters->getM()) /
+                                 (1 + exp(-parameters->getX0() - parameters->getXsn() * groupSize +
+                                          parameters->getXsh() * this->help));
+            } else {
+                this->survival = (1 - parameters->getM()) /
+                                 (1 + exp(-parameters->getX0() - parameters->getXsn() * groupSize));
+            }
         }
     }
 }
