@@ -3,7 +3,7 @@
 #SBATCH --account=free
 
 # Mail on NONE, BEGIN, END, FAIL, REQUEUE, ALL
-#SBATCH --mail-user=ig2500@campus.unibe.ch
+#SBATCH --mail-user=ig2500@columbia.edu
 #SBATCH --mail-type=end,fail
 
 # Job name
@@ -26,66 +26,8 @@
 
 declare -a arr=(
 
-"DOL_m01-Xh3-Yh008_default_noAge.yml"
-"DOL_m01-Xh3-Yh006_default_noAge.yml"
-"DOL_m01-Xh5-Yh008_default_noAge.yml"
-"DOL_m01-Xh5-Yh006_default_noAge.yml"
-"DOL_m01-Xh7-Yh008_default_noAge.yml"
-"DOL_m01-Xh7-Yh006_default_noAge.yml"
-"DOL_m02-Xh3-Yh008_default_noAge.yml"
-"DOL_m02-Xh3-Yh006_default_noAge.yml"
-"DOL_m02-Xh5-Yh008_default_noAge.yml"
-"DOL_m02-Xh5-Yh006_default_noAge.yml"
-"DOL_m02-Xh7-Yh008_default_noAge.yml"
-"DOL_m02-Xh7-Yh006_default_noAge.yml"
-"DOL_m03-Xh3-Yh008_default_noAge.yml"
-"DOL_m03-Xh3-Yh006_default_noAge.yml"
-"DOL_m03-Xh5-Yh008_default_noAge.yml"
-"DOL_m03-Xh5-Yh006_default_noAge.yml"
-"DOL_m03-Xh7-Yh008_default_noAge.yml"
-"DOL_m03-Xh7-Yh006_default_noAge.yml"
-"NoDOL_m01-Xh3-Yh008_default_noAge.yml"
-"NoDOL_m01-Xh3-Yh006_default_noAge.yml"
-"NoDOL_m01-Xh5-Yh008_default_noAge.yml"
-"NoDOL_m01-Xh5-Yh006_default_noAge.yml"
-"NoDOL_m01-Xh7-Yh008_default_noAge.yml"
-"NoDOL_m01-Xh7-Yh006_default_noAge.yml"
-"NoDOL_m02-Xh3-Yh008_default_noAge.yml"
-"NoDOL_m02-Xh3-Yh006_default_noAge.yml"
-"NoDOL_m02-Xh5-Yh008_default_noAge.yml"
-"NoDOL_m02-Xh5-Yh006_default_noAge.yml"
-"NoDOL_m02-Xh7-Yh008_default_noAge.yml"
-"NoDOL_m02-Xh7-Yh006_default_noAge.yml"
-"NoDOL_m03-Xh3-Yh008_default_noAge.yml"
-"NoDOL_m03-Xh3-Yh006_default_noAge.yml"
-"NoDOL_m03-Xh5-Yh008_default_noAge.yml"
-"NoDOL_m03-Xh5-Yh006_default_noAge.yml"
-"NoDOL_m03-Xh7-Yh008_default_noAge.yml"
-"NoDOL_m03-Xh7-Yh006_default_noAge.yml"
-"DOL_m015-Xh3-Yh008_default_noAge.yml"
-"DOL_m015-Xh3-Yh006_default_noAge.yml"
-"DOL_m015-Xh5-Yh008_default_noAge.yml"
-"DOL_m015-Xh5-Yh006_default_noAge.yml"
-"DOL_m015-Xh7-Yh008_default_noAge.yml"
-"DOL_m015-Xh7-Yh006_default_noAge.yml"
-"DOL_m025-Xh3-Yh008_default_noAge.yml"
-"DOL_m025-Xh3-Yh006_default_noAge.yml"
-"DOL_m025-Xh5-Yh008_default_noAge.yml"
-"DOL_m025-Xh5-Yh006_default_noAge.yml"
-"DOL_m025-Xh7-Yh008_default_noAge.yml"
-"DOL_m025-Xh7-Yh006_default_noAge.yml"
-"NoDOL_m015-Xh3-Yh008_default_noAge.yml"
-"NoDOL_m015-Xh3-Yh006_default_noAge.yml"
-"NoDOL_m015-Xh5-Yh008_default_noAge.yml"
-"NoDOL_m015-Xh5-Yh006_default_noAge.yml"
-"NoDOL_m015-Xh7-Yh008_default_noAge.yml"
-"NoDOL_m015-Xh7-Yh006_default_noAge.yml"
-"NoDOL_m025-Xh3-Yh008_default_noAge.yml"
-"NoDOL_m025-Xh3-Yh006_default_noAge.yml"
-"NoDOL_m025-Xh5-Yh008_default_noAge.yml"
-"NoDOL_m025-Xh5-Yh006_default_noAge.yml"
-"NoDOL_m025-Xh7-Yh008_default_noAge.yml"
-"NoDOL_m025-Xh7-Yh006_default_noAge.yml"
+"default.yml"
+
 
 
 		)
