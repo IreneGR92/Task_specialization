@@ -136,7 +136,7 @@ Statistics::calculateRelatedness(const std::vector<Group> &groups) {
 
     for (const Group &group: groups) {
         for (const Individual &helper: group.getHelpers()) {
-            if (!isnan(helper.getDispersal()) || !isnan(helper.getHelp())) {
+            if (!std::isnan(helper.getDispersal()) || !std::isnan(helper.getHelp())) {
                 double X = (helper.getDrift() - meanX);
                 double Y = (group.getBreeder().getDrift() - meanY);
 
@@ -188,7 +188,7 @@ Statistics::correlationHelpGroupSize(const std::vector<Group> &groups) {
 
     for (const Group &group: groups) {
         for (const Individual &helper: group.getHelpers()) {
-            if (!isnan(helper.getDispersal()) || !isnan(helper.getHelp())) {
+            if (!std::isnan(helper.getDispersal()) || !std::isnan(helper.getHelp())) {
                 double X = (helper.getHelp() - meanX);
                 double Y = (group.getGroupSize() - meanY);
 
