@@ -9,7 +9,7 @@ include_directories(${PROJECT_SOURCE_DIR}/include/)
 
 if(UNIX AND NOT APPLE)
     message(STATUS "Linux x86_64")
-    set(LIB_YAML ${PROJECT_SOURCE_DIR}/../yaml-cpp/build/libyaml-cpp.so)
+    set(LIB_YAML ${PROJECT_SOURCE_DIR}/lib/libyaml-cpp.so)
 else()
     message(STATUS "macOS")
     set(LIB_YAML ${PROJECT_SOURCE_DIR}/lib/libyaml-cpp.dylib)
