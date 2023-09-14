@@ -15,7 +15,7 @@ Individual::Individual(Individual &individual, FishType fishType, int &generatio
     this->beta = individual.beta;
     this->betaAge = individual.betaAge;
     this->gamma = individual.gamma;
-    this->gammaAge = individual.gammaAge;
+    this->gammaRank = individual.gammaRank;
     this->drift = individual.getDrift();
 
     this->dispersal = Parameters::NO_VALUE;
@@ -38,7 +38,7 @@ Individual::Individual(FishType fishType) {
     this->beta = param->getInitBeta();
     this->betaAge = param->getInitBetaAge();
     this->gamma = param->getInitGamma();
-    this->gammaAge = param->getInitGammaAge();
+    this->gammaRank = param->getInitGammaRank();
     this->drift = param->driftUniform(*param->getGenerator());
     this->initializeIndividual(fishType);
 }
@@ -98,7 +98,7 @@ void Individual::calcTaskSpecialization() {
             if (task < 0) { task = 0;
             } else if (task > 1) {task = 1;}
         } else {
-            task = 1 / (1 + exp(gammaAge * age - gamma));
+            task = 1 / (1 + exp(gammaRank * rank - gamma));
         }
 
         if (parameters->uniform(*parameters->getGenerator()) > task){
@@ -110,6 +110,29 @@ void Individual::calcTaskSpecialization() {
     } else {
         task = Parameters::NO_VALUE;
         std::cout << "Error: floaters get a task value" << std::endl;
+    }
+}
+
+/* CALCULATE RANK */
+void Individual::calculateRank() {
+    if (!parameters->isAgeNoInfluenceInheritance()){
+        if (fishType == HELPER && helpType == 0) {
+            rank = age - parameters->getYh() * help;
+            if (rank < 0.001) {
+                rank = 0.001;
+            }
+        } else {
+            rank = age;
+        }
+    } else {
+        if (fishType == HELPER && helpType == 0) {
+            rank = parameters->getFixedIndQuality() - parameters->getYh() * help;
+            if (rank < 0.001) {
+                rank = 0.001;
+            }
+        } else {
+            rank = parameters->getFixedIndQuality();
+        }
     }
 }
 
@@ -204,8 +227,8 @@ void Individual::mutate(int generation) // mutate genome of offspring
         }
     }
     if (parameters->isReactionNormTask()) {
-        if (parameters->uniform(rng) < parameters->getMutationGammaAge()) {
-            gammaAge += NormalG(rng);
+        if (parameters->uniform(rng) < parameters->getMutationGammaRank()) {
+            gammaRank += NormalG(rng);
         }
     }
 
@@ -231,28 +254,7 @@ void Individual::increaseAge() {
     this->increaseAge(true);
 }
 
-/* CALCULATE RANK */
-void Individual::calculateRank() {
-    if (!parameters->isAgeNoInfluenceInheritance()){
-        if (fishType == HELPER && helpType == 0) {
-            rank = age - parameters->getYh() * help;
-            if (rank < 0.001) {
-                rank = 0.001;
-            }
-        } else {
-            rank = age;
-        }
-    } else {
-        if (fishType == HELPER && helpType == 0) {
-            rank = parameters->getFixedIndQuality() - parameters->getYh() * help;
-            if (rank < 0.001) {
-                rank = 0.001;
-            }
-        } else {
-            rank = parameters->getFixedIndQuality();
-        }
-    }
-}
+
 
 
 /* GETTERS AND SETTERS */
@@ -277,8 +279,8 @@ double Individual::getGamma() const {
     return gamma;
 }
 
-double Individual::getGammaAge() const {
-    return gammaAge;
+double Individual::getGammaRank() const {
+    return gammaRank;
 }
 
 double Individual::getDrift() const {
@@ -358,8 +360,8 @@ double Individual::get(Attribute type) const {
             return this->betaAge;
         case GAMMA:
             return this->gamma;
-        case GAMMA_AGE:
-            return this->gammaAge;
+        case GAMMA_RANK:
+            return this->gammaRank;
         case HELP:
             return this->help;
         case HELP_TYPE:

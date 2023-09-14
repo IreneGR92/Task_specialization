@@ -80,10 +80,10 @@ private:
 
 //For task specialization
     double INIT_GAMMA;             // if 0 no task specialization, negative values lower rank, positive values lower survival
-    double INIT_GAMMA_AGE;         // if 0 age has no effect, negative values more cost in survival with age, positive values more cost in rank with age
+    double INIT_GAMMA_RANK;         // if 0 age has no effect, negative values more cost in survival with age, positive values more cost in rank with age
 
     double MUTATION_GAMMA;
-    double MUTATION_GAMMA_AGE;
+    double MUTATION_GAMMA_RANK;
     double STEP_GAMMA;
 
 
@@ -189,11 +189,11 @@ public:
 
     double getInitGamma() const;
 
-    double getInitGammaAge() const;
+    double getInitGammaRank() const;
 
     double getMutationGamma() const;
 
-    double getMutationGammaAge() const;
+    double getMutationGammaRank() const;
 
     double getStepGamma() const;
 

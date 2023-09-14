@@ -59,10 +59,10 @@ STEP_BETA: 0.04             # mutation step size for the propensity to disperse
 
 #For task specialization
 INIT_GAMMA: 0.0              # if 0 no task specialization, negative values lower rank, positive values lower survival
-INIT_GAMMA_AGE: 0.0          # if 0 age has no effect, negative values more cost in survival with age, positive values more cost in rank with age
+INIT_GAMMA_RANK: 0.0          # if 0 age has no effect, negative values more cost in survival with age, positive values more cost in rank with age
 
 MUTATION_GAMMA: 0.05
-MUTATION_GAMMA_AGE: 0.05
+MUTATION_GAMMA_RANK: 0.05
 STEP_GAMMA: 0.04
 
 #For relatedness

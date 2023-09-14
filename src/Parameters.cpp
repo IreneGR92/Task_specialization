@@ -56,9 +56,9 @@ Parameters::Parameters(const string &url) {
     this->MUTATION_BETA_AGE = config["MUTATION_BETA_AGE"].as<double>();
     this->STEP_BETA = config["STEP_BETA"].as<double>();
     this->INIT_GAMMA = config["INIT_GAMMA"].as<double>();
-    this->INIT_GAMMA_AGE = config["INIT_GAMMA_AGE"].as<double>();
+    this->INIT_GAMMA_RANK = config["INIT_GAMMA_RANK"].as<double>();
     this->MUTATION_GAMMA = config["MUTATION_GAMMA"].as<double>();
-    this->MUTATION_GAMMA_AGE = config["MUTATION_GAMMA_AGE"].as<double>();
+    this->MUTATION_GAMMA_RANK = config["MUTATION_GAMMA_RANK"].as<double>();
     this->STEP_GAMMA = config["STEP_GAMMA"].as<double>();
     this->MUTATION_DRIFT = config["MUTATION_DRIFT"].as<double>();
     this->STEP_DRIFT = config["STEP_DRIFT"].as<double>();
@@ -120,13 +120,13 @@ void Parameters::print(std::ofstream &outputStream) {
                  << "initBeta:" << "\t" << this->getInitBeta() << endl
                  << "initBetaAge:" << "\t" << this->getInitBetaAge() << endl
                  << "initGamma:" << "\t" << this->getInitGamma() << endl
-                 << "initGammaAge:" << "\t" << this->getInitGammaAge() << endl
+                 << "initGammaRank:" << "\t" << this->getInitGammaRank() << endl
                  << "mutAlpha:" << "\t" << this->getMutationAlpha() << endl
                  << "mutAlphaAge:" << "\t" << this->getMutationAlphaAge() << endl
                  << "mutBeta:" << "\t" << this->getMutationBeta() << endl
                  << "mutBetaAge:" << "\t" << this->getMutationBetaAge() << endl
                  << "mutGamma:" << "\t" << this->getMutationGamma() << endl
-                 << "mutGammaAge:" << "\t" << this->getMutationGammaAge() << endl
+                 << "mutGammaRank:" << "\t" << this->getMutationGammaRank() << endl
                  << "mutDrift:" << "\t" << this->getMutationDrift() << endl
                  << "stepAlpha:" << "\t" << this->getStepAlpha() << endl
                  << "stepBeta:" << "\t" << this->getStepBeta() << endl
@@ -295,16 +295,16 @@ double Parameters::getInitGamma() const {
     return INIT_GAMMA;
 }
 
-double Parameters::getInitGammaAge() const {
-    return INIT_GAMMA_AGE;
+double Parameters::getInitGammaRank() const {
+    return INIT_GAMMA_RANK;
 }
 
 double Parameters::getMutationGamma() const {
     return MUTATION_GAMMA;
 }
 
-double Parameters::getMutationGammaAge() const {
-    return MUTATION_GAMMA_AGE;
+double Parameters::getMutationGammaRank() const {
+    return MUTATION_GAMMA_RANK;
 }
 
 double Parameters::getStepGamma() const {

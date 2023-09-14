@@ -94,6 +94,7 @@ void Group::calculateCumulativeHelp() //Calculate accumulative help of all indiv
         assert(helper.getFishType() == HELPER);
         helper.calcHelp();
         helper.calcTaskSpecialization();
+        helper.calculateRank();
 
         if (helper.getHelpType() == 0){
             cumHelpType0 += helper.getHelp();
@@ -209,7 +210,6 @@ void Group::newBreeder(vector<Individual> &floaters, int &newBreederFloater, int
     //  Choose new breeder
         //    Choose breeder with higher likelihood for the highest rank
         for (candidateIt = candidates.begin(); candidateIt < candidates.end(); ++candidateIt) {
-            (*candidateIt)->calculateRank();
             sumRank += (*candidateIt)->getRank(); //add all the ranks from the vector candidates
         }
 

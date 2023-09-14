@@ -17,7 +17,7 @@ class Individual {
     double beta;
     double betaAge;
     double gamma;
-    double gammaAge;
+    double gammaRank;
     double drift;
 
     double dispersal;
@@ -66,7 +66,7 @@ public:
 
     double getGamma() const;
 
-    double getGammaAge() const;
+    double getGammaRank() const;
 
     double getDrift() const;
 
