@@ -127,11 +127,17 @@ void Individual::calculateRank() {
     } else {
         if (fishType == HELPER && helpType == 0) {
             rank = parameters->getFixedIndQuality() - parameters->getYh() * help;
+            if (age == parameters->getMinAgeBecomeBreeder()){
+                rank = 0.001;
+            }
             if (rank < 0.001) {
                 rank = 0.001;
             }
         } else {
             rank = parameters->getFixedIndQuality();
+            if (age == parameters->getMinAgeBecomeBreeder()){
+                rank = 0.001;
+            }
         }
     }
 }
