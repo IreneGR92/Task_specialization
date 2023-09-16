@@ -21,7 +21,7 @@ class Statistics {
 
     StatisticalFormulas groupSize;
 
-    StatisticalFormulas age, ageBreeders, ageFloaters, ageHelpers, ageBecomeBreeder;
+    StatisticalFormulas rank, age, ageBreeders, ageFloaters, ageHelpers, ageBecomeBreeder;
 
     StatisticalFormulas alpha, alphaAge;
 
