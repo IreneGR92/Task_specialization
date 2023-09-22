@@ -13,7 +13,7 @@ AGE_NO_INFLUENCE_INHERITANCE: false # Age no influence of who inherits territory
 
 MAX_COLONIES: 5000     # max number of groups or colonies
 NUM_GENERATIONS: 200000
-MAX_NUM_REPLICATES: 10
+MAX_NUM_REPLICATES: 20
 SKIP: 1000   # interval between print-outs
 
 #Fix values
