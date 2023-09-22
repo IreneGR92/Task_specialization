@@ -55,6 +55,7 @@ void Individual::initializeIndividual(FishType type) {
     this->age = 1;
     this->ageBecomeBreeder = Parameters::NO_VALUE;
     this->rank = Parameters::NO_VALUE;
+    this->rankBecomeBreeder = Parameters::NO_VALUE;
 }
 
 /* BECOME FLOATER (STAY VS DISPERSE) */
@@ -342,6 +343,10 @@ void Individual::setAgeBecomeBreeder(int ageBecomeBreeder_) {
     Individual::ageBecomeBreeder = ageBecomeBreeder_;
 }
 
+void Individual::setRankBecomeBreeder(double rankBecomeBreeder_) {
+    Individual::rankBecomeBreeder = rankBecomeBreeder_;
+}
+
 double Individual::getRank() const {
     return rank;
 }
@@ -386,6 +391,8 @@ double Individual::get(Attribute type) const {
             return this->ageBecomeBreeder;
         case RANK:
             return this->rank;
+        case RANK_BECOME_BREEDER:
+            return this->rankBecomeBreeder;
     }
 
     assert(false);

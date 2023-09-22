@@ -83,6 +83,7 @@ void Statistics::calculateStatistics(const Population &populationObj) {
     ageBreeders.addValues(breeders.get(AGE));
     ageFloaters.addValues(populationObj.getFloaters().get(AGE));
     ageBecomeBreeder.addValues(breeders.get(AGE_BECOME_BREEDER));
+    rankBecomeBreeder.addValues(breeders.get(RANK_BECOME_BREEDER));
 
     help.addValues(helpers.get(HELP));
 
@@ -260,7 +261,7 @@ void Statistics::printHeadersToFile() {
     *parameters->getMainWriter() << "Replica" << "\t" << "Generation" << "\t" << "Population" << "\t"
                                  << "Deaths" << "\t" << "Floaters" << "\t" << "Group_size" << "\t"
                                  << "Rank" << "\t" << "Age" << "\t" << "Age_H" << "\t" << "Age_F" << "\t"
-                                 << "Age_B" << "\t" << "Age_New_Breeder" << "\t"
+                                 << "Age_B" << "\t" << "Rank_New_Breeder" << "\t" << "Age_New_Breeder" << "\t"
                                  << "meanAlpha" << "\t" << "meanAlphaAge" << "\t"
                                  << "meanBeta" << "\t" << "meanBetaAge" << "\t"
                                  << "meanGamma" << "\t" << "meanGammaRank" << "\t"
@@ -308,6 +309,7 @@ void Statistics::printToFile(int replica, int generation, int deaths, int newBre
                                  << "\t" << setprecision(4) << ageHelpers.calculateMean()
                                  << "\t" << setprecision(4) << ageFloaters.calculateMean()
                                  << "\t" << setprecision(4) << ageBreeders.calculateMean()
+                                 << "\t" << setprecision(4) << rankBecomeBreeder.calculateMean()
                                  << "\t" << setprecision(4) << ageBecomeBreeder.calculateMean()
                                  << "\t" << setprecision(4) << alpha.calculateMean()
                                  << "\t" << setprecision(4) << alphaAge.calculateMean()

@@ -30,6 +30,7 @@ class Individual {
     int age;
     int ageBecomeBreeder;
     double rank;
+    double rankBecomeBreeder;
     bool inherit;                                                    //did the new breeder inherit the territory or did it disperse?
 
     void mutate(int generation);
@@ -89,6 +90,7 @@ public:
     int getAge() const;
     void setAgeBecomeBreeder(int ageBecomeBreeder_);
     double getRank() const;
+    void setRankBecomeBreeder(double rankBecomeBreeder_);
 
     void increaseAge(bool alive); //for the breeder
     void increaseAge(); // For helpers and floaters

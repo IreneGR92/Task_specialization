@@ -210,6 +210,7 @@ void Group::newBreeder(vector<Individual> &floaters, int &newBreederFloater, int
     //  Choose new breeder
         //    Choose breeder with higher likelihood for the highest rank
         for (candidateIt = candidates.begin(); candidateIt < candidates.end(); ++candidateIt) {
+            (*candidateIt)->calculateRank();
             sumRank += (*candidateIt)->getRank(); //add all the ranks from the vector candidates
         }
 
@@ -227,6 +228,7 @@ void Group::newBreeder(vector<Individual> &floaters, int &newBreederFloater, int
                 breeder = **candidateIt; //substitute the previous dead breeder
                 breederAlive = true;
                 breeder.setAgeBecomeBreeder(breeder.getAge());
+                breeder.setRankBecomeBreeder(breeder.getRank());
 
                 if ((*candidateIt)->getFishType() == FLOATER) //delete the ind from the vector floaters
                 {
