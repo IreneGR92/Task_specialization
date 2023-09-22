@@ -49,6 +49,7 @@ vector<Individual> Group::disperse() {
         if (parameters->uniform(*parameters->getGenerator()) < helper.getDispersal()) {
             helper.setInherit(false); //the location of the individual is not the natal territory
             helper.setFishType(FLOATER);
+            helper.calculateRank(); //calculate rank for floaters (=age)
             newFloaters.push_back(helper); //add the individual to the vector floaters in the last position
             helpers.removeIndividual(i);
 
@@ -210,7 +211,6 @@ void Group::newBreeder(vector<Individual> &floaters, int &newBreederFloater, int
     //  Choose new breeder
         //    Choose breeder with higher likelihood for the highest rank
         for (candidateIt = candidates.begin(); candidateIt < candidates.end(); ++candidateIt) {
-            (*candidateIt)->calculateRank();
             sumRank += (*candidateIt)->getRank(); //add all the ranks from the vector candidates
         }
 
