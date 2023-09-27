@@ -24,12 +24,5 @@
 
 #### Your shell commands below this line ####
 
-declare -a arr=(
 
-"default.yml"
-
-
-
-		)
-
-srun ./build/App "parameters/${arr[$SLURM_ARRAY_TASK_ID]}"
+srun echo "Hello World"
