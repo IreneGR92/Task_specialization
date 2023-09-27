@@ -10,7 +10,7 @@
 #SBATCH --job-name="TaskSpecialization"
 
 # Runtime and memory
-#SBATCH --time=120:00:00
+#SBATCH --time=96:00:00
 #SBATCH --mem-per-cpu=2G
 #SBATCH --cpus-per-task=1
 
@@ -20,9 +20,15 @@
 
 # For array jobs
 # Indicate how many input files you have
-#SBATCH --array=0-135
+#SBATCH --array=0-1
 
 #### Your shell commands below this line ####
 
+declare -a arr=(
 
-srun echo "Hello World"
+"default.yml"
+
+
+		)
+
+srun ./build/App "parameters/${arr[$SLURM_ARRAY_TASK_ID]}"
