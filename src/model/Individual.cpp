@@ -183,6 +183,8 @@ void Individual::calculateSurvival(const int &groupSize) {
 }
 
 
+/*MUTATION*/
+
 void Individual::mutate(int generation) // mutate genome of offspring
 {
     auto rng = *parameters->getGenerator();
@@ -195,10 +197,7 @@ void Individual::mutate(int generation) // mutate genome of offspring
     double mutationAlpha;
     double mutationAlphaAge;
 
-    if (parameters->isEvolutionHelpAfterDispersal() && generation < 25000) {
-        mutationAlpha = 0;
-        mutationAlphaAge = 0;
-    } else if (parameters->isNoRelatedness() && parameters->isNoRelatednessRandomGroup()) {
+    if (parameters->isNoRelatedness() && parameters->isNoRelatednessRandomGroup()) {
         mutationAlpha = 0;
         mutationAlphaAge = 0;
     } else {
@@ -230,7 +229,18 @@ void Individual::mutate(int generation) // mutate genome of offspring
     }
 
     // Gamma
-    if (parameters->uniform(rng) < parameters->getMutationGamma()) {
+    double mutationGamma;
+    double mutationGammaRank;
+
+    if (parameters->isEvolutionTaskAfterHelp() && generation < 25000) {
+        mutationGamma = 0;
+        mutationGammaRank = 0;
+    } else {
+        mutationGamma = parameters->getMutationGamma();
+        mutationGammaRank = parameters->getMutationGammaRank();
+    }
+
+    if (parameters->uniform(rng) < mutationGamma) {
         gamma += NormalG(rng);
         if (!parameters->isReactionNormTask()) {
             if (gamma < 0) { gamma = 0; }
@@ -238,7 +248,7 @@ void Individual::mutate(int generation) // mutate genome of offspring
         }
     }
     if (parameters->isReactionNormTask()) {
-        if (parameters->uniform(rng) < parameters->getMutationGammaRank()) {
+        if (parameters->uniform(rng) < mutationGammaRank) {
             gammaRank += NormalG(rng);
         }
     }
@@ -264,7 +274,6 @@ void Individual::increaseAge(bool alive) {
 void Individual::increaseAge() {
     this->increaseAge(true);
 }
-
 
 
 
