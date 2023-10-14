@@ -116,18 +116,22 @@ void Individual::calcTaskSpecialization() {
 
 /* CALCULATE RANK */
 void Individual::calculateRank() {
+
+    int multiplier = 3; // increases the effective difference in rank to the likelihood to become breeder
     if (!parameters->isAgeNoInfluenceInheritance()){
+        //Gerontocratic context
         if (fishType == HELPER && helpType == 0) {
-            rank = age - parameters->getYh() * help;
+            rank = (age - parameters->getYh() * help) * multiplier;
             if (rank < 0.001) {
                 rank = 0.001;
             }
         } else {
-            rank = age;
+            rank = age * multiplier;
         }
     } else {
+        //Scramble context
         if (fishType == HELPER && helpType == 0) {
-            rank = parameters->getFixedIndQuality() - parameters->getYh() * help;
+            rank = (parameters->getFixedIndQuality() - parameters->getYh() * help) * multiplier;
             if (age == parameters->getMinAgeBecomeBreeder()){
                 rank = 0.001;
             }
@@ -135,7 +139,7 @@ void Individual::calculateRank() {
                 rank = 0.001;
             }
         } else {
-            rank = parameters->getFixedIndQuality();
+            rank = parameters->getFixedIndQuality() * multiplier;
             if (age == parameters->getMinAgeBecomeBreeder()){
                 rank = 0.001;
             }

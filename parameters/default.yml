@@ -10,9 +10,9 @@ NO_RELATEDNESS: false     # Apply implementation to remove the effect of related
 NO_RELATEDNESS_RANDOM_GROUP: false # In the non relatedness implementation, put non-related helpers to random groups without maintaining group size, removing kin selection from evolution of philopatry
 AGE_NO_INFLUENCE_INHERITANCE: false # Age no influence of who inherits territory, randomly sampled from candidate (helpers + sample floaters)
 
-MAX_COLONIES: 5000     # max number of groups or colonies
-NUM_GENERATIONS: 200000
-MAX_NUM_REPLICATES: 3
+MAX_COLONIES: 2000     # max number of groups or colonies
+NUM_GENERATIONS: 150000
+MAX_NUM_REPLICATES: 1
 SKIP: 1000   # interval between print-outs
 
 #Fix values
@@ -30,7 +30,7 @@ Xsh: 7    # cost of help in survival
 Xsn: 3    # benefit of group size in survival
 
 # Costs of help
-Yh: 0.06   # cost of help on rank
+Yh: 0.1   # cost of help on rank
 
 #Modifiers in fecundity
 K0: 1    # min fecundity, fecundity when no help provided.

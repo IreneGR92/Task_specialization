@@ -89,6 +89,7 @@ public:
 
     int getAge() const;
     void setAgeBecomeBreeder(int ageBecomeBreeder_);
+
     double getRank() const;
     void setRankBecomeBreeder(double rankBecomeBreeder_);
 
