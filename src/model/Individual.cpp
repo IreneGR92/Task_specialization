@@ -117,7 +117,7 @@ void Individual::calcTaskSpecialization() {
 /* CALCULATE RANK */
 void Individual::calculateRank() {
 
-    int multiplier = 3; // increases the effective difference in rank to the likelihood to become breeder
+    int multiplier = 1; // increases the effective difference in rank to the likelihood to become breeder
     if (!parameters->isAgeNoInfluenceInheritance()){
         //Gerontocratic context
         if (fishType == HELPER && helpType == 0) {
