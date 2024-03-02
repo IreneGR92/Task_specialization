@@ -137,7 +137,7 @@ void Group::mortalityGroup(int &deaths) {
     }
 
     //Mortality breeder
-    if (parameters->uniform(*parameters->getGenerator()) > breeder.getSurvival()) {
+    if (breederAlive && parameters->uniform(*parameters->getGenerator()) > breeder.getSurvival()) {
         breederAlive = false;
         deaths++;
         if (parameters->isDirectBroodCareOnly()) {
