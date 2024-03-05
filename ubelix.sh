@@ -36,10 +36,7 @@
 declare -a arr=(
 
 "NoDOL_m02-Xh5-Yh01_default.yml"
-"NoDOL_m02-Xh7-Yh01_default.yml"
-"NoDOL_m03-Xh3-Yh01_default.yml"
 
-"DOL_m03-Xh7-Yh01_NoRelatedness.yml"
 "NoDOL_m03-Xh5-Yh01_NoRelatedness.yml"
 "NoDOL_m03-Xh7-Yh01_NoRelatedness.yml"
 
