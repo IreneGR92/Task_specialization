@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # You must specify a valid email address!
-#SBATCH --mail-user=ig17c521@campus.unibe.ch
+#SBATCH --mail-user=ig2500@columbia.edu
 
 # Mail on NONE, BEGIN, END, FAIL, REQUEUE, ALL
 #SBATCH --mail-type=end,fail
