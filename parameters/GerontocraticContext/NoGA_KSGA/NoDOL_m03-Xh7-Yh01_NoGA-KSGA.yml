@@ -6,7 +6,7 @@ REACTION_NORM_TASK: true # Apply reaction norm to age for the level of task spec
 NEED_DIVISION_LABOUR: false # If true, individuals in a group must split the type of help provided to have an optimum increase on fecundity, as there is need of both defence and feeding
 DIRECT_BROOD_CARE_ONLY: false      # Breeder does not receive help during the first breeding cycle after becoming new breeder
 NO_GROUP_AUGMENTATION: true
-NO_RELATEDNESS: false     # Apply implementation to remove the effect of relatedness?
+NO_RELATEDNESS: true     # Apply implementation to remove the effect of relatedness?
 NO_RELATEDNESS_RANDOM_GROUP: false # In the non relatedness implementation, put non-related helpers to random groups without maintaining group size, removing kin selection from evolution of philopatry
 AGE_NO_INFLUENCE_INHERITANCE: false # Age no influence of who inherits territory, randomly sampled from candidate (helpers + sample floaters)
 
