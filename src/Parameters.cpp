@@ -90,7 +90,7 @@ void Parameters::print(std::ofstream &outputStream) {
 
                  << "Reaction_norm_help?:" << "\t" << this->isReactionNormHelp() << endl
                  << "Reaction_norm_dispersal?:" << "\t" << this->isReactionNormDispersal() << endl
-                 << "EVOLUTION_TASK_AFTER_HELP?:" << "\t" << this->isEvolutionTaskAfterHelp() << endl
+                 << "Evolution_task_after_help?:" << "\t" << this->isEvolutionTaskAfterHelp() << endl
                  << "Reaction_norm_task?:" << "\t" << this->isReactionNormTask() << endl
                  << "Need_division_labour?:" << "\t" << this->isNeedDivisionLabour() << endl
                  << "Direct_brood_care_only?:" << "\t" << this->isDirectBroodCareOnly() << endl
