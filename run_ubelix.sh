@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-module load CMake/3.10.2-GCCcore-6.4.0
+module load CMake/3.26.3-GCCcore-12.3.0
 
 rm -rf build
 mkdir build
