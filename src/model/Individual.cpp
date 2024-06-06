@@ -67,8 +67,8 @@ void Individual::calcDispersal() {
         this->dispersal = 1 / (1 + exp(betaAge * age - beta));
     }
 
-    if (parameters->isNoGroupAugmentation() && age == 1) { //this removes further any effect of group augmentation vs group benefits since help does not increase recruitment
-        this->dispersal = 1; //TODO: keep this?
+    if (parameters->isNoGroupAugmentation() && parameters->isNoRelatedness() && age == 1) { //this removes further any effect of group augmentation vs group benefits since help does not increase recruitment
+        this->dispersal = 1; //TODO: keep this? it also removes relatedness since all offspring disperse
     }
 }
 
