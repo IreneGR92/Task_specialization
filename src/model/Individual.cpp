@@ -66,6 +66,10 @@ void Individual::calcDispersal() {
     } else {
         this->dispersal = 1 / (1 + exp(betaAge * age - beta));
     }
+
+    if (parameters->isNoGroupAugmentation() && age == 1) { //this removes further any effect of group augmentation vs group benefits since help does not increase recruitment
+        this->dispersal = 1; //TODO: keep this?
+    }
 }
 
 void Individual::setGroupIndex(int groupIndex) {
