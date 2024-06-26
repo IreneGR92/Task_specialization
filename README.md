@@ -29,4 +29,4 @@ The output of the application is then stored in file `main_parameters_example.tx
 and `last_generation_parameters_example.txt` in the same folder as the binary.
 
 You can modify the input parameters of the model by modifying the yml file. First lines allow you to choose between the
-different models (with/without age-dependent plasticity and with/without relatedness building up from model dynamics). 
+different models. 
