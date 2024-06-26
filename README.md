@@ -1,7 +1,7 @@
-# Group augmentation
+# Division of Labor in Vertebrates
 
 Simulation code, written in C++, to support the paper:
-"Group benefits are a prerequisite for the evolution of cooperative breeding".
+"Fitness drivers of division of labor in vertebrates"
 
 ## Getting Started
 
