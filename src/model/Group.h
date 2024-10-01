@@ -63,8 +63,11 @@ public:
 
     std::vector<double> get(Attribute attribute, bool includeBreeder) const;
 
-    std::vector<Individual> reassignNoRelatedness(int index);
+    std::vector<Individual> noRelatedHelpersToReassign(int index);
 
+    int countHelpersAgeOne();
+
+    int calculateHelpersToReassign();
 };
 
 

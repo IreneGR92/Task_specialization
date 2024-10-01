@@ -45,6 +45,7 @@ private:
     int MIN_AGE_BECOME_BREEDER; //minimum age for individuals to be able to become breeders
     int FIXED_IND_QUALITY;      // in the "age no influence on inheritance", rank of all individuals before effect of help
     double FIXED_GROUP_SIZE;       //in the implementation of no group augmentation, virtual group size for survival for breeder and helpers
+    int REDUCED_RELATEDNESS;     // proportion of philopatric offspring reallocated to reduce within group relatedness in an asexual population (ONLY VALUES 2 OR 3)
 
 // Modifiers in survival.
     double m;      //base mortality
@@ -148,6 +149,8 @@ public:
     int getMinAgeBecomeBreeder() const;
 
     int getFixedIndQuality() const;
+
+    int getReducedRelatedness() const;
 
     double getM() const;
 

@@ -36,6 +36,7 @@ Parameters::Parameters(const string &url) {
     this->MIN_AGE_BECOME_BREEDER = config["MIN_AGE_BECOME_BREEDER"].as<int>();
     this->FIXED_IND_QUALITY = config["FIXED_IND_QUALITY"].as<int>();
     this->FIXED_GROUP_SIZE = config["FIXED_GROUP_SIZE"].as<double>();
+    this->REDUCED_RELATEDNESS = config["REDUCED_RELATEDNESS"].as<int>();
     this->m = config["m"].as<double>();
     this->n = config["n"].as<double>();
     this->X0 = config["X0"].as<double>();
@@ -105,6 +106,7 @@ void Parameters::print(std::ofstream &outputStream) {
                  << "Min_age_become_breeder:" << "\t" << this->getMinAgeBecomeBreeder() << endl
                  << "Fixed_ind_quality:" << "\t" << this->getFixedIndQuality() << endl
                  << "Fixed_group_size:" << "\t" << this->getFixedGroupSize() << endl
+                 << "Reduced_relatedness:" << "\t" << this->getReducedRelatedness() << endl
                  << "Bias_float_breeder:" << "\t" << this->getBiasFloatBreeder() << endl
                  << "m(Overall_mortality):" << "\t" << this->getM() << endl
                  << "n(Mortality_dispersal):" << "\t" << this->getN() << endl
@@ -213,6 +215,10 @@ int Parameters::getFixedIndQuality() const {
 
 double Parameters::getFixedGroupSize() const {
     return FIXED_GROUP_SIZE;
+}
+
+int Parameters::getReducedRelatedness() const {
+    return REDUCED_RELATEDNESS;
 }
 
 double Parameters::getM() const {

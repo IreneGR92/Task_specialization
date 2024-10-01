@@ -62,25 +62,65 @@ vector<Individual> Group::disperse() {
     return newFloaters;
 }
 
-std::vector<Individual> Group::reassignNoRelatedness(int index) {
+
+std::vector<Individual> Group::noRelatedHelpersToReassign(int index) {
 
     std::vector<Individual> noRelatedHelpers;
 
-    for (int i = 0; i < helpers.size();) {
-        Individual &helper = helpers[i];
-        if (helper.getAge() == 1) { // all new offspring is assigned to new groups so no related to breeder
+    //Obtain the number of helpers to reassign
+    int helpersToReassign = calculateHelpersToReassign();
 
-            helper.setInherit(false); //the location of the individual is not the natal territory
-            noRelatedHelpers.push_back(helper); //add the individual to the vector in the last position
-            helpers.removeIndividual(i); // removes the individual from the helpers vector
-
-        } else {
-            i++;
-        }
-        helper.setGroupIndex(index);
+    //Reassign the helpers
+    for (int i = 0; i < helpersToReassign; i++) {
+        Individual *helper = &helpers.back(); // since offspring are added at the end of the helper vector, access last helper
+        //helper->setInherit(false); //the location of the individual is not the natal territory //TODO: consider reassigned helpers insiders/outsiders?
+        noRelatedHelpers.push_back(*helper); //add the individual to the vector in the last position
+        helper->setGroupIndex(index);
+        assert(helper->getAge() == 1);
+        helpers.pop_back(); // Remove the last helper from the helpers vector
     }
     return noRelatedHelpers;
 }
+
+
+int Group::countHelpersAgeOne() {
+    int count = 0;
+    for (Individual &helper: helpers) {
+        if (helper.getAge() == 1) {
+            count++;
+        }
+    }
+    return count;
+}
+
+int Group::calculateHelpersToReassign() {
+    int helpersToReassign;
+    if (parameters->isNoRelatedness()) {
+        helpersToReassign = countHelpersAgeOne();
+
+    } else if (parameters->getReducedRelatedness() == 3) {
+
+        helpersToReassign = round(countHelpersAgeOne() / 3);
+
+    } else if (parameters->getReducedRelatedness() == 2) {
+        double value = static_cast<double>(countHelpersAgeOne()) / 2;
+        if (value != floor(value)) { // Check if the value is not an integer
+            if (parameters->uniform(*parameters->getGenerator()) < 0.5) {
+                helpersToReassign = floor(value);
+            } else {
+                helpersToReassign = ceil(value);
+            }
+        } else {
+            helpersToReassign = value;// If the value is an integer, just assign it normally
+        }
+    } else {
+        helpersToReassign = 0; // Any other value than 2 or 3 of reduced relatedness will not reassign helpers
+    }
+    return helpersToReassign;
+}
+
+
+
 
 
 /*  CALCULATE CUMULATIVE LEVEL OF HELP */
