@@ -67,17 +67,21 @@ std::vector<Individual> Group::noRelatedHelpersToReassign(int index) {
 
     std::vector<Individual> noRelatedHelpers;
 
-    //Obtain the number of helpers to reassign
+    // Obtain the number of helpers to reassign based on the relatedness reduction strategy
     int helpersToReassign = calculateHelpersToReassign();
 
-    //Reassign the helpers
+    // Iterate to reassign the specified number of helpers
     for (int i = 0; i < helpersToReassign; i++) {
-        Individual *helper = &helpers.back(); // since offspring are added at the end of the helper vector, access last helper
-        //helper->setInherit(false); //the location of the individual is not the natal territory //TODO: consider reassigned helpers insiders/outsiders?
-        noRelatedHelpers.push_back(*helper); //add the individual to the vector in the last position
-        helper->setGroupIndex(index);
-        assert(helper->getAge() == 1);
-        helpers.pop_back(); // Remove the last helper from the helpers vector
+        // Find the first helper with age 1
+        for (auto it = helpers.begin(); it != helpers.end(); ++it) {
+            if (it->getAge() == 1) {
+                noRelatedHelpers.push_back(*it); // Add the helper to the noRelatedHelpers vector
+                it->setGroupIndex(index); // Set the group index for the helper
+                assert(it->getAge() == 1); // Ensure the helper's age is 1
+                helpers.erase(it); // Remove the helper from the helpers vector
+                break;  // Exit the loop after finding the first helper with age 1
+            }
+        }
     }
     return noRelatedHelpers;
 }
@@ -94,14 +98,21 @@ int Group::countHelpersAgeOne() {
 }
 
 int Group::calculateHelpersToReassign() {
-    int helpersToReassign;
+
+    int helpersToReassign = 0;
+
+    // No relatedness implementation
     if (parameters->isNoRelatedness()) {
         helpersToReassign = countHelpersAgeOne();
 
+
+    // Reduced relatedness by a third implementation
     } else if (parameters->getReducedRelatedness() == 3) {
 
         helpersToReassign = round(countHelpersAgeOne() / 3);
 
+
+    // Reduced relatedness by half implementation
     } else if (parameters->getReducedRelatedness() == 2) {
         double value = static_cast<double>(countHelpersAgeOne()) / 2;
         if (value != floor(value)) { // Check if the value is not an integer
@@ -113,9 +124,8 @@ int Group::calculateHelpersToReassign() {
         } else {
             helpersToReassign = value;// If the value is an integer, just assign it normally
         }
-    } else {
-        helpersToReassign = 0; // Any other value than 2 or 3 of reduced relatedness will not reassign helpers
     }
+
     return helpersToReassign;
 }
 

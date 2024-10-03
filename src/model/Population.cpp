@@ -58,7 +58,7 @@ void Population::disperse(int generation) {
         this->floaters.merge(group.disperse());
 
         // In the non relatedness implementation, helpers just born are reassigned to random groups. Groups receive as many helpers as helpers left the group for reassignment.
-        if (parameters->isNoRelatedness() && generation > 0) {
+        if (generation > 0) {
             noRelatedHelpers = group.noRelatedHelpersToReassign(i);
             for (int j = 0; j < noRelatedHelpers.size(); j++) {
                 noRelatednessGroupsID.push_back(groupID);
