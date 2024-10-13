@@ -25,9 +25,9 @@ FIXED_GROUP_SIZE: 3		# in implementation "no group augmentation", virtual group 
 REDUCED_RELATEDNESS: 0  # proportion of philopatric offspring reallocated to reduce within group relatedness in an asexual population (ONLY VALUES 2 OR 3)
 
 # Modifiers in survival
-m: 0.1    # mortality due to predation
+m: 0.2    # mortality due to predation
 n: 1      # multiplier to m for lower mortality of floaters (only in the new logistic survival formula)
-X0: 5   # base survival without the effect of help or group size
+X0: 10   # base survival without the effect of help or group size
 Xsh: 3    # cost of help in survival
 Xsn: 0    # benefit of group size in survival
 

@@ -3,7 +3,7 @@ REACTION_NORM_HELP: false    # Apply reaction norm to age for level of help?
 REACTION_NORM_DISPERSAL: false     # Apply reaction norm to age for dispersal?
 EVOLUTION_TASK_AFTER_HELP: false     # Task specialization evolves only after the evolution of help?
 REACTION_NORM_TASK: true # Apply reaction norm to age for the level of task specialization
-NEED_DIVISION_LABOUR: false # If true, individuals in a group must split the type of help provided to have an optimum increase on fecundity, as there is need of both defence and feeding
+NEED_DIVISION_LABOUR: true # If true, individuals in a group must split the type of help provided to have an optimum increase on fecundity, as there is need of both defence and feeding
 DIRECT_BROOD_CARE_ONLY: false      # Breeder does not receive help during the first breeding cycle after becoming new breeder
 NO_GROUP_AUGMENTATION: false
 NO_RELATEDNESS: false     # Apply implementation to remove the effect of relatedness?
@@ -27,8 +27,8 @@ REDUCED_RELATEDNESS: 0  # proportion of philopatric offspring reallocated to red
 # Modifiers in survival
 m: 0.1    # mortality due to predation
 n: 1      # multiplier to m for lower mortality of floaters (only in the new logistic survival formula)
-X0: 5   # base survival without the effect of help or group size
-Xsh: 5    # cost of help in survival
+X0: 10   # base survival without the effect of help or group size
+Xsh: 3    # cost of help in survival
 Xsn: 0    # benefit of group size in survival
 
 # Costs of help
