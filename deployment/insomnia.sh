@@ -1,16 +1,16 @@
 #!/bin/bash
-
-#SBATCH --account=free
+cd ..
+#SBATCH --account=e3b
 
 # Mail on NONE, BEGIN, END, FAIL, REQUEUE, ALL
 #SBATCH --mail-user=ig2500@columbia.edu
 #SBATCH --mail-type=end,fail
 
 # Job name
-#SBATCH --job-name="TaskSpecialization"
+#SBATCH --job-name="ReprSkew"
 
 # Runtime and memory
-#SBATCH --time=96:00:00
+#SBATCH --time=120:00:00
 #SBATCH --mem-per-cpu=2G
 #SBATCH --cpus-per-task=1
 
@@ -27,7 +27,6 @@
 declare -a arr=(
 
 "default.yml"
-
 
 		)
 

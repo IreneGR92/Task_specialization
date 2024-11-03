@@ -70,7 +70,7 @@ Parameters::Parameters(const string &url) {
     this->mainWriter = new std::ofstream("main_" + this->name + ".txt");
     this->lastGenerationWriter = new std::ofstream("last_generation_" + this->name + ".txt");
 
-    const int seed = 2;
+    const int seed = 1;
     this->generator = new std::default_random_engine(seed);
 }
 
