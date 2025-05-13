@@ -3,7 +3,24 @@
 
 declare -a arr=(
 
-"default.yml"
+"DOL_m01-Xh3-Yh01_default.yml"
+"DOL_m01-Xh5-Yh01_default.yml"
+"DOL_m01-Xh7-Yh01_default.yml"
+"DOL_m02-Xh3-Yh01_default.yml"
+"DOL_m02-Xh5-Yh01_default.yml"
+"DOL_m02-Xh7-Yh01_default.yml"
+"DOL_m03-Xh3-Yh01_default.yml"
+"DOL_m03-Xh5-Yh01_default.yml"
+"DOL_m03-Xh7-Yh01_default.yml"
+"NoDOL_m01-Xh3-Yh01_default.yml"
+"NoDOL_m01-Xh5-Yh01_default.yml"
+"NoDOL_m01-Xh7-Yh01_default.yml"
+"NoDOL_m02-Xh3-Yh01_default.yml"
+"NoDOL_m02-Xh5-Yh01_default.yml"
+"NoDOL_m02-Xh7-Yh01_default.yml"
+"NoDOL_m03-Xh3-Yh01_default.yml"
+"NoDOL_m03-Xh5-Yh01_default.yml"
+"NoDOL_m03-Xh7-Yh01_default.yml"
 
 )
 
