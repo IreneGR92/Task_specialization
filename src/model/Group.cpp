@@ -106,7 +106,7 @@ int Group::calculateHelpersToReassign() {
         helpersToReassign = countHelpersAgeOne();
 
 
-    // Reduced relatedness by a third implementation
+    // Reduced relatedness by a third implementation ///TODO: check this function, 0 is possible?
     } else if (parameters->getReducedRelatedness() == 3) {
 
         helpersToReassign = round(countHelpersAgeOne() / 3);
