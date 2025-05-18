@@ -3,24 +3,23 @@
 
 
 #include <vector>
-#include <algorithm>
 #include <iostream>
-#include <iterator>
 #include "../../Parameters.h"
 
 template<class T>
 
 class Container {
+    explicit Container(std::default_random_engine *generator);
+
+    std::default_random_engine generator;
 
 protected:
     std::vector<T> vector;
 
 public:
-    Container();
+    [[nodiscard]] unsigned int size() const;
 
-    const unsigned int size() const;
-
-    const bool isEmpty() const;
+    [[nodiscard]] bool isEmpty() const;
 
     const T &accessElement(int index);
 
@@ -47,17 +46,16 @@ public:
 
 
     void shuffle();
-
 };
 
 
 template<class T>
-const unsigned int Container<T>::size() const {
+unsigned int Container<T>::size() const {
     return vector.size();
 }
 
 template<class T>
-const bool Container<T>::isEmpty() const {
+bool Container<T>::isEmpty() const {
     return vector.empty();
 }
 
@@ -90,9 +88,8 @@ void Container<T>::merge(const Container<T> &container) {
 
 template<class T>
 T Container<T>::getRandomElement() const {
-    Parameters *parameters = Parameters::instance();
     std::uniform_int_distribution<int> uniform(0, vector.size() - 1);
-    int index = uniform(*parameters->getGenerator()); // selects a random index the noRelatednessGroupsID vector
+    int index = uniform(generator); // selects a random index the noRelatednessGroupsID vector
     return this->vector[index];
 }
 
@@ -122,7 +119,8 @@ void Container<T>::removeLast() {
 }
 
 template<class T>
-Container<T>::Container() {}
+Container<T>::Container(std::default_random_engine *generator): generator(*generator) {
+}
 
 template<class T>
 void Container<T>::shuffle() {

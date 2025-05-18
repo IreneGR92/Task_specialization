@@ -9,7 +9,6 @@
 using namespace std;
 
 
-static Parameters *singletonInstance;
 
 //default value if not provided
 Parameters::Parameters(const int replica) : Parameters("../parameters/default.yml", replica) {

@@ -9,7 +9,8 @@ class Population {
 
 
 private:
-    Parameters *parameters = Parameters::instance();
+    std::shared_ptr<Parameters> parameters;
+
 
     std::vector<Group> groups;
 
