@@ -2,7 +2,7 @@
 #include "Simulation.h"
 #include <iostream>
 #include <cassert>
-#include "Simulation.h"
+
 #include "stats/Statistics.h"
 #include <vector>
 

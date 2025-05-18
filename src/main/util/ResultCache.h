@@ -9,11 +9,12 @@
 #include "MainCacheElement.h"
 #include "../model/Individual.h"
 #include "../Simulation.h"
+#include "../stats/Statistics.h"
 
 class Simulation; // Forward declaration of the Simulation class.
 
 class ResultCache {
-    const int replica;    ///< The replica number for this simulation.
+    const int replica; ///< The replica number for this simulation.
 
     std::shared_ptr<Parameters> parameters; ///< The parameters of the simulation.
 
@@ -22,8 +23,8 @@ class ResultCache {
     std::queue<MainCacheElement> mainCache;
 
 public:
-    explicit ResultCache(const std::shared_ptr<Parameters>& parameters, int replica) : parameters(parameters),
-                                                                                       replica(replica) {
+    explicit ResultCache(const std::shared_ptr<Parameters> &parameters, int replica) : parameters(parameters),
+        replica(replica) {
     }
 
 
