@@ -1,4 +1,3 @@
-
 #ifndef CPP_PARAMETERS_H
 #define CPP_PARAMETERS_H
 
@@ -7,21 +6,46 @@
 #include <fstream>
 #include <random>
 
-//Singleton
+#include "stats/Statistics.h"
+
+/**
+ * @class Parameters
+ *
+ * This class maintains various parameters related to the simulation such as the number of generations, mutation rates, and other genetic parameters.
+ * It provides methods to access these parameters.
+ */
 class Parameters {
-
 public:
-    Parameters();
+    /**
+     * @brief Default constructor for the Parameters class.
+     */
+    explicit Parameters(int replica);
 
+    /**
+         * @brief Destructor for the Parameters class.
+         */
     virtual ~Parameters();
 
-    explicit Parameters(const std::string& url);
+    /**
+     * @brief Constructor for the Parameters class that takes a URL.
+     * @param filename The URL to load parameters from.
+     */
+    explicit Parameters(const std::string &filename, int replica);
+
+
+    /**
+     * makes a deep copy of Parameters while incrementing newReplica by 1 + initializes a new rng
+     */
+    std::shared_ptr<Parameters> cloneWithIncrementedReplica(int newReplica);
+
+    int getReplica() const;
 
 private:
-
-
     std::string name;
-///#Run parameters
+    int replica; ///< The replica number.
+
+    // Run parameters
+    const int SEED = 1; ///< The seed for the random number generator.
     bool REACTION_NORM_HELP;    //Apply reaction norm to age for dispersal?
     bool REACTION_NORM_DISPERSAL; // Apply reaction norm to age for dispersal?
     bool EVOLUTION_TASK_AFTER_HELP; // help evolves only after the evolution of dispersal?
@@ -60,7 +84,7 @@ private:
     double Kh;    // benefit of cumHelp in the fecundity
     double Km;    // reduced the need for division of labour, the higher the value the less need for DOL
 
-//Genetic values
+    // Genetic values
 
 //For help
     double INIT_ALPHA;            // bigger values higher level of help
@@ -92,128 +116,27 @@ private:
     double MUTATION_DRIFT;            // mutation rate in the neutral selected value to track level of relatedness
     double STEP_DRIFT; // mutation step size in the neutral genetic value to track level of relatedness
 
-    std::default_random_engine *generator;
+    std::default_random_engine *generator; ///< A pointer to the random number generator.
 
-    std::string getName(std::string url);
+    std::string removeExtension(std::string url); ///< Helper function to get the name of the simulation from a URL.
 
-    void print(std::ofstream &outputStream);
+    void print(std::ofstream &outputStream); ///< Helper function to print the parameters to an output stream.
 
-    std::ofstream *mainWriter;
-    std::ofstream *lastGenerationWriter;
+
+    double idCounter = 0;
+    Statistics *results;
 
 public:
+    std::uniform_real_distribution<double> driftUniform; ///< A uniform real distribution for drift.
+    std::uniform_real_distribution<double> uniform; ///< A uniform real distribution.
 
-
-    std::uniform_real_distribution<double> driftUniform;
-    std::uniform_real_distribution<double> uniform;
-
-    void print();
-
-
-    const std::string &getName() const;
-
-    bool isReactionNormHelp() const;
-
-    bool isReactionNormDispersal() const;
-
-    bool isEvolutionTaskAfterHelp() const;
-
-    bool isReactionNormTask() const;
-
-    bool isNeedDivisionLabour() const;
-
-    bool isDirectBroodCareOnly() const;
-
-    bool isNoGroupAugmentation() const;
-
-    bool isNoRelatedness() const;
-
-    bool isNoRelatednessRandomGroup() const;
-
-    bool isAgeNoInfluenceInheritance() const;
-
-    int getMaxColonies() const;
-
-    int getNumGenerations() const;
-
-    int getMaxNumReplicates() const;
-
-    int getSkip() const;
-
-    int getInitNumHelpers() const;
-
-    double getBiasFloatBreeder() const;
-
-    double getFixedGroupSize() const;
-
-    int getMinAgeBecomeBreeder() const;
-
-    int getFixedIndQuality() const;
-
-    int getReducedRelatedness() const;
-
-    double getM() const;
-
-    double getN() const;
-
-    double getX0() const;
-
-    double getXsh() const;
-
-    double getXsn() const;
-
-    double getYh() const;
-
-    double getK0() const;
-
-    double getKh() const;
-
-    double getKm() const;
-
-    double getInitAlpha() const;
-
-    double getInitAlphaAge() const;
-
-    double getMutationAlpha() const;
-
-    double getMutationAlphaAge() const;
-
-    double getStepAlpha() const;
-
-    double getInitBeta() const;
-
-    double getInitBetaAge() const;
-
-    double getMutationBeta() const;
-
-    double getMutationBetaAge() const;
-
-    double getStepBeta() const;
-
-    double getInitGamma() const;
-
-    double getInitGammaRank() const;
-
-    double getMutationGamma() const;
-
-    double getMutationGammaRank() const;
-
-    double getStepGamma() const;
-
-    double getMutationDrift() const;
-
-    double getStepDrift() const;
-
-    static const int NO_VALUE = -1;
-
-    std::ofstream *getMainWriter() const;
-
-    std::ofstream *getLastGenerationWriter() const;
+    static const int NO_VALUE = -1; ///< A constant representing no value.
 
     std::default_random_engine *getGenerator() const;
 
-    static Parameters *instance();
-
+    double nextId() {
+        return idCounter++;
+    }
 };
 
 

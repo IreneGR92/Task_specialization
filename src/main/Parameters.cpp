@@ -1,7 +1,10 @@
 #include <iostream>
 #include <algorithm>
 #include <yaml-cpp/yaml.h>
-#include "../Parameters.h"
+#include "Parameters.h"
+
+#include "util/Config.h"
+#include "spdlog/spdlog.h"
 
 using namespace std;
 
@@ -9,14 +12,21 @@ using namespace std;
 static Parameters *singletonInstance;
 
 //default value if not provided
-Parameters::Parameters() : Parameters("../parameters/default.yml") {}
+Parameters::Parameters(const int replica) : Parameters("../parameters/default.yml", replica) {
+}
 
-Parameters::Parameters(const string &url) {
-    singletonInstance = this;
+Parameters::Parameters(const string &filename, const int replica) : replica(replica) {
+    std::string path = Config::GET_PARAMETERS_FOLDER() + "/" + filename;
 
-    YAML::Node config = YAML::LoadFile(url);
-
-    this->name = this->getName(url);
+    spdlog::debug("Loading parameters from file: {}", path);
+    YAML::Node config;
+    try {
+        config = YAML::LoadFile(path);
+    } catch (YAML::BadFile &e) {
+        spdlog::error("Error loading parameters from file: {}", filename);
+        throw e;
+    }
+    this->name = this->removeExtension(filename);
     this->REACTION_NORM_HELP = config["REACTION_NORM_HELP"].as<bool>();
     this->REACTION_NORM_DISPERSAL = config["REACTION_NORM_DISPERSAL"].as<bool>();
     this->EVOLUTION_TASK_AFTER_HELP = config["EVOLUTION_TASK_AFTER_HELP"].as<bool>();
@@ -67,299 +77,18 @@ Parameters::Parameters(const string &url) {
     this->driftUniform = uniform_real_distribution<double>(100, 200);
     this->uniform = uniform_real_distribution<double>(0, 1);
 
-    this->mainWriter = new std::ofstream("main_" + this->name + ".txt");
-    this->lastGenerationWriter = new std::ofstream("last_generation_" + this->name + ".txt");
 
     const int seed = 1;
     this->generator = new std::default_random_engine(seed);
 }
 
-Parameters::~Parameters() {
-    delete mainWriter;
-    delete lastGenerationWriter;
-    delete generator;
-}
-
-
-void Parameters::print() {
-    this->print(*mainWriter);
-    this->print(*lastGenerationWriter);
-}
-
-void Parameters::print(std::ofstream &outputStream) {
-    outputStream << "PARAMETER VALUES" << endl
-
-                 << "Reaction_norm_help?:" << "\t" << this->isReactionNormHelp() << endl
-                 << "Reaction_norm_dispersal?:" << "\t" << this->isReactionNormDispersal() << endl
-                 << "Evolution_task_after_help?:" << "\t" << this->isEvolutionTaskAfterHelp() << endl
-                 << "Reaction_norm_task?:" << "\t" << this->isReactionNormTask() << endl
-                 << "Need_division_labour?:" << "\t" << this->isNeedDivisionLabour() << endl
-                 << "Direct_brood_care_only?:" << "\t" << this->isDirectBroodCareOnly() << endl
-                 << "No_group_augmentation?:" << "\t" << this->isNoGroupAugmentation() << endl
-                 << "No_effect_relatedness?:" << "\t" << this->isNoRelatedness() << endl
-                 << "Non-related_helpers_random_group?:" << "\t" << this->isNoRelatednessRandomGroup() << endl
-                 << "No_effect_age_inheritance?:" << "\t" << this->isAgeNoInfluenceInheritance() << endl
-                 << "Initial_population:" << "\t" << this->getMaxColonies() * (this->getInitNumHelpers() + 1) << endl
-                 << "Number_of_colonies:" << "\t" << this->getMaxColonies() << endl
-                 << "Number_generations:" << "\t" << this->getNumGenerations() << endl
-                 << "Number_replicates:" << "\t" << this->getMaxNumReplicates() << endl
-                 << "Min_age_become_breeder:" << "\t" << this->getMinAgeBecomeBreeder() << endl
-                 << "Fixed_ind_quality:" << "\t" << this->getFixedIndQuality() << endl
-                 << "Fixed_group_size:" << "\t" << this->getFixedGroupSize() << endl
-                 << "Reduced_relatedness:" << "\t" << this->getReducedRelatedness() << endl
-                 << "Bias_float_breeder:" << "\t" << this->getBiasFloatBreeder() << endl
-                 << "m(Overall_mortality):" << "\t" << this->getM() << endl
-                 << "n(Mortality_dispersal):" << "\t" << this->getN() << endl
-                 << "X0(intercept):" << "\t" << this->getX0() << endl
-                 << "Xh(Cost_help_survival):" << "\t" << this->getXsh() << endl
-                 << "Xn(Benefit_group_size_survival):" << "\t" << this->getXsn() << endl
-                 << "Yh(Cost_help_rank):" << "\t" << this->getYh() << endl
-                 << "K0(Base_fecundity):" << "\t" << this->getK0() << endl
-                 << "Kh(Benefit_help_fecundity):" << "\t" << this->getKh() << endl
-                 << "Km(Reduced_need_DOL):" << "\t" << this->getKm() << endl
-                 << "initAlpha:" << "\t" << this->getInitAlpha() << endl
-                 << "initAlphaAge:" << "\t" << this->getInitAlphaAge() << endl
-                 << "initBeta:" << "\t" << this->getInitBeta() << endl
-                 << "initBetaAge:" << "\t" << this->getInitBetaAge() << endl
-                 << "initGamma:" << "\t" << this->getInitGamma() << endl
-                 << "initGammaRank:" << "\t" << this->getInitGammaRank() << endl
-                 << "mutAlpha:" << "\t" << this->getMutationAlpha() << endl
-                 << "mutAlphaAge:" << "\t" << this->getMutationAlphaAge() << endl
-                 << "mutBeta:" << "\t" << this->getMutationBeta() << endl
-                 << "mutBetaAge:" << "\t" << this->getMutationBetaAge() << endl
-                 << "mutGamma:" << "\t" << this->getMutationGamma() << endl
-                 << "mutGammaRank:" << "\t" << this->getMutationGammaRank() << endl
-                 << "mutDrift:" << "\t" << this->getMutationDrift() << endl
-                 << "stepAlpha:" << "\t" << this->getStepAlpha() << endl
-                 << "stepBeta:" << "\t" << this->getStepBeta() << endl
-                 << "stepGamma:" << "\t" << this->getStepGamma() << endl
-                 << "stepDrift:" << "\t" << this->getStepDrift() << endl << endl;
-}
-
-
-const string &Parameters::getName() const {
-    return name;
-}
-
-bool Parameters::isReactionNormHelp() const {
-    return REACTION_NORM_HELP;
-}
-
-bool Parameters::isReactionNormDispersal() const {
-    return REACTION_NORM_DISPERSAL;
-}
-
-bool Parameters::isEvolutionTaskAfterHelp() const {
-    return EVOLUTION_TASK_AFTER_HELP;
-}
-
-bool Parameters::isReactionNormTask() const {
-    return REACTION_NORM_TASK;
-}
-
-bool Parameters::isNeedDivisionLabour() const {
-    return NEED_DIVISION_LABOUR;
-}
-
-bool Parameters::isDirectBroodCareOnly() const {
-    return DIRECT_BROOD_CARE_ONLY;
-}
-
-bool Parameters::isNoGroupAugmentation() const {
-    return NO_GROUP_AUGMENTATION;
-}
-
-bool Parameters::isNoRelatedness() const {
-    return NO_RELATEDNESS;
-}
-
-bool Parameters::isNoRelatednessRandomGroup() const {
-    return NO_RELATEDNESS_RANDOM_GROUP;
-}
-
-bool Parameters::isAgeNoInfluenceInheritance() const {
-    return AGE_NO_INFLUENCE_INHERITANCE;
-}
-
-int Parameters::getMaxColonies() const {
-    return MAX_COLONIES;
-}
-
-int Parameters::getNumGenerations() const {
-    return NUM_GENERATIONS;
-}
-
-int Parameters::getMaxNumReplicates() const {
-    return MAX_NUM_REPLICATES;
-}
-
-int Parameters::getSkip() const {
-    return SKIP;
-}
-
-int Parameters::getInitNumHelpers() const {
-    return INIT_NUM_HELPERS;
-}
-
-double Parameters::getBiasFloatBreeder() const {
-    return BIAS_FLOAT_BREEDER;
-}
-
-int Parameters::getMinAgeBecomeBreeder() const {
-    return MIN_AGE_BECOME_BREEDER;
-}
-
-int Parameters::getFixedIndQuality() const {
-    return FIXED_IND_QUALITY;
-}
-
-double Parameters::getFixedGroupSize() const {
-    return FIXED_GROUP_SIZE;
-}
-
-int Parameters::getReducedRelatedness() const {
-    return REDUCED_RELATEDNESS;
-}
-
-double Parameters::getM() const {
-    return m;
-}
-
-double Parameters::getN() const {
-    return n;
-}
-
-double Parameters::getX0() const {
-    return X0;
-}
-
-double Parameters::getXsh() const {
-    return Xsh;
-}
-
-double Parameters::getXsn() const {
-    return Xsn;
-}
-
-double Parameters::getYh() const {
-    return Yh;
-}
-
-double Parameters::getK0() const {
-    return K0;
-}
-
-double Parameters::getKh() const {
-    return Kh;
-}
-
-double Parameters::getKm() const {
-    return Km;
-}
-
-double Parameters::getInitAlpha() const {
-    return INIT_ALPHA;
-}
-
-double Parameters::getInitAlphaAge() const {
-    return INIT_ALPHA_AGE;
-}
-
-double Parameters::getMutationAlpha() const {
-    return MUTATION_ALPHA;
-}
-
-double Parameters::getMutationAlphaAge() const {
-    return MUTATION_ALPHA_AGE;
-}
-
-double Parameters::getStepAlpha() const {
-    return STEP_ALPHA;
-}
-
-double Parameters::getInitBeta() const {
-    return INIT_BETA;
-}
-
-double Parameters::getInitBetaAge() const {
-    return INIT_BETA_AGE;
-}
-
-double Parameters::getMutationBeta() const {
-    return MUTATION_BETA;
-}
-
-double Parameters::getMutationBetaAge() const {
-    return MUTATION_BETA_AGE;
-}
-
-double Parameters::getStepBeta() const {
-    return STEP_BETA;
-}
-
-double Parameters::getInitGamma() const {
-    return INIT_GAMMA;
-}
-
-double Parameters::getInitGammaRank() const {
-    return INIT_GAMMA_RANK;
-}
-
-double Parameters::getMutationGamma() const {
-    return MUTATION_GAMMA;
-}
-
-double Parameters::getMutationGammaRank() const {
-    return MUTATION_GAMMA_RANK;
-}
-
-double Parameters::getStepGamma() const {
-    return STEP_GAMMA;
-}
-
-double Parameters::getMutationDrift() const {
-    return MUTATION_DRIFT;
-}
-
-double Parameters::getStepDrift() const {
-    return STEP_DRIFT;
-}
-
-
-std::string Parameters::getName(std::string url) {
-
-
-    unsigned first = url.find("parameters/");
-    unsigned last = url.find(".yml");
-    string name = url.substr(first, last - first);
-    replace(name.begin(), name.end(), '/', '_');
-
-    return name;
-}
-
-ofstream *Parameters::getMainWriter() const {
-    return mainWriter;
-}
-
-ofstream *Parameters::getLastGenerationWriter() const {
-    return lastGenerationWriter;
+shared_ptr<Parameters> Parameters::cloneWithIncrementedReplica(int newReplica) {
+    auto deepCopy = std::make_shared<Parameters>(*this); // Use copy constructor
+    deepCopy->replica = newReplica; // Increment newReplica
+    deepCopy->generator = new std::default_random_engine(SEED + newReplica);
+    return deepCopy;
 }
 
 default_random_engine *Parameters::getGenerator() const {
     return generator;
 }
-
-Parameters *Parameters::instance() {
-    if (singletonInstance == nullptr) {
-        singletonInstance = new Parameters;
-    }
-    return singletonInstance;
-}
-
-
-
-
-
-
-
-
