@@ -26,19 +26,19 @@ void Statistics::calculateStatistics(const Population &populationObj) {
     std::vector<double> cumHelpsType1;
 
     for (const Individual &helper: helpers) {
-        if (helper.getFishType() != HELPER) {
+        if (helper.getIndividualType() != HELPER) {
             cout << "helper wrong class";
         }
     }
 
     for (const Individual &floater: populationObj.getFloaters()) {
-        if (floater.getFishType() != FLOATER) {
+        if (floater.getIndividualType() != FLOATER) {
             cout << "floater wrong class";
         }
     }
 
     for (const Individual &breeder: breeders) {
-        if (breeder.getFishType() != BREEDER) {
+        if (breeder.getIndividualType() != BREEDER) {
             cout << "breeder wrong class";
         }
     }
@@ -390,7 +390,7 @@ void Statistics::printIndividual(Individual individual, int generation, int grou
                                            << replica + 1
                                            << "\t" << generation
                                            << "\t" << groupID
-                                           << "\t" << individual.getFishType()
+                                           << "\t" << individual.getIndividualType()
                                            << "\t" << setprecision(4) << individual.getRank()
                                            << "\t" << setprecision(4) << individual.getAge()
                                            << "\t" << setprecision(4) << individual.getAlpha()

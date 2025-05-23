@@ -4,7 +4,7 @@
 
 
 #include <unordered_map>
-#include "FishType.h"
+#include "IndividualType.h"
 #include "../Parameters.h"
 #include "Attribute.h"
 
@@ -26,7 +26,7 @@ class Individual {
     double task;
     double survival;
 
-    FishType fishType;                                                // possible classes: breeder, helper, floater
+    IndividualType individualType;                                                // possible classes: breeder, helper, floater
     int age;
     int ageBecomeBreeder;
     double rank;
@@ -35,16 +35,16 @@ class Individual {
 
     void mutate(int generation);
 
-    void initializeIndividual(FishType type);
+    void initializeIndividual(IndividualType type);
 
     int groupIndex;
 public:
     int getGroupIndex() const;
 
 public:
-    Individual(Individual &individual, FishType fishType, int &generation);
+    Individual(Individual &individual, IndividualType individualType, int &generation);
 
-    explicit Individual(FishType fishType);
+    explicit Individual(IndividualType individualType);
 
 
     //Functions inside Individual
@@ -83,9 +83,9 @@ public:
 
     double getSurvival() const;
 
-    FishType getFishType() const;
+    IndividualType getIndividualType() const;
 
-    void setFishType(FishType type);
+    void setIndividualType(IndividualType type);
 
     int getAge() const;
     void setAgeBecomeBreeder(int ageBecomeBreeder_);

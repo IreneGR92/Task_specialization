@@ -3,12 +3,12 @@
 #include <cassert>
 
 #include "Individual.h"
-#include "FishType.h"
+#include "IndividualType.h"
 
 //Constructor for reproduction of a Breeder
-Individual::Individual(Individual &individual, FishType fishType, int &generation) {
+Individual::Individual(Individual &individual, IndividualType individualType, int &generation) {
 
-    assert(individual.fishType == BREEDER);
+    assert(individual.individualType == BREEDER);
 
     this->alpha = individual.alpha;
     this->alphaAge = individual.alphaAge;
@@ -23,13 +23,13 @@ Individual::Individual(Individual &individual, FishType fishType, int &generatio
     this->helpType = 0;
     this->task = Parameters::NO_VALUE;
 
-    this->initializeIndividual(fishType);
+    this->initializeIndividual(individualType);
 
     this->mutate(generation);
 }
 
 //Constructor for initial creation
-Individual::Individual(FishType fishType) {
+Individual::Individual(IndividualType individualType) {
 
     auto param = Parameters::instance();
 
@@ -40,17 +40,17 @@ Individual::Individual(FishType fishType) {
     this->gamma = param->getInitGamma();
     this->gammaRank = param->getInitGammaRank();
     this->drift = param->driftUniform(*param->getGenerator());
-    this->initializeIndividual(fishType);
+    this->initializeIndividual(individualType);
 }
 
-void Individual::initializeIndividual(FishType type) {
+void Individual::initializeIndividual(IndividualType type) {
     this->parameters = Parameters::instance();
     this->dispersal = Parameters::NO_VALUE;
     this->help = 0;
     this->helpType = 0;
     this->task = Parameters::NO_VALUE;
     this->survival = Parameters::NO_VALUE;
-    this->fishType = type;
+    this->individualType = type;
     this->inherit = true;
     this->age = 1;
     this->ageBecomeBreeder = Parameters::NO_VALUE;
@@ -83,7 +83,7 @@ void Individual::setGroupIndex(int groupIndex) {
 /*DISPLAY LEVEL OF HELP*/
 
 void Individual::calcHelp() {
-    if (fishType == HELPER) {
+    if (individualType == HELPER) {
         if (!parameters->isReactionNormHelp()) {
             help = alpha;
 
@@ -101,7 +101,7 @@ void Individual::calcHelp() {
 /*CALCULATE TASK SPECIALIZATION*/
 
 void Individual::calcTaskSpecialization() {
-    if (fishType == HELPER) {
+    if (individualType == HELPER) {
         if (!parameters->isReactionNormTask()) {
             task = gamma;
             if (task < 0) { task = 0;
@@ -128,7 +128,7 @@ void Individual::calculateRank() {
     int multiplier = 10; // increases the effective difference in rank to the likelihood to become breeder
     if (!parameters->isAgeNoInfluenceInheritance()){
         //Gerontocratic context
-        if (fishType == HELPER && helpType == 0) {
+        if (individualType == HELPER && helpType == 0) {
             rank = (age - parameters->getYh() * help);
             if (rank < 0.001) {
                 rank = 0.001;
@@ -138,7 +138,7 @@ void Individual::calculateRank() {
         }
     } else {
         //Scramble context
-        if (fishType == HELPER && helpType == 0) {
+        if (individualType == HELPER && helpType == 0) {
             rank = (parameters->getFixedIndQuality() - parameters->getYh() * help) * multiplier;
             if (age == parameters->getMinAgeBecomeBreeder()){
                 rank = 0.001;
@@ -161,10 +161,10 @@ void Individual::calculateRank() {
 void Individual::calculateSurvival(const int &groupSize) {
 
     if (parameters->isNoGroupAugmentation()) {
-        if (fishType == FLOATER) {
+        if (individualType == FLOATER) {
             this->survival = (1 - parameters->getM() * parameters->getN()) / (1 + exp(-parameters->getX0()));
         } else {
-            if (fishType == HELPER && helpType == 1) {
+            if (individualType == HELPER && helpType == 1) {
                 this->survival = (1 - parameters->getM()) /
                                  (1 + exp(-parameters->getX0() - parameters->getXsn() * parameters->getFixedGroupSize() +
                                           parameters->getXsh() * this->help));
@@ -175,10 +175,10 @@ void Individual::calculateSurvival(const int &groupSize) {
         }
 
     } else {
-        if (fishType == FLOATER) {
+        if (individualType == FLOATER) {
             this->survival = (1 - parameters->getM() * parameters->getN()) / (1 + exp(-parameters->getX0()));
         } else {
-            if (fishType == HELPER && helpType == 1) {
+            if (individualType == HELPER && helpType == 1) {
                 this->survival = (1 - parameters->getM()) /
                                  (1 + exp(-parameters->getX0() - parameters->getXsn() * groupSize +
                                           parameters->getXsh() * this->help));
@@ -328,12 +328,12 @@ double Individual::getSurvival() const {
     return survival;
 }
 
-FishType Individual::getFishType() const {
-    return fishType;
+IndividualType Individual::getIndividualType() const {
+    return individualType;
 }
 
-void Individual::setFishType(FishType type) {
-    Individual::fishType = type;
+void Individual::setIndividualType(IndividualType type) {
+    Individual::individualType = type;
     if (type == BREEDER) {
         this->dispersal = Parameters::NO_VALUE;
         this->help = 0;

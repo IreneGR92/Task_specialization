@@ -3,7 +3,7 @@
 #include <cassert>
 #include <iostream>
 #include "Group.h"
-#include "FishType.h"
+#include "IndividualType.h"
 
 using namespace std;
 
@@ -48,13 +48,13 @@ vector<Individual> Group::disperse() {
 
         if (parameters->uniform(*parameters->getGenerator()) < helper.getDispersal()) {
             helper.setInherit(false); //the location of the individual is not the natal territory
-            helper.setFishType(FLOATER);
+            helper.setIndividualType(FLOATER);
             helper.calculateRank(); //calculate rank for floaters (=age)
             newFloaters.push_back(helper); //add the individual to the vector floaters in the last position
             helpers.removeIndividual(i);
 
         } else {
-            helper.setFishType(HELPER); //individuals that stay or disperse to this group become helpers
+            helper.setIndividualType(HELPER); //individuals that stay or disperse to this group become helpers
             i++;
         }
 
@@ -142,7 +142,7 @@ void Group::calculateCumulativeHelp() //Calculate accumulative help of all indiv
 
     //Level of help for helpers
     for (Individual &helper: helpers) {
-        assert(helper.getFishType() == HELPER);
+        assert(helper.getIndividualType() == HELPER);
         helper.calcHelp();
         helper.calcTaskSpecialization();
         helper.calculateRank();
@@ -280,7 +280,7 @@ void Group::newBreeder(vector<Individual> &floaters, int &newBreederFloater, int
                 breeder.setAgeBecomeBreeder(breeder.getAge());
                 breeder.setRankBecomeBreeder(breeder.getRank());
 
-                if ((*candidateIt)->getFishType() == FLOATER) //delete the ind from the vector floaters
+                if ((*candidateIt)->getIndividualType() == FLOATER) //delete the ind from the vector floaters
                 {
                     **candidateIt = floaters[floaters.size() - 1];
                     floaters.pop_back();
@@ -294,7 +294,7 @@ void Group::newBreeder(vector<Individual> &floaters, int &newBreederFloater, int
                     }
                 }
 
-                breeder.setFishType(BREEDER); //modify the class
+                breeder.setIndividualType(BREEDER); //modify the class
                 counting = candidates.size();//end loop
             } else
                 ++candidateIt, ++counting;
