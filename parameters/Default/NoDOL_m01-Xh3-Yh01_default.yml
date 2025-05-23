@@ -2,7 +2,7 @@
 REACTION_NORM_HELP: false    # Apply reaction norm to age for level of help?
 REACTION_NORM_DISPERSAL: false     # Apply reaction norm to age for dispersal?
 RN_DISPERSAL_RANK: false    # If reaction norm to dispersal true, TRUE: to rank, FALSE: to age
-REACTION_NORM_TASK: true # Apply reaction norm to age for the level of task specialization
+RN_TASK_RANK: true # Reaction norm of task to rank vs age
 NEED_DIVISION_LABOUR: false # If true, individuals in a group must split the type of help provided to have an optimum increase on fecundity, as there is need of both defence and feeding
 DIRECT_BROOD_CARE_ONLY: false      # Breeder does not receive help during the first breeding cycle after becoming new breeder
 NO_GROUP_AUGMENTATION: false
