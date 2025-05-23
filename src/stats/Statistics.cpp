@@ -72,7 +72,7 @@ void Statistics::calculateStatistics(const Population &populationObj) {
     alpha.addValues(individualsAll.get(ALPHA));
     alphaAge.addValues(individualsAll.get(ALPHA_AGE));
     beta.addValues(individualsAll.get(BETA));
-    betaAge.addValues(individualsAll.get(BETA_AGE));
+    betaRank.addValues(individualsAll.get(BETA_RANK));
     gamma.addValues(individualsAll.get(GAMMA));
     gammaRank.addValues(individualsAll.get(GAMMA_RANK));
 
@@ -222,7 +222,7 @@ void Statistics::printHeadersToConsole() {
     // column headings on screen
     cout << setw(6) << "gen" << setw(9) << "pop" << setw(9) << "deaths" << setw(9)
          << "float" << setw(9) << "group" << setw(9) << "maxGroup" << setw(9) << "rank" << setw(9) << "ageH" << setw(9)
-         << "alpha" << setw(9) << "alphaAge" << setw(9) << "beta" << setw(9) << "betaAge" << setw(9)
+         << "alpha" << setw(9) << "alphaAge" << setw(9) << "beta" << setw(9) << "betaRank" << setw(9)
          << "gamma" << setw(9) << "gammaRank" << setw(9)
          << "disper" << setw(9) << "help" << setw(9)  << "task" << setw(9) << "surv" << setw(9) << "relat" << endl;
 }
@@ -242,7 +242,7 @@ void Statistics::printToConsole(int generation, int deaths) {
               << setw(9) << setprecision(4) << alpha.calculateMean()
               << setw(9) << setprecision(4) << alphaAge.calculateMean()
               << setw(9) << setprecision(4) << beta.calculateMean()
-              << setw(9) << setprecision(4) << betaAge.calculateMean()
+              << setw(9) << setprecision(4) << betaRank.calculateMean()
               << setw(9) << setprecision(4) << gamma.calculateMean()
               << setw(9) << setprecision(4) << gammaRank.calculateMean()
               << setw(9) << setprecision(4) << dispersal.calculateMean()
@@ -263,7 +263,7 @@ void Statistics::printHeadersToFile() {
                                  << "Rank" << "\t" << "Age" << "\t" << "Age_H" << "\t" << "Age_F" << "\t"
                                  << "Age_B" << "\t" << "Rank_New_Breeder" << "\t" << "Age_New_Breeder" << "\t"
                                  << "meanAlpha" << "\t" << "meanAlphaAge" << "\t"
-                                 << "meanBeta" << "\t" << "meanBetaAge" << "\t"
+                                 << "meanBeta" << "\t" << "meanBetaRank" << "\t"
                                  << "meanGamma" << "\t" << "meanGammaRank" << "\t"
                                  << "meanDispersal" << "\t"
                                  << "meanHelp" << "\t" << "meanCumHelp0" << "\t" << "meanCumHelp1" << "\t"
@@ -273,7 +273,7 @@ void Statistics::printHeadersToFile() {
                                  << "SD_Rank" << "\t" << "SD_Age" << "\t" << "SD_Age_H" << "\t"
                                  << "SD_Age_F" << "\t" << "SD_Age_B" << "\t"
                                  << "SD_Alpha" << "\t" << "SD_AlphaAge" << "\t"
-                                 << "SD_Beta" << "\t" << "SD_BetaAge" << "\t"
+                                 << "SD_Beta" << "\t" << "SD_BetaRank" << "\t"
                                  << "SD_Gamma" << "\t" << "SD_GammaRank" << "\t"
                                  << "SD_Dispersal" << "\t"
                                  << "SD_Help" << "\t" << "SD_CumHelp0" << "\t" << "SD_CumHelp1" << "\t"
@@ -288,7 +288,7 @@ void Statistics::printHeadersToFile() {
     *parameters->getLastGenerationWriter() << "replica" << "\t" << "generation" << "\t" << "groupID"
                                            << "\t" << "type" << "\t" << "rank" << "\t" << "age" << "\t"
                                            << "alpha" << "\t" << "alphaAge" << "\t"
-                                           << "beta" << "\t" << "betaAge" << "\t"
+                                           << "beta" << "\t" << "betaRank" << "\t"
                                            << "gamma" << "\t" << "gammaRank" << "\t" << "drift"<< "\t"
                                            << "dispersal" << "\t" << "help" << "\t" << "task" << "\t" << "helpType" << "\t"
                                            << "survival" << endl;
@@ -314,7 +314,7 @@ void Statistics::printToFile(int replica, int generation, int deaths, int newBre
                                  << "\t" << setprecision(4) << alpha.calculateMean()
                                  << "\t" << setprecision(4) << alphaAge.calculateMean()
                                  << "\t" << setprecision(4) << beta.calculateMean()
-                                 << "\t" << setprecision(4) << betaAge.calculateMean()
+                                 << "\t" << setprecision(4) << betaRank.calculateMean()
                                  << "\t" << setprecision(4) << gamma.calculateMean()
                                  << "\t" << setprecision(4) << gammaRank.calculateMean()
                                  << "\t" << setprecision(4) << dispersal.calculateMean()
@@ -336,7 +336,7 @@ void Statistics::printToFile(int replica, int generation, int deaths, int newBre
                                  << "\t" << setprecision(4) << alpha.calculateSD()
                                  << "\t" << setprecision(4) << alphaAge.calculateSD()
                                  << "\t" << setprecision(4) << beta.calculateSD()
-                                 << "\t" << setprecision(4) << betaAge.calculateSD()
+                                 << "\t" << setprecision(4) << betaRank.calculateSD()
                                  << "\t" << setprecision(4) << gamma.calculateSD()
                                  << "\t" << setprecision(4) << gammaRank.calculateSD()
                                  << "\t" << setprecision(4) << dispersal.calculateSD()
@@ -396,7 +396,7 @@ void Statistics::printIndividual(Individual individual, int generation, int grou
                                            << "\t" << setprecision(4) << individual.getAlpha()
                                            << "\t" << setprecision(4) << individual.getAlphaAge()
                                            << "\t" << setprecision(4) << individual.getBeta()
-                                           << "\t" << setprecision(4) << individual.getBetaAge()
+                                           << "\t" << setprecision(4) << individual.getBetaRank()
                                            << "\t" << setprecision(4) << individual.getGamma()
                                            << "\t" << setprecision(4) << individual.getGammaRank()
                                            << "\t" << setprecision(4) << individual.getDrift()

@@ -13,7 +13,7 @@ Individual::Individual(Individual &individual, FishType fishType, int &generatio
     this->alpha = individual.alpha;
     this->alphaAge = individual.alphaAge;
     this->beta = individual.beta;
-    this->betaAge = individual.betaAge;
+    this->betaRank = individual.betaRank;
     this->gamma = individual.gamma;
     this->gammaRank = individual.gammaRank;
     this->drift = individual.getDrift();
@@ -36,7 +36,7 @@ Individual::Individual(FishType fishType) {
     this->alpha = param->getInitAlpha();
     this->alphaAge = param->getInitAlphaAge();
     this->beta = param->getInitBeta();
-    this->betaAge = param->getInitBetaAge();
+    this->betaRank = param->getInitBetaRank();
     this->gamma = param->getInitGamma();
     this->gammaRank = param->getInitGammaRank();
     this->drift = param->driftUniform(*param->getGenerator());
@@ -65,9 +65,9 @@ void Individual::calcDispersal() {
         this->dispersal = beta;
     } else {
         if (parameters->isRNDispersalRank()) {
-            this->dispersal = 1 / (1 + exp(betaAge * rank - beta));
+            this->dispersal = 1 / (1 + exp(betaRank * rank - beta));
         } else {
-            this->dispersal = 1 / (1 + exp(betaAge * age - beta));
+            this->dispersal = 1 / (1 + exp(betaRank * age - beta));
         }
     }
 
@@ -231,8 +231,8 @@ void Individual::mutate(int generation) // mutate genome of offspring
         }
     }
     if (parameters->isReactionNormDispersal()) {
-        if (parameters->uniform(rng) < parameters->getMutationBetaAge()) {
-            betaAge += NormalB(rng);
+        if (parameters->uniform(rng) < parameters->getMutationBetaRank()) {
+            betaRank += NormalB(rng);
         }
     }
 
@@ -288,8 +288,8 @@ double Individual::getBeta() const {
     return beta;
 }
 
-double Individual::getBetaAge() const {
-    return betaAge;
+double Individual::getBetaRank() const {
+    return betaRank;
 }
 
 double Individual::getGamma() const {
@@ -377,8 +377,8 @@ double Individual::get(Attribute type) const {
             return this->alphaAge;
         case BETA:
             return this->beta;
-        case BETA_AGE:
-            return this->betaAge;
+        case BETA_RANK:
+            return this->betaRank;
         case GAMMA:
             return this->gamma;
         case GAMMA_RANK:

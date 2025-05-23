@@ -52,9 +52,9 @@ Parameters::Parameters(const string &url) {
     this->MUTATION_ALPHA_AGE = config["MUTATION_ALPHA_AGE"].as<double>();
     this->STEP_ALPHA = config["STEP_ALPHA"].as<double>();
     this->INIT_BETA = config["INIT_BETA"].as<double>();
-    this->INIT_BETA_AGE = config["INIT_BETA_AGE"].as<double>();
+    this->INIT_BETA_RANK = config["INIT_BETA_RANK"].as<double>();
     this->MUTATION_BETA = config["MUTATION_BETA"].as<double>();
-    this->MUTATION_BETA_AGE = config["MUTATION_BETA_AGE"].as<double>();
+    this->MUTATION_BETA_RANK = config["MUTATION_BETA_RANK"].as<double>();
     this->STEP_BETA = config["STEP_BETA"].as<double>();
     this->INIT_GAMMA = config["INIT_GAMMA"].as<double>();
     this->INIT_GAMMA_RANK = config["INIT_GAMMA_RANK"].as<double>();
@@ -120,13 +120,13 @@ void Parameters::print(std::ofstream &outputStream) {
                  << "initAlpha:" << "\t" << this->getInitAlpha() << endl
                  << "initAlphaAge:" << "\t" << this->getInitAlphaAge() << endl
                  << "initBeta:" << "\t" << this->getInitBeta() << endl
-                 << "initBetaAge:" << "\t" << this->getInitBetaAge() << endl
+                 << "initBetaRank:" << "\t" << this->getInitBetaRank() << endl
                  << "initGamma:" << "\t" << this->getInitGamma() << endl
                  << "initGammaRank:" << "\t" << this->getInitGammaRank() << endl
                  << "mutAlpha:" << "\t" << this->getMutationAlpha() << endl
                  << "mutAlphaAge:" << "\t" << this->getMutationAlphaAge() << endl
                  << "mutBeta:" << "\t" << this->getMutationBeta() << endl
-                 << "mutBetaAge:" << "\t" << this->getMutationBetaAge() << endl
+                 << "mutBetaRank:" << "\t" << this->getMutationBetaRank() << endl
                  << "mutGamma:" << "\t" << this->getMutationGamma() << endl
                  << "mutGammaRank:" << "\t" << this->getMutationGammaRank() << endl
                  << "mutDrift:" << "\t" << this->getMutationDrift() << endl
@@ -281,16 +281,16 @@ double Parameters::getInitBeta() const {
     return INIT_BETA;
 }
 
-double Parameters::getInitBetaAge() const {
-    return INIT_BETA_AGE;
+double Parameters::getInitBetaRank() const {
+    return INIT_BETA_RANK;
 }
 
 double Parameters::getMutationBeta() const {
     return MUTATION_BETA;
 }
 
-double Parameters::getMutationBetaAge() const {
-    return MUTATION_BETA_AGE;
+double Parameters::getMutationBetaRank() const {
+    return MUTATION_BETA_RANK;
 }
 
 double Parameters::getStepBeta() const {
