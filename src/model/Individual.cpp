@@ -102,12 +102,10 @@ void Individual::calcHelp() {
 
 void Individual::calcTaskSpecialization() {
     if (individualType == HELPER) {
-        if (!parameters->isReactionNormTask()) {
-            task = gamma;
-            if (task < 0) { task = 0;
-            } else if (task > 1) {task = 1;}
-        } else {
+        if (parameters->isRNTaskRank()) {
             task = 1 / (1 + exp(gammaRank * rank - gamma));
+        } else {
+            task = 1 / (1 + exp(gammaRank * age - gamma));
         }
 
         if (parameters->uniform(*parameters->getGenerator()) > task){
@@ -239,12 +237,12 @@ void Individual::mutate(int generation) // mutate genome of offspring
     // Gamma
     if (parameters->uniform(rng) < parameters->getMutationGamma()) {
         gamma += NormalG(rng);
-        if (!parameters->isReactionNormTask()) {
+        if (!parameters->isRNTaskRank()) {
             if (gamma < 0) { gamma = 0; }
             else if (gamma > 1) { gamma = 1; }
         }
     }
-    if (parameters->isReactionNormTask()) {
+    if (parameters->isRNTaskRank()) {
         if (parameters->uniform(rng) < parameters->getMutationGammaRank()) {
             gammaRank += NormalG(rng);
         }
