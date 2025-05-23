@@ -64,7 +64,11 @@ void Individual::calcDispersal() {
     if (!parameters->isReactionNormDispersal()) {
         this->dispersal = beta;
     } else {
-        this->dispersal = 1 / (1 + exp(betaAge * age - beta));
+        if (parameters->isRNDispersalRank()) {
+            this->dispersal = 1 / (1 + exp(betaAge * rank - beta));
+        } else {
+            this->dispersal = 1 / (1 + exp(betaAge * age - beta));
+        }
     }
 
     if (parameters->isNoGroupAugmentation() && parameters->isNoRelatedness() && age == 1) { //this removes further any effect of group augmentation vs group benefits since help does not increase recruitment
