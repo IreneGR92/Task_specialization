@@ -24,7 +24,7 @@ private:
 ///#Run parameters
     bool REACTION_NORM_HELP;    //Apply reaction norm to age for dispersal?
     bool REACTION_NORM_DISPERSAL; // Apply reaction norm to age for dispersal?
-    bool EVOLUTION_TASK_AFTER_HELP; // help evolves only after the evolution of dispersal?
+    bool RN_DISPERSAL_RANK; // If reaction norm to dispersal true, TRUE: to rank, FALSE: to age
     bool REACTION_NORM_TASK; // If true: help reduces the rank and likelihood to inherit breeding position, if false: help reduces survival
     bool NEED_DIVISION_LABOUR; //If true, individuals in a group must split the type of help provided to have an optimum increase on fecundity, as there is need of both defence and feeding
     bool DIRECT_BROOD_CARE_ONLY; // right after an individual becomes breeder, it does not receive help for the first breeding cycle
@@ -116,7 +116,7 @@ public:
 
     bool isReactionNormDispersal() const;
 
-    bool isEvolutionTaskAfterHelp() const;
+    bool isRNDispersalRank() const;
 
     bool isReactionNormTask() const;
 

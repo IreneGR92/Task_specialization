@@ -54,7 +54,7 @@ void Individual::initializeIndividual(FishType type) {
     this->inherit = true;
     this->age = 1;
     this->ageBecomeBreeder = Parameters::NO_VALUE;
-    this->rank = Parameters::NO_VALUE;
+    this->rank = age;
     this->rankBecomeBreeder = Parameters::NO_VALUE;
 }
 
@@ -233,18 +233,7 @@ void Individual::mutate(int generation) // mutate genome of offspring
     }
 
     // Gamma
-    double mutationGamma;
-    double mutationGammaRank;
-
-    if (parameters->isEvolutionTaskAfterHelp() && generation < 25000) {
-        mutationGamma = 0;
-        mutationGammaRank = 0;
-    } else {
-        mutationGamma = parameters->getMutationGamma();
-        mutationGammaRank = parameters->getMutationGammaRank();
-    }
-
-    if (parameters->uniform(rng) < mutationGamma) {
+    if (parameters->uniform(rng) < parameters->getMutationGamma()) {
         gamma += NormalG(rng);
         if (!parameters->isReactionNormTask()) {
             if (gamma < 0) { gamma = 0; }
@@ -252,7 +241,7 @@ void Individual::mutate(int generation) // mutate genome of offspring
         }
     }
     if (parameters->isReactionNormTask()) {
-        if (parameters->uniform(rng) < mutationGammaRank) {
+        if (parameters->uniform(rng) < parameters->getMutationGammaRank()) {
             gammaRank += NormalG(rng);
         }
     }

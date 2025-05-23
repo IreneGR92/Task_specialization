@@ -19,7 +19,7 @@ Parameters::Parameters(const string &url) {
     this->name = this->getName(url);
     this->REACTION_NORM_HELP = config["REACTION_NORM_HELP"].as<bool>();
     this->REACTION_NORM_DISPERSAL = config["REACTION_NORM_DISPERSAL"].as<bool>();
-    this->EVOLUTION_TASK_AFTER_HELP = config["EVOLUTION_TASK_AFTER_HELP"].as<bool>();
+    this->RN_DISPERSAL_RANK = config["RN_DISPERSAL_RANK"].as<bool>();
     this->DIRECT_BROOD_CARE_ONLY = config["DIRECT_BROOD_CARE_ONLY"].as<bool>();
     this->NO_GROUP_AUGMENTATION = config["NO_GROUP_AUGMENTATION"].as<bool>();
     this->NO_RELATEDNESS = config["NO_RELATEDNESS"].as<bool>();
@@ -91,7 +91,7 @@ void Parameters::print(std::ofstream &outputStream) {
 
                  << "Reaction_norm_help?:" << "\t" << this->isReactionNormHelp() << endl
                  << "Reaction_norm_dispersal?:" << "\t" << this->isReactionNormDispersal() << endl
-                 << "Evolution_task_after_help?:" << "\t" << this->isEvolutionTaskAfterHelp() << endl
+                 << "RN_DISPERSAL_RANK?:" << "\t" << this->isRNDispersalRank() << endl
                  << "Reaction_norm_task?:" << "\t" << this->isReactionNormTask() << endl
                  << "Need_division_labour?:" << "\t" << this->isNeedDivisionLabour() << endl
                  << "Direct_brood_care_only?:" << "\t" << this->isDirectBroodCareOnly() << endl
@@ -149,8 +149,8 @@ bool Parameters::isReactionNormDispersal() const {
     return REACTION_NORM_DISPERSAL;
 }
 
-bool Parameters::isEvolutionTaskAfterHelp() const {
-    return EVOLUTION_TASK_AFTER_HELP;
+bool Parameters::isRNDispersalRank() const {
+    return RN_DISPERSAL_RANK;
 }
 
 bool Parameters::isReactionNormTask() const {
