@@ -68,7 +68,7 @@ void Population::disperse(int generation) {
         }
     }
     // Assign helpers to random group while maintaining the same group size
-    if (parameters->isNoRelatedness() && !allNoRelatedHelpers.empty() && !parameters->isNoRelatednessRandomGroup()) {
+    if (!allNoRelatedHelpers.empty() && !parameters->isNoRelatednessRandomGroup()) {
 
         int selectGroupID;
         int timeout = 0;
@@ -95,6 +95,7 @@ void Population::disperse(int generation) {
             }
         }
         // Assign helpers to completely random groups, group size not maintained
+        //TODO might contain a bug  parameters->isNoRelatedness()
     } else if (parameters->isNoRelatedness() && !allNoRelatedHelpers.empty() && parameters->isNoRelatednessRandomGroup()) {
         int timeout = 0;
         while (!allNoRelatedHelpers.empty()) {
