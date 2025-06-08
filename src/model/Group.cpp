@@ -87,8 +87,8 @@ std::vector<Individual> Group::noRelatedHelpersToReassign(int index) {
 }
 
 
-int Group::countHelpersAgeOne() {
-    int count = 0;
+double Group::countHelpersAgeOne() {
+    double count = 0;
     for (Individual &helper: helpers) {
         if (helper.getAge() == 1) {
             count++;
@@ -101,26 +101,35 @@ int Group::calculateHelpersToReassign() {
 
     int helpersToReassign = 0;
 
-    // No relatedness implementation
+    // No relatedness implementation // noRelatetness = true
     if (parameters->isNoRelatedness()) {
         helpersToReassign = countHelpersAgeOne();
 
 
-    // Reduced relatedness by a third implementation ///TODO: check this function, 0 is possible?
+        // Reduced relatedness by a third implementation ///TODO: check this function, 0 is possible?
+        // reduceedRelatedness = 3 and noRelatedness = false
     } else if (parameters->getReducedRelatedness() == 3) {
 
         helpersToReassign = round(countHelpersAgeOne() / 3);
 
 
-    // Reduced relatedness by half implementation
+        // Reduced relatedness by half implementation
+        // reduceedRelatedness = 2 and noRelatedness = false
     } else if (parameters->getReducedRelatedness() == 2) {
-        double value = static_cast<double>(countHelpersAgeOne()) / 2;
-        if (value != floor(value)) { // Check if the value is not an integer
-            if (parameters->uniform(*parameters->getGenerator()) < 0.5) {
-                helpersToReassign = floor(value);
+        double value = countHelpersAgeOne() / 2;
+
+
+        if (value != std::floor(value)) { // Check if the value is not an integer and not 0.5
+            if (std::fmod(value, 0.5) == 0) {
+                if (parameters->uniform(*parameters->getGenerator()) < 0.5) {
+                    helpersToReassign = floor(value);
+                } else {
+                    helpersToReassign = ceil(value);
+                }
             } else {
-                helpersToReassign = ceil(value);
+                helpersToReassign = round(value);
             }
+
         } else {
             helpersToReassign = value;// If the value is an integer, just assign it normally
         }
@@ -128,9 +137,6 @@ int Group::calculateHelpersToReassign() {
 
     return helpersToReassign;
 }
-
-
-
 
 
 /*  CALCULATE CUMULATIVE LEVEL OF HELP */
@@ -147,7 +153,7 @@ void Group::calculateCumulativeHelp() //Calculate accumulative help of all indiv
         helper.calcTaskSpecialization();
         helper.calculateRank();
 
-        if (helper.getHelpType() == 0){
+        if (helper.getHelpType() == 0) {
             cumHelpType0 += helper.getHelp();
         } else {
             cumHelpType1 += helper.getHelp();
@@ -165,7 +171,7 @@ void Group::survivalGroup() {
     }
 
     //Calculate the survival of the breeder
-        this->breeder.calculateSurvival(groupSize);
+    this->breeder.calculateSurvival(groupSize);
 }
 
 void Group::mortalityGroup(int &deaths) {
@@ -259,48 +265,47 @@ void Group::newBreeder(vector<Individual> &floaters, int &newBreederFloater, int
         }
     }
     //  Choose new breeder
-        //    Choose breeder with higher likelihood for the highest rank
-        for (candidateIt = candidates.begin(); candidateIt < candidates.end(); ++candidateIt) {
-            sumRank += (*candidateIt)->getRank(); //add all the ranks from the vector candidates
-        }
+    //    Choose breeder with higher likelihood for the highest rank
+    for (candidateIt = candidates.begin(); candidateIt < candidates.end(); ++candidateIt) {
+        sumRank += (*candidateIt)->getRank(); //add all the ranks from the vector candidates
+    }
 
-        for (candidateIt = candidates.begin(); candidateIt < candidates.end(); ++candidateIt) {
-            position.push_back(static_cast<double>((*candidateIt)->getRank()) / static_cast<double>(sumRank) +
-                               currentPosition); //creates a vector with proportional segments to the rank of each individual
-            currentPosition = position[position.size() - 1];
-        }
+    for (candidateIt = candidates.begin(); candidateIt < candidates.end(); ++candidateIt) {
+        position.push_back(static_cast<double>((*candidateIt)->getRank()) / static_cast<double>(sumRank) +
+                           currentPosition); //creates a vector with proportional segments to the rank of each individual
+        currentPosition = position[position.size() - 1];
+    }
 
-        candidateIt = candidates.begin();
-        int counting = 0;
-        while (counting < candidates.size()) {
-            if (RandP < position[candidateIt - candidates.begin()]) //to access the same ind in the candidates vector
+    candidateIt = candidates.begin();
+    int counting = 0;
+    while (counting < candidates.size()) {
+        if (RandP < position[candidateIt - candidates.begin()]) //to access the same ind in the candidates vector
+        {
+            breeder = **candidateIt; //substitute the previous dead breeder
+            breederAlive = true;
+            breeder.setAgeBecomeBreeder(breeder.getAge());
+            breeder.setRankBecomeBreeder(breeder.getRank());
+
+            if ((*candidateIt)->getIndividualType() == FLOATER) //delete the ind from the vector floaters
             {
-                breeder = **candidateIt; //substitute the previous dead breeder
-                breederAlive = true;
-                breeder.setAgeBecomeBreeder(breeder.getAge());
-                breeder.setRankBecomeBreeder(breeder.getRank());
-
-                if ((*candidateIt)->getIndividualType() == FLOATER) //delete the ind from the vector floaters
-                {
-                    **candidateIt = floaters[floaters.size() - 1];
-                    floaters.pop_back();
-                    newBreederFloater++;
-                } else {
-                    **candidateIt = helpers[helpers.size() - 1]; //delete the ind from the vector helpers
-                    helpers.pop_back();
-                    newBreederHelper++;
-                    if ((*candidateIt)->isInherit() == 1) {
-                        inheritance++;                    //calculates how many individuals that become breeders are natal to the territory
-                    }
+                **candidateIt = floaters[floaters.size() - 1];
+                floaters.pop_back();
+                newBreederFloater++;
+            } else {
+                **candidateIt = helpers[helpers.size() - 1]; //delete the ind from the vector helpers
+                helpers.pop_back();
+                newBreederHelper++;
+                if ((*candidateIt)->isInherit() == 1) {
+                    inheritance++;                    //calculates how many individuals that become breeders are natal to the territory
                 }
+            }
 
-                breeder.setIndividualType(BREEDER); //modify the class
-                counting = candidates.size();//end loop
-            } else
-                ++candidateIt, ++counting;
-        }
+            breeder.setIndividualType(BREEDER); //modify the class
+            counting = candidates.size();//end loop
+        } else
+            ++candidateIt, ++counting;
+    }
 }
-
 
 
 /* INCREASE AGE OF ALL GROUP INDIVIDUALS*/
@@ -323,7 +328,7 @@ void Group::reproduce(int generation) { // populate offspring generation
     double allowedCumHelp0 = cumHelpType0;
     double allowedCumHelp1 = cumHelpType1;
 
-    if (parameters->isNeedDivisionLabour()){
+    if (parameters->isNeedDivisionLabour()) {
         if (cumHelpType0 > maxCumHelp) {
             allowedCumHelp0 = maxCumHelp;
         }
@@ -346,7 +351,8 @@ void Group::reproduce(int generation) { // populate offspring generation
         for (int i = 0; i < realFecundity; i++) { //number of offspring dependent on real fecundity
             Individual offspring = Individual(breeder, HELPER, generation);
 
-            helpers.emplace_back(offspring); //create a new individual as helper in the group. Call construct to assign the mother genetic values to the offspring, construct calls Mutate function.
+            helpers.emplace_back(
+                    offspring); //create a new individual as helper in the group. Call construct to assign the mother genetic values to the offspring, construct calls Mutate function.
         }
     }
 }

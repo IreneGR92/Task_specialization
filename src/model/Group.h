@@ -65,7 +65,7 @@ public:
 
     std::vector<Individual> noRelatedHelpersToReassign(int index);
 
-    int countHelpersAgeOne();
+    double countHelpersAgeOne();
 
     int calculateHelpersToReassign();
 };
