@@ -22,8 +22,11 @@ void Population::reset() {
     this->newBreederFloater = 0;
 }
 
-Population::Population() {
-    for (int i = 0; i < Parameters::instance()->getMaxColonies(); i++) {
+Population::Population(const std::shared_ptr<Parameters> &parameters) : parameters(parameters), deaths(0),
+                                                                        newBreederFloater(0),
+                                                                        newBreederHelper(0),
+                                                                        inheritance(0) {
+    for (int i = 0; i < parameters->getMaxColonies(); i++) {
         Group group;
         this->groups.emplace_back(group);
     }

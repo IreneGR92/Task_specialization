@@ -37,6 +37,8 @@ include_directories(${VERSION_HEADER_DIR})
 set(SOURCE_FILES
         src/main/util/Config.h
         src/main/util/Config.cpp
+        src/main/util/Parameters.h
+        src/main/util/Parameters.cpp
         src/main/loadbalancing/TaskQueue.h
         src/main/loadbalancing/TaskQueue.cpp
         src/main/loadbalancing/ThreadPool.h
@@ -48,8 +50,6 @@ set(SOURCE_FILES
         src/main/main.cpp
         src/main/SimulationRunner.h
         src/main/SimulationRunner.cpp
-        src/main/Parameters.h
-        src/main/Parameters.cpp
         src/main/Simulation.cpp
         src/main/Simulation.h
         src/main/model/Attribute.h

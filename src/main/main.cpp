@@ -19,7 +19,7 @@
 /*HEADER FILES*/
 
 #include <iostream>
-#include "Parameters.h"
+#include "util/Parameters.h"
 #include "stats/Statistics.h"
 
 

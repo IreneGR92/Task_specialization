@@ -28,6 +28,8 @@ public:
     //to know if the new breeder was a helper or a floater
 
 public:
+    explicit Population(const std::shared_ptr<Parameters>& parameters);
+
     const std::vector<Group> &getGroups() const;
 
     const IndividualVector &getFloaters() const;

@@ -1,5 +1,5 @@
 #include <thread>
-#include "../SimulationRunner.h"
+#include "SimulationRunner.h"
 #include "util/FilePrinter.h"
 #include "spdlog/spdlog.h"
 #include "yaml-cpp/yaml.h"

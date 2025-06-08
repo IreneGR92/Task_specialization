@@ -11,7 +11,7 @@
 
 class Statistics {
 
-    Parameters *parameters;
+    std::shared_ptr<Parameters> parameters; ///< The parameters of the simulation.
 
     //Population parameters and Statistics
 

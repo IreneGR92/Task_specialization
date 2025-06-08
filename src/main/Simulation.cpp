@@ -7,14 +7,10 @@
 #include <vector>
 
 
-Simulation::Simulation(const int replica)
-        : replica(replica),
-          population(),
-          parameters(Parameters::instance()) {
-}
 
 
-void Simulation::run() {
+
+std::unique_ptr<ResultCache> Simulation::run() {
 
     // Output file
     auto *statistics = new Statistics();
@@ -26,7 +22,7 @@ void Simulation::run() {
 
     delete statistics;
 
-    for (generation = 1; generation <= Parameters::instance()->getNumGenerations(); generation++) {
+    for (generation = 1; generation <= parameters->getNumGenerations(); generation++) {
         statistics = new Statistics();
         population.reset();
 
@@ -71,9 +67,6 @@ void Simulation::run() {
     }
 }
 
-const int Simulation::getReplica() const {
-    return replica;
-}
 
 int Simulation::getGeneration() const {
     return generation;

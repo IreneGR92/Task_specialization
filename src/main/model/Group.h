@@ -2,16 +2,16 @@
 #ifndef GROUP_AUGMENTATION_GROUP_H
 #define GROUP_AUGMENTATION_GROUP_H
 
-
+#include <memory>
 #include "Individual.h"
-#include "../Parameters.h"
+#include "../util/Parameters.h"
 #include "container/IndividualVector.h"
 
 
 class Group {
 
 private:
-    Parameters *parameters;
+    std::shared_ptr<Parameters> parameters;
     double cumHelpType0;
     double cumHelpType1;
     bool breederAlive;      // for the breeder: 1 alive, 0 dead
@@ -25,7 +25,7 @@ private:
 
 public:
 
-    explicit Group();
+    explicit Group(const std::shared_ptr<Parameters>& parameters);
 
     void calculateGroupSize();
 

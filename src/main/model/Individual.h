@@ -4,13 +4,14 @@
 
 
 #include <unordered_map>
+#include <memory>
 #include "FishType.h"
-#include "../Parameters.h"
+#include "../util/Parameters.h"
 #include "Attribute.h"
 
 class Individual {
 
-    Parameters *parameters;
+    std::shared_ptr<Parameters> parameters;
 
     double alpha;
     double alphaAge;
@@ -38,13 +39,11 @@ class Individual {
     void initializeIndividual(FishType type);
 
     int groupIndex;
-public:
-    int getGroupIndex() const;
 
 public:
     Individual(Individual &individual, FishType fishType, int &generation);
 
-    explicit Individual(FishType fishType);
+    Individual(FishType fishType, const std::shared_ptr<Parameters> &parameters);
 
 
     //Functions inside Individual
@@ -88,9 +87,13 @@ public:
     void setFishType(FishType type);
 
     int getAge() const;
+
     void setAgeBecomeBreeder(int ageBecomeBreeder_);
 
     double getRank() const;
+
+    int getGroupIndex() const;
+
     void setRankBecomeBreeder(double rankBecomeBreeder_);
 
     void increaseAge(bool alive); //for the breeder
