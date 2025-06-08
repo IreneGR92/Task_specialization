@@ -200,22 +200,11 @@ void Individual::mutate(int generation) // mutate genome of offspring
     std::normal_distribution<double> NormalD(0, parameters->getStepDrift());
 
     // Alpha
-    double mutationAlpha;
-    double mutationAlphaAge;
-
-    if (parameters->isNoRelatedness() && parameters->isNoRelatednessRandomGroup()) {
-        mutationAlpha = 0;
-        mutationAlphaAge = 0;
-    } else {
-        mutationAlpha = parameters->getMutationAlpha();
-        mutationAlphaAge = parameters->getMutationAlphaAge();
-    }
-
-    if (parameters->uniform(rng) < mutationAlpha) {
+    if (parameters->uniform(rng) < parameters->getMutationAlpha()) {
         alpha += NormalA(rng);
     }
     if (parameters->isReactionNormHelp()) {
-        if (parameters->uniform(rng) < mutationAlphaAge) {
+        if (parameters->uniform(rng) < parameters->getMutationAlphaAge()) {
             alphaAge += NormalA(rng);
         }
     }

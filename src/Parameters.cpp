@@ -23,7 +23,6 @@ Parameters::Parameters(const string &url) {
     this->DIRECT_BROOD_CARE_ONLY = config["DIRECT_BROOD_CARE_ONLY"].as<bool>();
     this->NO_GROUP_AUGMENTATION = config["NO_GROUP_AUGMENTATION"].as<bool>();
     this->NO_RELATEDNESS = config["NO_RELATEDNESS"].as<bool>();
-    this->NO_RELATEDNESS_RANDOM_GROUP = config["NO_RELATEDNESS_RANDOM_GROUP"].as<bool>();
     this->AGE_NO_INFLUENCE_INHERITANCE = config["AGE_NO_INFLUENCE_INHERITANCE"].as<bool>();
     this->RN_TASK_RANK = config["RN_TASK_RANK"].as<bool>();
     this->NEED_DIVISION_LABOUR = config["NEED_DIVISION_LABOUR"].as<bool>();
@@ -97,7 +96,6 @@ void Parameters::print(std::ofstream &outputStream) {
                  << "Direct_brood_care_only?:" << "\t" << this->isDirectBroodCareOnly() << endl
                  << "No_group_augmentation?:" << "\t" << this->isNoGroupAugmentation() << endl
                  << "No_effect_relatedness?:" << "\t" << this->isNoRelatedness() << endl
-                 << "Non-related_helpers_random_group?:" << "\t" << this->isNoRelatednessRandomGroup() << endl
                  << "No_effect_age_inheritance?:" << "\t" << this->isAgeNoInfluenceInheritance() << endl
                  << "Initial_population:" << "\t" << this->getMaxColonies() * (this->getInitNumHelpers() + 1) << endl
                  << "Number_of_colonies:" << "\t" << this->getMaxColonies() << endl
@@ -171,10 +169,6 @@ bool Parameters::isNoGroupAugmentation() const {
 
 bool Parameters::isNoRelatedness() const {
     return NO_RELATEDNESS;
-}
-
-bool Parameters::isNoRelatednessRandomGroup() const {
-    return NO_RELATEDNESS_RANDOM_GROUP;
 }
 
 bool Parameters::isAgeNoInfluenceInheritance() const {

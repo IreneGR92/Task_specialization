@@ -6,9 +6,7 @@ RN_TASK_RANK: true # Reaction norm of task to rank vs age
 NEED_DIVISION_LABOUR: true # If true, individuals in a group must split the type of help provided to have an optimum increase on fecundity, as there is need of both defence and feeding
 DIRECT_BROOD_CARE_ONLY: false      # Breeder does not receive help during the first breeding cycle after becoming new breeder
 NO_GROUP_AUGMENTATION: false
-NO_RELATEDNESS: false     # Apply implementation to remove the effect of relatedness?
-NO_RELATEDNESS_RANDOM_GROUP: false # In the non relatedness implementation, put non-related helpers to random groups without maintaining group size, removing kin selection from evolution of philopatry
-AGE_NO_INFLUENCE_INHERITANCE: false # Age no influence of who inherits territory, randomly sampled from candidate (helpers + sample floaters)
+NO_RELATEDNESS: false     # Apply implementation to remove the effect of relatedness?AGE_NO_INFLUENCE_INHERITANCE: false # Age no influence of who inherits territory, randomly sampled from candidate (helpers + sample floaters)
 
 MAX_COLONIES: 500     # max number of groups or colonies
 NUM_GENERATIONS: 200000
