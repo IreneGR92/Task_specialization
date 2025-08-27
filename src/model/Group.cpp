@@ -315,15 +315,10 @@ void Group::increaseAge() {
 void Group::reproduce(int generation) { // populate offspring generation
     //Calculate fecundity
 
-    double maxCumHelp = (cumHelpType0 + cumHelpType1) / 2 + parameters->getKm();
-    double minCumHelp = (cumHelpType0 + cumHelpType1) / 2 - parameters->getKm();
-    if (minCumHelp < 0) {
-        minCumHelp = 0;
-    }
-
     double totalCumHelp = cumHelpType0 + cumHelpType1;
 
     if (parameters->isNeedDivisionLabour()){
+        double maxCumHelp = (cumHelpType0 + cumHelpType1) / 2 + parameters->getKm();
         double allowedCumHelp0 = cumHelpType0;
         double allowedCumHelp1 = cumHelpType1;
         if (cumHelpType0 > maxCumHelp) {
@@ -335,8 +330,11 @@ void Group::reproduce(int generation) { // populate offspring generation
         totalCumHelp = allowedCumHelp0 + allowedCumHelp1;
 
     } else if (parameters->isObligatoryDivisionLabour()){
-        if (cumHelpType0 < minCumHelp ||  cumHelpType1 < minCumHelp) {
-            totalCumHelp = 0;
+        double maxVal = std::max(cumHelpType0, cumHelpType1);
+        double absDiff = std::abs(cumHelpType0 - cumHelpType1);
+
+        if (absDiff > parameters->getKm() * maxVal) {
+            totalCumHelp = 0.0; // if the values of help for each task are different by more than a percentage, help does not increase fecundity
         }
     }
 
