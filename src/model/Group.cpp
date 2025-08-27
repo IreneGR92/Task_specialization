@@ -190,10 +190,6 @@ void Group::mortalityGroup(int &deaths) {
     if (breederAlive && parameters->uniform(*parameters->getGenerator()) > breeder.getSurvival()) {
         breederAlive = false;
         deaths++;
-        if (parameters->isDirectBroodCareOnly()) {
-            cumHelpType0 = 0; //removes help for new breeder
-            cumHelpType1 = 0;
-        }
     }
     this->calculateGroupSize(); //update group size after mortality
 }
@@ -320,21 +316,29 @@ void Group::reproduce(int generation) { // populate offspring generation
     //Calculate fecundity
 
     double maxCumHelp = (cumHelpType0 + cumHelpType1) / 2 + parameters->getKm();
-    double allowedCumHelp0 = cumHelpType0;
-    double allowedCumHelp1 = cumHelpType1;
+    double minCumHelp = (cumHelpType0 + cumHelpType1) / 2 - parameters->getKm();
+    if (minCumHelp < 0) {
+        minCumHelp = 0;
+    }
+
+    double totalCumHelp = cumHelpType0 + cumHelpType1;
 
     if (parameters->isNeedDivisionLabour()){
+        double allowedCumHelp0 = cumHelpType0;
+        double allowedCumHelp1 = cumHelpType1;
         if (cumHelpType0 > maxCumHelp) {
             allowedCumHelp0 = maxCumHelp;
         }
-
         if (cumHelpType1 > maxCumHelp) {
             allowedCumHelp1 = maxCumHelp;
         }
+        totalCumHelp = allowedCumHelp0 + allowedCumHelp1;
+
+    } else if (parameters->isObligatoryDivisionLabour()){
+        if (cumHelpType0 < minCumHelp ||  cumHelpType1 < minCumHelp) {
+            totalCumHelp = 0;
+        }
     }
-
-    double totalCumHelp = allowedCumHelp0 + allowedCumHelp1;
-
 
     fecundity = parameters->getK0() + parameters->getKh() * totalCumHelp / (1 + totalCumHelp);
 
