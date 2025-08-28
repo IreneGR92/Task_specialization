@@ -88,8 +88,10 @@ void Statistics::calculateStatistics(const Population &populationObj) {
     ageBecomeBreeder.addValues(breeders.get(AGE_BECOME_BREEDER));
 
     help.addValues(helpers.get(HELP));
-
     task.addValues(helpers.get(TASK));
+
+    //fecundity.addValues(breeders.get(FECUNDITY)); // TODO: print values of fecundity and real fecundity
+    //realFecundity.addValues(breeders.get(REAL_FECUNDITY));
 
     dispersal.addValues(helpers.get(DISPERSAL));
     dispersal.addValues(populationObj.getFloaters().get(DISPERSAL));
@@ -105,7 +107,6 @@ void Statistics::calculateStatistics(const Population &populationObj) {
     groupSize.addValues(groupSizes);
     cumulativeHelpType0.addValues(cumHelpsType0);
     cumulativeHelpType1.addValues(cumHelpsType1);
-
 
 
     //Correlations in different levels
