@@ -78,12 +78,14 @@ void Statistics::calculateStatistics(const Population &populationObj) {
 
     //Phenotypes
     rank.addValues(helpers.get(RANK));
+    rankHelpers.addValues(helpers.get(RANK));
+    rankFloaters.addValues(populationObj.getFloaters().get(RANK));
+    rankBecomeBreeder.addValues(breeders.get(RANK_BECOME_BREEDER));
     age.addValues(individualsAll.get(AGE));
     ageHelpers.addValues(helpers.get(AGE));
     ageBreeders.addValues(breeders.get(AGE));
     ageFloaters.addValues(populationObj.getFloaters().get(AGE));
     ageBecomeBreeder.addValues(breeders.get(AGE_BECOME_BREEDER));
-    rankBecomeBreeder.addValues(breeders.get(RANK_BECOME_BREEDER));
 
     help.addValues(helpers.get(HELP));
 
@@ -260,8 +262,8 @@ void Statistics::printHeadersToFile() {
     // column headings in output file main
     *parameters->getMainWriter() << "Replica" << "\t" << "Generation" << "\t" << "Population" << "\t"
                                  << "Deaths" << "\t" << "Floaters" << "\t" << "Group_size" << "\t"
-                                 << "Rank" << "\t" << "Age" << "\t" << "Age_H" << "\t" << "Age_F" << "\t"
-                                 << "Age_B" << "\t" << "Rank_New_Breeder" << "\t" << "Age_New_Breeder" << "\t"
+                                 << "Rank" << "\t" << "Rank_H" << "\t" << "Rank_F" << "\t" << "Rank_New_Breeder" << "\t"
+                                 << "Age" << "\t" << "Age_H" << "\t" << "Age_F" << "\t" << "Age_B" << "\t" << "Age_New_Breeder" << "\t"
                                  << "meanAlpha" << "\t" << "meanAlphaAge" << "\t"
                                  << "meanBeta" << "\t" << "meanBetaRank" << "\t"
                                  << "meanGamma" << "\t" << "meanGammaRank" << "\t"
@@ -270,8 +272,8 @@ void Statistics::printHeadersToFile() {
                                  << "meanTask" << "\t"
                                  << "meanSurvival" << "\t" << "meanSurvival_H" << "\t" << "meanSurvival_F" << "\t"
                                  << "meanSurvival_B" << "\t" << "Relatedness" << "\t"<< "SD_GroupSize" << "\t"
-                                 << "SD_Rank" << "\t" << "SD_Age" << "\t" << "SD_Age_H" << "\t"
-                                 << "SD_Age_F" << "\t" << "SD_Age_B" << "\t"
+                                 << "SD_Rank" << "\t" << "SD_Rank_H" << "\t" << "SD_Rank_F" << "\t"
+                                 << "SD_Age" << "\t" << "SD_Age_H" << "\t" << "SD_Age_F" << "\t" << "SD_Age_B" << "\t"
                                  << "SD_Alpha" << "\t" << "SD_AlphaAge" << "\t"
                                  << "SD_Beta" << "\t" << "SD_BetaRank" << "\t"
                                  << "SD_Gamma" << "\t" << "SD_GammaRank" << "\t"
@@ -305,11 +307,13 @@ void Statistics::printToFile(int replica, int generation, int deaths, int newBre
                                  << "\t" << totalFloaters
                                  << "\t" << setprecision(4) << groupSize.calculateMean()
                                  << "\t" << setprecision(4) << rank.calculateMean()
+                                 << "\t" << setprecision(4) << rankHelpers.calculateMean()
+                                 << "\t" << setprecision(4) << rankFloaters.calculateMean()
+                                 << "\t" << setprecision(4) << rankBecomeBreeder.calculateMean()
                                  << "\t" << setprecision(4) << age.calculateMean()
                                  << "\t" << setprecision(4) << ageHelpers.calculateMean()
                                  << "\t" << setprecision(4) << ageFloaters.calculateMean()
                                  << "\t" << setprecision(4) << ageBreeders.calculateMean()
-                                 << "\t" << setprecision(4) << rankBecomeBreeder.calculateMean()
                                  << "\t" << setprecision(4) << ageBecomeBreeder.calculateMean()
                                  << "\t" << setprecision(4) << alpha.calculateMean()
                                  << "\t" << setprecision(4) << alphaAge.calculateMean()
@@ -329,6 +333,8 @@ void Statistics::printToFile(int replica, int generation, int deaths, int newBre
                                  << "\t" << setprecision(4) << relatedness
                                  << "\t" << setprecision(4) << groupSize.calculateSD()
                                  << "\t" << setprecision(4) << rank.calculateSD()
+                                 << "\t" << setprecision(4) << rankHelpers.calculateSD()
+                                 << "\t" << setprecision(4) << rankFloaters.calculateSD()
                                  << "\t" << setprecision(4) << age.calculateSD()
                                  << "\t" << setprecision(4) << ageHelpers.calculateSD()
                                  << "\t" << setprecision(4) << ageFloaters.calculateSD()
