@@ -1,4 +1,3 @@
-
 #ifndef GROUP_AUGMENTATION_GROUP_H
 #define GROUP_AUGMENTATION_GROUP_H
 
@@ -9,12 +8,10 @@
 
 
 class Group {
-
-private:
-    Parameters *parameters;
+    Parameters* parameters;
     double cumHelpType0;
     double cumHelpType1;
-    bool breederAlive;      // for the breeder: 1 alive, 0 dead
+    bool breederAlive; // for the breeder: 1 alive, 0 dead
     int groupSize;
     double fecundity;
     int realFecundity;
@@ -24,7 +21,6 @@ private:
     IndividualVector helpers;
 
 public:
-
     explicit Group();
 
     void calculateGroupSize();
@@ -33,19 +29,19 @@ public:
 
     void calculateCumulativeHelp();
 
-    const IndividualVector &getHelpers() const;
+    const IndividualVector& getHelpers() const;
 
     void survivalGroup();
 
-    void mortalityGroup(int &deaths);
+    void mortalityGroup(int& deaths);
 
-    void newBreeder(std::vector<Individual> &floaters, int &newBreederFloater, int &newBreederHelper, int &inheritance);
+    void newBreeder(std::vector<Individual>& floaters, int& newBreederFloater, int& newBreederHelper, int& inheritance);
 
     void increaseAge();
 
     void reproduce(int generation);
 
-    const Individual &getBreeder() const;
+    const Individual& getBreeder() const;
 
     int getGroupSize() const;
 
@@ -55,9 +51,13 @@ public:
 
     double getCumHelpType1() const;
 
+    int getRealFecundity() const;
+
+    double getFecundity() const;
+
     bool hasHelpers() const;
 
-    void addHelper(const Individual &helper);
+    void addHelper(const Individual& helper);
 
     std::vector<double> get(Attribute attribute) const;
 

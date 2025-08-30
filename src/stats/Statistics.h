@@ -1,4 +1,3 @@
-
 #ifndef GROUP_AUGMENTATION_STATISTICS_H
 #define GROUP_AUGMENTATION_STATISTICS_H
 
@@ -9,9 +8,9 @@
 #include "StatisticalFormulas.h"
 #include "../model/container/IndividualVector.h"
 
-class Statistics {
-
-    Parameters *parameters;
+class Statistics
+{
+    Parameters* parameters;
 
     //Population parameters and Statistics
 
@@ -35,6 +34,8 @@ class Statistics {
 
     StatisticalFormulas dispersal, dispersalHelpers;
 
+    StatisticalFormulas fecundity, realFecundity;
+
     StatisticalFormulas task;
 
     StatisticalFormulas survival, survivalBreeders, survivalFloaters, survivalHelpers;
@@ -46,11 +47,11 @@ class Statistics {
 public:
     Statistics();
 
-    void calculateStatistics(const Population &populationObj);
+    void calculateStatistics(const Population& populationObj);
 
-    double calculateRelatedness(const std::vector<Group> &groups);
+    double calculateRelatedness(const std::vector<Group>& groups);
 
-    double correlationHelpGroupSize(const std::vector<Group> &groups);
+    double correlationHelpGroupSize(const std::vector<Group>& groups);
 
     void printHeadersToConsole();
 
@@ -61,8 +62,7 @@ public:
     void printToFile(int replica, int generation, int deaths, int newBreederFloater,
                      int newBreederHelper, int inheritance);
 
-    void printToFileLastGeneration(Simulation *simulation, const Population &populationObj);
-
+    void printToFileLastGeneration(Simulation* simulation, const Population& populationObj);
 };
 
 
