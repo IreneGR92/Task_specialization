@@ -1,46 +1,78 @@
 #!/bin/bash
 
 
+git pull
+
+# Function to generate a unique build folder name
+generate_unique_folder() {
+  base_name="build"
+  folder_name=$base_name
+  counter=1
+
+  while [ -d "../$folder_name" ]; do
+    folder_name="${base_name}_${counter}"
+    ((counter++))
+  done
+
+  echo $folder_name
+}
+
+# Generate a unique build folder name
+build_folder=$(generate_unique_folder)
+
+# Create the new build folder
+mkdir -p "../$build_folder"
+
+# Navigate to the build folder and build the App target
+cd "../$build_folder"
+cmake ..  # Configure the build system
+make App  # Build the App target
+
+# Return to the script directory
+cd -
+
+
+
 declare -a arr=(
+  "test.yml"
+  #"DOL-NoOblig_m01-Xh3-Yh01_Xn0.yml"
+  #"DOL-NoOblig_m01-Xh5-Yh01_Xn0.yml"
+  #"DOL-NoOblig_m01-Xh7-Yh01_Xn0.yml"
+  #"DOL-NoOblig_m02-Xh3-Yh01_Xn0.yml"
+  #"DOL-NoOblig_m02-Xh5-Yh01_Xn0.yml"
+  #"DOL-NoOblig_m02-Xh7-Yh01_Xn0.yml"
+  #"DOL-NoOblig_m03-Xh3-Yh01_Xn0.yml"
+  #"DOL-NoOblig_m03-Xh5-Yh01_Xn0.yml"
+  #"DOL-NoOblig_m03-Xh7-Yh01_Xn0.yml"
+  #
+  #"DOL-NoOblig_m01-Xh3-Yh01_default.yml"
+  #"DOL-NoOblig_m01-Xh5-Yh01_default.yml"
+  #"DOL-NoOblig_m01-Xh7-Yh01_default.yml"
+  #"DOL-NoOblig_m02-Xh3-Yh01_default.yml"
+  #"DOL-NoOblig_m02-Xh5-Yh01_default.yml"
+  #"DOL-NoOblig_m02-Xh7-Yh01_default.yml"
+  #"DOL-NoOblig_m03-Xh3-Yh01_default.yml"
+  #"DOL-NoOblig_m03-Xh5-Yh01_default.yml"
+  #"DOL-NoOblig_m03-Xh7-Yh01_default.yml"
+  #
+  #"DOL-NoOblig_m01-Xh3-Yh01_NoRelatedness.yml"
+  #"DOL-NoOblig_m01-Xh5-Yh01_NoRelatedness.yml"
+  #"DOL-NoOblig_m01-Xh7-Yh01_NoRelatedness.yml"
+  #"DOL-NoOblig_m02-Xh3-Yh01_NoRelatedness.yml"
+  #"DOL-NoOblig_m02-Xh5-Yh01_NoRelatedness.yml"
+  #"DOL-NoOblig_m02-Xh7-Yh01_NoRelatedness.yml"
+  #"DOL-NoOblig_m03-Xh3-Yh01_NoRelatedness.yml"
+  #"DOL-NoOblig_m03-Xh5-Yh01_NoRelatedness.yml"
+  #"DOL-NoOblig_m03-Xh7-Yh01_NoRelatedness.yml"
 
-"test.yml"
-
-#"DOL-NoOblig_m01-Xh3-Yh01_Xn0.yml"
-#"DOL-NoOblig_m01-Xh5-Yh01_Xn0.yml"
-#"DOL-NoOblig_m01-Xh7-Yh01_Xn0.yml"
-#"DOL-NoOblig_m02-Xh3-Yh01_Xn0.yml"
-#"DOL-NoOblig_m02-Xh5-Yh01_Xn0.yml"
-#"DOL-NoOblig_m02-Xh7-Yh01_Xn0.yml"
-#"DOL-NoOblig_m03-Xh3-Yh01_Xn0.yml"
-#"DOL-NoOblig_m03-Xh5-Yh01_Xn0.yml"
-#"DOL-NoOblig_m03-Xh7-Yh01_Xn0.yml"
-#
-#"DOL-NoOblig_m01-Xh3-Yh01_default.yml"
-#"DOL-NoOblig_m01-Xh5-Yh01_default.yml"
-#"DOL-NoOblig_m01-Xh7-Yh01_default.yml"
-#"DOL-NoOblig_m02-Xh3-Yh01_default.yml"
-#"DOL-NoOblig_m02-Xh5-Yh01_default.yml"
-#"DOL-NoOblig_m02-Xh7-Yh01_default.yml"
-#"DOL-NoOblig_m03-Xh3-Yh01_default.yml"
-#"DOL-NoOblig_m03-Xh5-Yh01_default.yml"
-#"DOL-NoOblig_m03-Xh7-Yh01_default.yml"
-#
-#"DOL-NoOblig_m01-Xh3-Yh01_NoRelatedness.yml"
-#"DOL-NoOblig_m01-Xh5-Yh01_NoRelatedness.yml"
-#"DOL-NoOblig_m01-Xh7-Yh01_NoRelatedness.yml"
-#"DOL-NoOblig_m02-Xh3-Yh01_NoRelatedness.yml"
-#"DOL-NoOblig_m02-Xh5-Yh01_NoRelatedness.yml"
-#"DOL-NoOblig_m02-Xh7-Yh01_NoRelatedness.yml"
-#"DOL-NoOblig_m03-Xh3-Yh01_NoRelatedness.yml"
-#"DOL-NoOblig_m03-Xh5-Yh01_NoRelatedness.yml"
-#"DOL-NoOblig_m03-Xh7-Yh01_NoRelatedness.yml"
-
+  # Add other .yml files here
 )
 
 for i in "${arr[@]}"; do
   echo $i
-  screen -d -S ${i} -m ./build.sh ${i}
-
+  screen -d -S ${i} -m ./build.sh ${i} $build_folder
 done
 
 screen -list
+
+echo "Build executed in folder: $build_folder"
