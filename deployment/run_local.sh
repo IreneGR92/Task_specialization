@@ -1,8 +1,6 @@
 #!/bin/bash
 
 
-git pull
-
 # Function to generate a unique build folder name
 generate_unique_folder() {
   base_name="build"
