@@ -9,9 +9,9 @@ NO_GROUP_AUGMENTATION: false
 NO_RELATEDNESS: false     # Apply implementation to remove the effect of relatedness?
 AGE_NO_INFLUENCE_INHERITANCE: false # Age no influence of who inherits territory, randomly sampled from candidate (helpers + sample floaters)
 
-MAX_COLONIES: 500     # max number of groups or colonies
+MAX_COLONIES: 5000     # max number of groups or colonies
 NUM_GENERATIONS: 200000
-MAX_NUM_REPLICATES: 1
+MAX_NUM_REPLICATES: 20
 SKIP: 1000   # interval between print-outs
 
 #Fix values
@@ -23,18 +23,18 @@ FIXED_GROUP_SIZE: 3		# in implementation "no group augmentation", virtual group 
 REDUCED_RELATEDNESS: 0  # proportion of philopatric offspring reallocated to reduce within group relatedness in an asexual population (ONLY VALUES 2 OR 3)
 
 # Modifiers in survival
-m: 0.1    # mortality due to predation
+m: 0.3    # mortality due to predation
 n: 1      # multiplier to m for lower mortality of floaters (only in the new logistic survival formula)
 X0: 1.5   # base survival without the effect of help or group size
-Xsh: 3    # cost of help in survival
-Xsn: 3    # benefit of group size in survival
+Xsh: 7    # cost of help in survival
+Xsn: 0    # benefit of group size in survival
 
 # Costs of help
 Yh: 0.1   # cost of help on rank
 
 #Modifiers in fecundity
 K0: 1    # min fecundity, fecundity when no help provided.
-Kh: 1    # benefit of cumHelp in the fecundity
+Kh: 10    # benefit of cumHelp in the fecundity
 Km: 0.1  # reduces the need for division of labour
 
 
@@ -50,7 +50,7 @@ STEP_ALPHA: 0.04            # mutation step size in alpha for level of help
 
 
 #For dispersal
-INIT_BETA: 1.0            # bigger values higher dispersal
+INIT_BETA: 0.5            # bigger values higher dispersal
 INIT_BETA_RANK: 0.0            # if 0 age has no effect
 
 MUTATION_BETA: 0.05            # mutation rate for the propensity to disperse
@@ -70,3 +70,4 @@ STEP_GAMMA: 0.04
 #For relatedness
 MUTATION_DRIFT: 0.05            # mutation rate in the neutral selected value to track level of relatedness
 STEP_DRIFT: 0.04            # mutation step size in the neutral genetic value to track level of relatedness
+
