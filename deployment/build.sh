@@ -4,7 +4,7 @@
 name=${PWD##*/}
 echo $1
 
-parameter_name = ${1%.yml}
+parameter_name=${1%.yml}
 
 build_folder=$2  # Get the build folder name from the second argument
 
