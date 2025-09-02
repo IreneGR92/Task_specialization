@@ -10,6 +10,6 @@ cd "../$build_folder"
 
 ./App "../parameters/$1"
 
-mv *$1* /home/odin/TresoritDrive/Results/Task_specialization_results
+mv *"${1%.yml}"* /home/odin/TresoritDrive/Results/Task_specialization_results
 
 echo "done"
