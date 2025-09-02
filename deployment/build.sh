@@ -7,6 +7,6 @@ echo $@
 cd ../build/
 ./App "../parameters/$@"
 
+mv *$@* /home/odin/TresoritDrive/Results/Task_specialization_results
 
-sleep 10
 echo "done"
