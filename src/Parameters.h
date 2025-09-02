@@ -27,7 +27,7 @@ private:
     bool RN_DISPERSAL_RANK; // If reaction norm to dispersal true, TRUE: to rank, FALSE: to age
     bool RN_TASK_RANK; // Reaction norm of task to rank vs age
     bool NEED_DIVISION_LABOUR; //If true, individuals in a group must split the type of help provided to have an optimum increase on fecundity, as there is need of both defence and feeding
-    bool DIRECT_BROOD_CARE_ONLY; // right after an individual becomes breeder, it does not receive help for the first breeding cycle
+    bool OBLIGATORY_DIVISION_LABOUR; // If helpers do not evolve DoL as a group, help has no effect in fecundity.
     bool NO_GROUP_AUGMENTATION;
     bool NO_RELATEDNESS;       //Apply implementation to remove the effect of relatedness?
     bool AGE_NO_INFLUENCE_INHERITANCE; // Age no influence of who inherits territory, randomly sampled from candidate (helpers + sample floaters)
@@ -57,7 +57,7 @@ private:
 //Modifiers in fecundity
     double K0;    // min fecundity, fecundity when no help provided.
     double Kh;    // benefit of cumHelp in the fecundity
-    double Km;    // reduced the need for division of labour, the higher the value the less need for DOL
+    double Km;    // reduces the need for division of labour
 
 //Genetic values
 
@@ -121,7 +121,7 @@ public:
 
     bool isNeedDivisionLabour() const;
 
-    bool isDirectBroodCareOnly() const;
+    bool isObligatoryDivisionLabour() const;
 
     bool isNoGroupAugmentation() const;
 

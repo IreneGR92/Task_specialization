@@ -1,17 +1,18 @@
 #Run parameters
-REACTION_NORM_HELP: false    # Apply reaction norm to age for level of help?
-REACTION_NORM_DISPERSAL: true     # Apply reaction norm to age for dispersal?
-RN_DISPERSAL_RANK: true    # If reaction norm to dispersal true, TRUE: to rank, FALSE: to age
-RN_TASK_RANK: true # Reaction norm of task to rank vs age
-NEED_DIVISION_LABOUR: true # If true, individuals in a group must split the type of help provided to have an optimum increase on fecundity, as there is need of both defence and feeding
-DIRECT_BROOD_CARE_ONLY: false      # Breeder does not receive help during the first breeding cycle after becoming new breeder
+REACTION_NORM_HELP: false           # Apply reaction norm to age for level of help?
+REACTION_NORM_DISPERSAL: false       # Apply reaction norm to age for dispersal?
+RN_DISPERSAL_RANK: true             # If reaction norm to dispersal true, TRUE: to rank, FALSE: to age
+RN_TASK_RANK: true                  # Reaction norm of task to rank vs age
+NEED_DIVISION_LABOUR: false          # If true, individuals in a group must split the type of help provided to have an optimum increase on fecundity, as there is need of both defence and feeding
+OBLIGATORY_DIVISION_LABOUR: true   # If helpers do not evolve DoL as a group, help has no effect in fecundity)
 NO_GROUP_AUGMENTATION: false
-NO_RELATEDNESS: false     # Apply implementation to remove the effect of relatedness?AGE_NO_INFLUENCE_INHERITANCE: false # Age no influence of who inherits territory, randomly sampled from candidate (helpers + sample floaters)
+NO_RELATEDNESS: false               # Apply implementation to remove the effect of relatedness?
+AGE_NO_INFLUENCE_INHERITANCE: false # Age no influence of who inherits territory, randomly sampled from candidate (helpers + sample floaters)
 
 MAX_COLONIES: 500     # max number of groups or colonies
-NUM_GENERATIONS: 200000
-MAX_NUM_REPLICATES: 1
-SKIP: 1000   # interval between print-outs
+NUM_GENERATIONS: 400000
+MAX_NUM_REPLICATES: 3
+SKIP: 10000   # interval between print-outs
 
 #Fix values
 INIT_NUM_HELPERS: 3     # initial number of helpers per group
@@ -22,7 +23,7 @@ FIXED_GROUP_SIZE: 3		# in implementation "no group augmentation", virtual group 
 REDUCED_RELATEDNESS: 0  # proportion of philopatric offspring reallocated to reduce within group relatedness in an asexual population (ONLY VALUES 2 OR 3)
 
 # Modifiers in survival
-m: 0.2    # mortality due to predation
+m: 0.1    # mortality due to predation
 n: 1      # multiplier to m for lower mortality of floaters (only in the new logistic survival formula)
 X0: 1.5   # base survival without the effect of help or group size
 Xsh: 3    # cost of help in survival
@@ -33,8 +34,8 @@ Yh: 0.1   # cost of help on rank
 
 #Modifiers in fecundity
 K0: 1    # min fecundity, fecundity when no help provided.
-Kh: 1    # benefit of cumHelp in the fecundity
-Km: 0.1  # reduced the need for division of labour, the higher the value the less need for DOL
+Kh: 10    # benefit of cumHelp in the fecundity
+Km: 0.5  # reduces the need for division of labour, as percentage in obligatory DOL implementation
 
 
 #Genetic values
@@ -48,7 +49,7 @@ MUTATION_ALPHA_AGE: 0.05
 STEP_ALPHA: 0.04            # mutation step size in alpha for level of help
 
 #For dispersal
-INIT_BETA: 1.0            # bigger values higher dispersal
+INIT_BETA: 0.5            # bigger values higher dispersal
 INIT_BETA_RANK: 0.0            # if 0 age has no effect
 
 MUTATION_BETA: 0.05            # mutation rate for the propensity to disperse

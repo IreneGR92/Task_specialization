@@ -20,7 +20,7 @@ Parameters::Parameters(const string &url) {
     this->REACTION_NORM_HELP = config["REACTION_NORM_HELP"].as<bool>();
     this->REACTION_NORM_DISPERSAL = config["REACTION_NORM_DISPERSAL"].as<bool>();
     this->RN_DISPERSAL_RANK = config["RN_DISPERSAL_RANK"].as<bool>();
-    this->DIRECT_BROOD_CARE_ONLY = config["DIRECT_BROOD_CARE_ONLY"].as<bool>();
+    this->OBLIGATORY_DIVISION_LABOUR = config["OBLIGATORY_DIVISION_LABOUR"].as<bool>();
     this->NO_GROUP_AUGMENTATION = config["NO_GROUP_AUGMENTATION"].as<bool>();
     this->NO_RELATEDNESS = config["NO_RELATEDNESS"].as<bool>();
     this->AGE_NO_INFLUENCE_INHERITANCE = config["AGE_NO_INFLUENCE_INHERITANCE"].as<bool>();
@@ -93,7 +93,7 @@ void Parameters::print(std::ofstream &outputStream) {
                  << "RN_dispersal_rank?:" << "\t" << this->isRNDispersalRank() << endl
                  << "RN_task_rank?:" << "\t" << this->isRNTaskRank() << endl
                  << "Need_division_labour?:" << "\t" << this->isNeedDivisionLabour() << endl
-                 << "Direct_brood_care_only?:" << "\t" << this->isDirectBroodCareOnly() << endl
+                 << "Obligatory_division_labour?:" << "\t" << this->isObligatoryDivisionLabour() << endl
                  << "No_group_augmentation?:" << "\t" << this->isNoGroupAugmentation() << endl
                  << "No_effect_relatedness?:" << "\t" << this->isNoRelatedness() << endl
                  << "No_effect_age_inheritance?:" << "\t" << this->isAgeNoInfluenceInheritance() << endl
@@ -159,8 +159,8 @@ bool Parameters::isNeedDivisionLabour() const {
     return NEED_DIVISION_LABOUR;
 }
 
-bool Parameters::isDirectBroodCareOnly() const {
-    return DIRECT_BROOD_CARE_ONLY;
+bool Parameters::isObligatoryDivisionLabour() const {
+    return OBLIGATORY_DIVISION_LABOUR;
 }
 
 bool Parameters::isNoGroupAugmentation() const {

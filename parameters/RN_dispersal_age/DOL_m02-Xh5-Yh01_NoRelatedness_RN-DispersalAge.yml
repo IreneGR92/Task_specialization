@@ -4,7 +4,7 @@ REACTION_NORM_DISPERSAL: true     # Apply reaction norm to age for dispersal?
 RN_DISPERSAL_RANK: false    # If reaction norm to dispersal true, TRUE: to rank, FALSE: to age
 RN_TASK_RANK: true # Reaction norm of task to rank vs age
 NEED_DIVISION_LABOUR: true # If true, individuals in a group must split the type of help provided to have an optimum increase on fecundity, as there is need of both defence and feeding
-DIRECT_BROOD_CARE_ONLY: false      # Breeder does not receive help during the first breeding cycle after becoming new breeder
+OBLIGATORY_DIVISION_LABOUR: false      # If helpers do not evolve DoL as a group, help has no effect in fecundity
 NO_GROUP_AUGMENTATION: false
 NO_RELATEDNESS: true     # Apply implementation to remove the effect of relatedness?
 AGE_NO_INFLUENCE_INHERITANCE: false # Age no influence of who inherits territory, randomly sampled from candidate (helpers + sample floaters)
@@ -35,7 +35,7 @@ Yh: 0.1   # cost of help on rank
 #Modifiers in fecundity
 K0: 1    # min fecundity, fecundity when no help provided.
 Kh: 1    # benefit of cumHelp in the fecundity
-Km: 0.1  # reduced the need for division of labour, the higher the value the less need for DOL
+Km: 0.1  # reduces the need for division of labour
 
 
 #Genetic values
