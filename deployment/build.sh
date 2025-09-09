@@ -2,11 +2,16 @@
 
 
 name=${PWD##*/}
-echo $@
+echo $1
 
-cd ../build/
-./App "../parameters/$@"
+parameter_name=${1%.yml}
 
-mv *$@* /home/odin/TresoritDrive/Results/Task_specialization_results
+build_folder=$2  # Get the build folder name from the second argument
+
+cd "../$build_folder"
+
+./App "../parameters/$1"
+
+mv *"$parameter_name"* /home/odin/TresoritDrive/Results/Task_specialization_results
 
 echo "done"
