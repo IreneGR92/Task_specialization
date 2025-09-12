@@ -12,6 +12,7 @@ cd "../$build_folder"
 
 ./App "../parameters/$1"
 
-mv *"$parameter_name"* /home/odin/TresoritDrive/Results/Task_specialization_results
+cp last_generation_parameters_"$parameter_name".txt /home/odin/TresoritDrive/Results/Task_specialization_results
+cp main_parameters_"$parameter_name".txt /home/odin/TresoritDrive/Results/Task_specialization_results
 
 echo "done"
