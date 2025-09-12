@@ -7,7 +7,7 @@ generate_unique_folder() {
   folder_name=$base_name
   counter=1
 
-  while [ -d "_bias1._bias1./$folder_name" ]; do
+  while [ -d "../$folder_name" ]; do
     folder_name="${base_name}_${counter}"
     ((counter++))
   done
@@ -19,16 +19,15 @@ generate_unique_folder() {
 build_folder=$(generate_unique_folder)
 
 # Create the new build folder
-mkdir -p "_bias1._bias1./$build_folder"
+mkdir -p "../$build_folder"
 
 # Navigate to the build folder and build the App target
-cd "_bias1._bias1./$build_folder"
-cmake _bias1._bias1.  # Configure the build system
+cd "../$build_folder"
+cmake ..  # Configure the build system
 make App  # Build the App target
 
 # Return to the script directory
 cd -
-
 
 
 declare -a arr=(
@@ -131,7 +130,7 @@ declare -a arr=(
 
 for i in "${arr[@]}"; do
   echo $i
-  screen -d -S ${i} -m _bias1./build_bias1.sh ${i} $build_folder
+  screen -d -S ${i} -m ./build.sh ${i} $build_folder
 done
 
 screen -list
