@@ -1,7 +1,7 @@
 #Run parameters
 REACTION_NORM_HELP: false    # Apply reaction norm to age for level of help?
 REACTION_NORM_DISPERSAL: false     # Apply reaction norm to age for dispersal?
-# If reaction norm to dispersal true, TRUE: to rank, FALSE: to age: false    # If reaction norm to dispersal true, TRUE: to rank, FALSE: to age
+RN_DISPERSAL_RANK: true # If reaction norm to dispersal true, TRUE: to rank, FALSE: to age: false    # If reaction norm to dispersal true, TRUE: to rank, FALSE: to age
 RN_TASK_RANK: true # Reaction norm of task to rank vs age
 NEED_DIVISION_LABOUR: true # If true, individuals in a group must split the type of help provided to have an optimum increase on fecundity, as there is need of both defence and feeding
 OBLIGATORY_DIVISION_LABOUR: false      # If helpers do not evolve DoL as a group, help has no effect in fecundity

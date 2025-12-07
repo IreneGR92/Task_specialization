@@ -32,37 +32,11 @@ cd -
 
 declare -a arr=(
 
-"DOL_m01-Xh1-Xn0.yml"
-"DOL_m01-Xh1-Xn1_default.yml"
-"DOL_m01-Xh1-Xn1_NoRelatedness.yml"
-"DOL_m02-Xh1-Xn0.yml"
-"DOL_m02-Xh1-Xn1_default.yml"
-"DOL_m02-Xh1-Xn1_NoRelatedness.yml"
-"DOL_m03-Xh1-Xn0.yml"
 "DOL_m03-Xh1-Xn1_default.yml"
-"DOL_m03-Xh1-Xn1_NoRelatedness.yml"
-"NoDOL_m01-Xh1-Xn0.yml"
-"NoDOL_m01-Xh1-Xn1_default.yml"
-"NoDOL_m01-Xh1-Xn1_NoRelatedness.yml"
-"NoDOL_m02-Xh1-Xn0.yml"
-"NoDOL_m02-Xh1-Xn1_default.yml"
-"NoDOL_m02-Xh1-Xn1_NoRelatedness.yml"
-"NoDOL_m03-Xh1-Xn0.yml"
-"NoDOL_m03-Xh1-Xn1_default.yml"
-"NoDOL_m03-Xh1-Xn1_NoRelatedness.yml"
-
-"DOL_m01-Xh1-Xn3_default.yml"
-"DOL_m01-Xh1-Xn3_NoRelatedness.yml"
-"DOL_m02-Xh1-Xn3_default.yml"
-"DOL_m02-Xh1-Xn3_NoRelatedness.yml"
 "DOL_m03-Xh1-Xn3_default.yml"
-"DOL_m03-Xh1-Xn3_NoRelatedness.yml"
-"NoDOL_m01-Xh1-Xn3_default.yml"
-"NoDOL_m01-Xh1-Xn3_NoRelatedness.yml"
-"NoDOL_m02-Xh1-Xn3_default.yml"
-"NoDOL_m02-Xh1-Xn3_NoRelatedness.yml"
-"NoDOL_m03-Xh1-Xn3_default.yml"
-"NoDOL_m03-Xh1-Xn3_NoRelatedness.yml"
+"DOL_m03-Xh5-Xn1_default.yml"
+"DOL_m03-Xh5-Yh1_default.yml"
+"DOL_m03-Xh5-Yh01_default.yml"
 
 )
 
