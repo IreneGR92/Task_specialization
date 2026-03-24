@@ -19,13 +19,12 @@ Parameters::Parameters(const string &url) {
     this->name = this->getName(url);
     this->REACTION_NORM_HELP = config["REACTION_NORM_HELP"].as<bool>();
     this->REACTION_NORM_DISPERSAL = config["REACTION_NORM_DISPERSAL"].as<bool>();
-    this->EVOLUTION_TASK_AFTER_HELP = config["EVOLUTION_TASK_AFTER_HELP"].as<bool>();
-    this->DIRECT_BROOD_CARE_ONLY = config["DIRECT_BROOD_CARE_ONLY"].as<bool>();
+    this->RN_DISPERSAL_RANK = config["RN_DISPERSAL_RANK"].as<bool>();
+    this->OBLIGATORY_DIVISION_LABOUR = config["OBLIGATORY_DIVISION_LABOUR"].as<bool>();
     this->NO_GROUP_AUGMENTATION = config["NO_GROUP_AUGMENTATION"].as<bool>();
     this->NO_RELATEDNESS = config["NO_RELATEDNESS"].as<bool>();
-    this->NO_RELATEDNESS_RANDOM_GROUP = config["NO_RELATEDNESS_RANDOM_GROUP"].as<bool>();
     this->AGE_NO_INFLUENCE_INHERITANCE = config["AGE_NO_INFLUENCE_INHERITANCE"].as<bool>();
-    this->REACTION_NORM_TASK = config["REACTION_NORM_TASK"].as<bool>();
+    this->RN_TASK_RANK = config["RN_TASK_RANK"].as<bool>();
     this->NEED_DIVISION_LABOUR = config["NEED_DIVISION_LABOUR"].as<bool>();
     this->MAX_COLONIES = config["MAX_COLONIES"].as<int>();
     this->NUM_GENERATIONS = config["NUM_GENERATIONS"].as<int>();
@@ -36,6 +35,7 @@ Parameters::Parameters(const string &url) {
     this->MIN_AGE_BECOME_BREEDER = config["MIN_AGE_BECOME_BREEDER"].as<int>();
     this->FIXED_IND_QUALITY = config["FIXED_IND_QUALITY"].as<int>();
     this->FIXED_GROUP_SIZE = config["FIXED_GROUP_SIZE"].as<double>();
+    this->REDUCED_RELATEDNESS = config["REDUCED_RELATEDNESS"].as<int>();
     this->m = config["m"].as<double>();
     this->n = config["n"].as<double>();
     this->X0 = config["X0"].as<double>();
@@ -51,9 +51,9 @@ Parameters::Parameters(const string &url) {
     this->MUTATION_ALPHA_AGE = config["MUTATION_ALPHA_AGE"].as<double>();
     this->STEP_ALPHA = config["STEP_ALPHA"].as<double>();
     this->INIT_BETA = config["INIT_BETA"].as<double>();
-    this->INIT_BETA_AGE = config["INIT_BETA_AGE"].as<double>();
+    this->INIT_BETA_RANK = config["INIT_BETA_RANK"].as<double>();
     this->MUTATION_BETA = config["MUTATION_BETA"].as<double>();
-    this->MUTATION_BETA_AGE = config["MUTATION_BETA_AGE"].as<double>();
+    this->MUTATION_BETA_RANK = config["MUTATION_BETA_RANK"].as<double>();
     this->STEP_BETA = config["STEP_BETA"].as<double>();
     this->INIT_GAMMA = config["INIT_GAMMA"].as<double>();
     this->INIT_GAMMA_RANK = config["INIT_GAMMA_RANK"].as<double>();
@@ -69,7 +69,7 @@ Parameters::Parameters(const string &url) {
     this->mainWriter = new std::ofstream("main_" + this->name + ".txt");
     this->lastGenerationWriter = new std::ofstream("last_generation_" + this->name + ".txt");
 
-    const int seed = 0;
+    const int seed = 2;
     this->generator = new std::default_random_engine(seed);
 }
 
@@ -90,13 +90,12 @@ void Parameters::print(std::ofstream &outputStream) {
 
                  << "Reaction_norm_help?:" << "\t" << this->isReactionNormHelp() << endl
                  << "Reaction_norm_dispersal?:" << "\t" << this->isReactionNormDispersal() << endl
-                 << "Evolution_task_after_help?:" << "\t" << this->isEvolutionTaskAfterHelp() << endl
-                 << "Reaction_norm_task?:" << "\t" << this->isReactionNormTask() << endl
+                 << "RN_dispersal_rank?:" << "\t" << this->isRNDispersalRank() << endl
+                 << "RN_task_rank?:" << "\t" << this->isRNTaskRank() << endl
                  << "Need_division_labour?:" << "\t" << this->isNeedDivisionLabour() << endl
-                 << "Direct_brood_care_only?:" << "\t" << this->isDirectBroodCareOnly() << endl
+                 << "Obligatory_division_labour?:" << "\t" << this->isObligatoryDivisionLabour() << endl
                  << "No_group_augmentation?:" << "\t" << this->isNoGroupAugmentation() << endl
                  << "No_effect_relatedness?:" << "\t" << this->isNoRelatedness() << endl
-                 << "Non-related_helpers_random_group?:" << "\t" << this->isNoRelatednessRandomGroup() << endl
                  << "No_effect_age_inheritance?:" << "\t" << this->isAgeNoInfluenceInheritance() << endl
                  << "Initial_population:" << "\t" << this->getMaxColonies() * (this->getInitNumHelpers() + 1) << endl
                  << "Number_of_colonies:" << "\t" << this->getMaxColonies() << endl
@@ -105,6 +104,7 @@ void Parameters::print(std::ofstream &outputStream) {
                  << "Min_age_become_breeder:" << "\t" << this->getMinAgeBecomeBreeder() << endl
                  << "Fixed_ind_quality:" << "\t" << this->getFixedIndQuality() << endl
                  << "Fixed_group_size:" << "\t" << this->getFixedGroupSize() << endl
+                 << "Reduced_relatedness:" << "\t" << this->getReducedRelatedness() << endl
                  << "Bias_float_breeder:" << "\t" << this->getBiasFloatBreeder() << endl
                  << "m(Overall_mortality):" << "\t" << this->getM() << endl
                  << "n(Mortality_dispersal):" << "\t" << this->getN() << endl
@@ -118,13 +118,13 @@ void Parameters::print(std::ofstream &outputStream) {
                  << "initAlpha:" << "\t" << this->getInitAlpha() << endl
                  << "initAlphaAge:" << "\t" << this->getInitAlphaAge() << endl
                  << "initBeta:" << "\t" << this->getInitBeta() << endl
-                 << "initBetaAge:" << "\t" << this->getInitBetaAge() << endl
+                 << "initBetaRank:" << "\t" << this->getInitBetaRank() << endl
                  << "initGamma:" << "\t" << this->getInitGamma() << endl
                  << "initGammaRank:" << "\t" << this->getInitGammaRank() << endl
                  << "mutAlpha:" << "\t" << this->getMutationAlpha() << endl
                  << "mutAlphaAge:" << "\t" << this->getMutationAlphaAge() << endl
                  << "mutBeta:" << "\t" << this->getMutationBeta() << endl
-                 << "mutBetaAge:" << "\t" << this->getMutationBetaAge() << endl
+                 << "mutBetaRank:" << "\t" << this->getMutationBetaRank() << endl
                  << "mutGamma:" << "\t" << this->getMutationGamma() << endl
                  << "mutGammaRank:" << "\t" << this->getMutationGammaRank() << endl
                  << "mutDrift:" << "\t" << this->getMutationDrift() << endl
@@ -147,20 +147,20 @@ bool Parameters::isReactionNormDispersal() const {
     return REACTION_NORM_DISPERSAL;
 }
 
-bool Parameters::isEvolutionTaskAfterHelp() const {
-    return EVOLUTION_TASK_AFTER_HELP;
+bool Parameters::isRNDispersalRank() const {
+    return RN_DISPERSAL_RANK;
 }
 
-bool Parameters::isReactionNormTask() const {
-    return REACTION_NORM_TASK;
+bool Parameters::isRNTaskRank() const {
+    return RN_TASK_RANK;
 }
 
 bool Parameters::isNeedDivisionLabour() const {
     return NEED_DIVISION_LABOUR;
 }
 
-bool Parameters::isDirectBroodCareOnly() const {
-    return DIRECT_BROOD_CARE_ONLY;
+bool Parameters::isObligatoryDivisionLabour() const {
+    return OBLIGATORY_DIVISION_LABOUR;
 }
 
 bool Parameters::isNoGroupAugmentation() const {
@@ -169,10 +169,6 @@ bool Parameters::isNoGroupAugmentation() const {
 
 bool Parameters::isNoRelatedness() const {
     return NO_RELATEDNESS;
-}
-
-bool Parameters::isNoRelatednessRandomGroup() const {
-    return NO_RELATEDNESS_RANDOM_GROUP;
 }
 
 bool Parameters::isAgeNoInfluenceInheritance() const {
@@ -213,6 +209,10 @@ int Parameters::getFixedIndQuality() const {
 
 double Parameters::getFixedGroupSize() const {
     return FIXED_GROUP_SIZE;
+}
+
+int Parameters::getReducedRelatedness() const {
+    return REDUCED_RELATEDNESS;
 }
 
 double Parameters::getM() const {
@@ -275,16 +275,16 @@ double Parameters::getInitBeta() const {
     return INIT_BETA;
 }
 
-double Parameters::getInitBetaAge() const {
-    return INIT_BETA_AGE;
+double Parameters::getInitBetaRank() const {
+    return INIT_BETA_RANK;
 }
 
 double Parameters::getMutationBeta() const {
     return MUTATION_BETA;
 }
 
-double Parameters::getMutationBetaAge() const {
-    return MUTATION_BETA_AGE;
+double Parameters::getMutationBetaRank() const {
+    return MUTATION_BETA_RANK;
 }
 
 double Parameters::getStepBeta() const {

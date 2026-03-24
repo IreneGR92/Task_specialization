@@ -3,17 +3,17 @@
 #include <cassert>
 
 #include "Individual.h"
-#include "FishType.h"
+#include "IndividualType.h"
 
 //Constructor for reproduction of a Breeder
-Individual::Individual(Individual &individual, FishType fishType, int &generation) {
+Individual::Individual(Individual &individual, IndividualType individualType, int &generation) {
 
-    assert(individual.fishType == BREEDER);
+    assert(individual.individualType == BREEDER);
 
     this->alpha = individual.alpha;
     this->alphaAge = individual.alphaAge;
     this->beta = individual.beta;
-    this->betaAge = individual.betaAge;
+    this->betaRank = individual.betaRank;
     this->gamma = individual.gamma;
     this->gammaRank = individual.gammaRank;
     this->drift = individual.getDrift();
@@ -23,38 +23,38 @@ Individual::Individual(Individual &individual, FishType fishType, int &generatio
     this->helpType = 0;
     this->task = Parameters::NO_VALUE;
 
-    this->initializeIndividual(fishType);
+    this->initializeIndividual(individualType);
 
     this->mutate(generation);
 }
 
 //Constructor for initial creation
-Individual::Individual(FishType fishType) {
+Individual::Individual(IndividualType individualType) {
 
     auto param = Parameters::instance();
 
     this->alpha = param->getInitAlpha();
     this->alphaAge = param->getInitAlphaAge();
     this->beta = param->getInitBeta();
-    this->betaAge = param->getInitBetaAge();
+    this->betaRank = param->getInitBetaRank();
     this->gamma = param->getInitGamma();
     this->gammaRank = param->getInitGammaRank();
     this->drift = param->driftUniform(*param->getGenerator());
-    this->initializeIndividual(fishType);
+    this->initializeIndividual(individualType);
 }
 
-void Individual::initializeIndividual(FishType type) {
+void Individual::initializeIndividual(IndividualType type) {
     this->parameters = Parameters::instance();
     this->dispersal = Parameters::NO_VALUE;
     this->help = 0;
     this->helpType = 0;
     this->task = Parameters::NO_VALUE;
     this->survival = Parameters::NO_VALUE;
-    this->fishType = type;
+    this->individualType = type;
     this->inherit = true;
     this->age = 1;
     this->ageBecomeBreeder = Parameters::NO_VALUE;
-    this->rank = Parameters::NO_VALUE;
+    this->rank = age;
     this->rankBecomeBreeder = Parameters::NO_VALUE;
 }
 
@@ -64,7 +64,11 @@ void Individual::calcDispersal() {
     if (!parameters->isReactionNormDispersal()) {
         this->dispersal = beta;
     } else {
-        this->dispersal = 1 / (1 + exp(betaAge * age - beta));
+        if (parameters->isRNDispersalRank()) {
+            this->dispersal = 1 / (1 + exp(betaRank * rank - beta));
+        } else {
+            this->dispersal = 1 / (1 + exp(betaRank * age - beta));
+        }
     }
 
     if (parameters->isNoGroupAugmentation() && parameters->isNoRelatedness() && age == 1) { //this removes further any effect of group augmentation vs group benefits since help does not increase recruitment
@@ -79,7 +83,7 @@ void Individual::setGroupIndex(int groupIndex) {
 /*DISPLAY LEVEL OF HELP*/
 
 void Individual::calcHelp() {
-    if (fishType == HELPER) {
+    if (individualType == HELPER) {
         if (!parameters->isReactionNormHelp()) {
             help = alpha;
 
@@ -97,13 +101,11 @@ void Individual::calcHelp() {
 /*CALCULATE TASK SPECIALIZATION*/
 
 void Individual::calcTaskSpecialization() {
-    if (fishType == HELPER) {
-        if (!parameters->isReactionNormTask()) {
-            task = gamma;
-            if (task < 0) { task = 0;
-            } else if (task > 1) {task = 1;}
-        } else {
+    if (individualType == HELPER) {
+        if (parameters->isRNTaskRank()) {
             task = 1 / (1 + exp(gammaRank * rank - gamma));
+        } else {
+            task = 1 / (1 + exp(gammaRank * age - gamma));
         }
 
         if (parameters->uniform(*parameters->getGenerator()) > task){
@@ -124,7 +126,7 @@ void Individual::calculateRank() {
     int multiplier = 10; // increases the effective difference in rank to the likelihood to become breeder
     if (!parameters->isAgeNoInfluenceInheritance()){
         //Gerontocratic context
-        if (fishType == HELPER && helpType == 0) {
+        if (individualType == HELPER && helpType == 0) {
             rank = (age - parameters->getYh() * help);
             if (rank < 0.001) {
                 rank = 0.001;
@@ -134,7 +136,7 @@ void Individual::calculateRank() {
         }
     } else {
         //Scramble context
-        if (fishType == HELPER && helpType == 0) {
+        if (individualType == HELPER && helpType == 0) {
             rank = (parameters->getFixedIndQuality() - parameters->getYh() * help) * multiplier;
             if (age == parameters->getMinAgeBecomeBreeder()){
                 rank = 0.001;
@@ -157,10 +159,10 @@ void Individual::calculateRank() {
 void Individual::calculateSurvival(const int &groupSize) {
 
     if (parameters->isNoGroupAugmentation()) {
-        if (fishType == FLOATER) {
+        if (individualType == FLOATER) {
             this->survival = (1 - parameters->getM() * parameters->getN()) / (1 + exp(-parameters->getX0()));
         } else {
-            if (fishType == HELPER && helpType == 1) {
+            if (individualType == HELPER && helpType == 1) {
                 this->survival = (1 - parameters->getM()) /
                                  (1 + exp(-parameters->getX0() - parameters->getXsn() * parameters->getFixedGroupSize() +
                                           parameters->getXsh() * this->help));
@@ -171,10 +173,10 @@ void Individual::calculateSurvival(const int &groupSize) {
         }
 
     } else {
-        if (fishType == FLOATER) {
+        if (individualType == FLOATER) {
             this->survival = (1 - parameters->getM() * parameters->getN()) / (1 + exp(-parameters->getX0()));
         } else {
-            if (fishType == HELPER && helpType == 1) {
+            if (individualType == HELPER && helpType == 1) {
                 this->survival = (1 - parameters->getM()) /
                                  (1 + exp(-parameters->getX0() - parameters->getXsn() * groupSize +
                                           parameters->getXsh() * this->help));
@@ -198,22 +200,11 @@ void Individual::mutate(int generation) // mutate genome of offspring
     std::normal_distribution<double> NormalD(0, parameters->getStepDrift());
 
     // Alpha
-    double mutationAlpha;
-    double mutationAlphaAge;
-
-    if (parameters->isNoRelatedness() && parameters->isNoRelatednessRandomGroup()) {
-        mutationAlpha = 0;
-        mutationAlphaAge = 0;
-    } else {
-        mutationAlpha = parameters->getMutationAlpha();
-        mutationAlphaAge = parameters->getMutationAlphaAge();
-    }
-
-    if (parameters->uniform(rng) < mutationAlpha) {
+    if (parameters->uniform(rng) < parameters->getMutationAlpha()) {
         alpha += NormalA(rng);
     }
     if (parameters->isReactionNormHelp()) {
-        if (parameters->uniform(rng) < mutationAlphaAge) {
+        if (parameters->uniform(rng) < parameters->getMutationAlphaAge()) {
             alphaAge += NormalA(rng);
         }
     }
@@ -227,32 +218,21 @@ void Individual::mutate(int generation) // mutate genome of offspring
         }
     }
     if (parameters->isReactionNormDispersal()) {
-        if (parameters->uniform(rng) < parameters->getMutationBetaAge()) {
-            betaAge += NormalB(rng);
+        if (parameters->uniform(rng) < parameters->getMutationBetaRank()) {
+            betaRank += NormalB(rng);
         }
     }
 
     // Gamma
-    double mutationGamma;
-    double mutationGammaRank;
-
-    if (parameters->isEvolutionTaskAfterHelp() && generation < 25000) {
-        mutationGamma = 0;
-        mutationGammaRank = 0;
-    } else {
-        mutationGamma = parameters->getMutationGamma();
-        mutationGammaRank = parameters->getMutationGammaRank();
-    }
-
-    if (parameters->uniform(rng) < mutationGamma) {
+    if (parameters->uniform(rng) < parameters->getMutationGamma()) {
         gamma += NormalG(rng);
-        if (!parameters->isReactionNormTask()) {
+        if (!parameters->isRNTaskRank()) {
             if (gamma < 0) { gamma = 0; }
             else if (gamma > 1) { gamma = 1; }
         }
     }
-    if (parameters->isReactionNormTask()) {
-        if (parameters->uniform(rng) < mutationGammaRank) {
+    if (parameters->isRNTaskRank()) {
+        if (parameters->uniform(rng) < parameters->getMutationGammaRank()) {
             gammaRank += NormalG(rng);
         }
     }
@@ -295,8 +275,8 @@ double Individual::getBeta() const {
     return beta;
 }
 
-double Individual::getBetaAge() const {
-    return betaAge;
+double Individual::getBetaRank() const {
+    return betaRank;
 }
 
 double Individual::getGamma() const {
@@ -335,12 +315,12 @@ double Individual::getSurvival() const {
     return survival;
 }
 
-FishType Individual::getFishType() const {
-    return fishType;
+IndividualType Individual::getIndividualType() const {
+    return individualType;
 }
 
-void Individual::setFishType(FishType type) {
-    Individual::fishType = type;
+void Individual::setIndividualType(IndividualType type) {
+    Individual::individualType = type;
     if (type == BREEDER) {
         this->dispersal = Parameters::NO_VALUE;
         this->help = 0;
@@ -384,8 +364,8 @@ double Individual::get(Attribute type) const {
             return this->alphaAge;
         case BETA:
             return this->beta;
-        case BETA_AGE:
-            return this->betaAge;
+        case BETA_RANK:
+            return this->betaRank;
         case GAMMA:
             return this->gamma;
         case GAMMA_RANK:
